@@ -1,0 +1,103 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using UnityEngine;
+using AIRLab.Mathematics;
+using CVARC.Basic.Sensors;
+
+namespace Assets
+{
+    public class UEngine : CVARC.Basic.IEngine
+    {
+        public void Initialize(CVARC.Basic.ISceneSettings settings)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetSpeed(string id, Frame3D speed)
+        {
+            GameObject MovingObject = GameObject.Find(id);
+            MovingObject.rigidbody.freezeRotation = true;
+
+            //MovingObject.rigidbody.velocity = new Vector3((float)speed.X, (float)speed.Y, (float)speed.Z);
+
+            MovingObject.transform.Translate(new Vector3((float)speed.X, (float)speed.Y, (float)speed.Z) * Time.deltaTime);
+        }
+
+        public Frame3D GetSpeed(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PerformAction(string id, string action)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Frame3D GetAbsoluteLocation(string id)
+        {
+            var obj = GameObject.Find(id);
+            var pos = obj.transform.position;
+            var rot = obj.transform.rotation.eulerAngles;
+            return new Frame3D(pos.x, pos.y, pos.z, Angle.FromGrad(rot.x), Angle.FromGrad(rot.y), Angle.FromGrad(rot.z));
+        }
+
+        public void DefineCamera(string cameraName, string host, RobotCameraSettings settings)
+        {
+            throw new NotImplementedException();
+        }
+
+        public byte[] GetImageFromCamera(string cameraName)
+        {
+            Camera[] allCameras = Resources.FindObjectsOfTypeAll(typeof(Camera)) as Camera[];
+            var camera = allCameras
+                .Where(x => cameraName.Equals(x.name))
+                .First();
+            camera.Render();
+            Texture2D image = new Texture2D(Screen.width, Screen.height);
+            image.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+            image.Apply();
+            byte[] bytes = image.EncodeToPNG();
+            //Debug.Log(string.Format("Took screenshot to {0}", cameraName));
+            return bytes;
+        }
+
+        public void DefineKinect(string kinectName, string host)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ImageSensorData GetImageFromKinect(string kinectName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RunEngine(double timeInSeconds, bool inRealTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetReplay()
+        {
+            throw new NotImplementedException();
+        }
+
+        public event CVARC.Basic.OnCollisionEventHandler OnCollision;
+
+        public void RaiseOnCollision(string firstBodyId, string secondBodyId, CVARC.Basic.CollisionType collisionType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<CVARC.Basic.IGameObject> GetAllObjects()
+        {
+            // т.к. юнити сама создает кучу непонятных лишних объектов в мире, пусть будет так:
+            // Имя (gameObject.name) любого объекта, который будет нужен в методе GetAllObjects будет иметь такой формат:
+            // %id%:%type%:CVARC_obj
+            var allGameObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[];
+            return allGameObjects.Where(obj => obj.name.Split(':').Length == 3 && obj.name.Split(':')[2] == "CVARC_obj")
+                .Select(obj => (CVARC.Basic.IGameObject)new CVARC.Basic.GameObject(obj.name.Split(':')[0], obj.name.Split(':')[1]));
+        }
+    }
+}
