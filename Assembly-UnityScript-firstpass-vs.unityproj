@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{4464F9EF-777D-E971-944B-0D2B43AA417D}</ProjectGuid>
+	<ProjectGuid>{2F4458E2-DA08-2E2E-D988-914A9DD9C79E}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -66,19 +66,19 @@
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-LightedOutline.shader" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
  <Reference Include="airlabs-cope">
- <HintPath>C:/Users/Администратор/Desktop/Unity/Assets/CVARC Assets/airlabs-cope.dll</HintPath>
+ <HintPath>C:/Users/Администратор/Desktop/CVARC-Unity/Assets/CVARC Assets/airlabs-cope.dll</HintPath>
  </Reference>
  <Reference Include="CVARC.Basic">
- <HintPath>C:/Users/Администратор/Desktop/Unity/Assets/CVARC Assets/CVARC.Basic.dll</HintPath>
+ <HintPath>C:/Users/Администратор/Desktop/CVARC-Unity/Assets/CVARC Assets/CVARC.Basic.dll</HintPath>
  </Reference>
  <Reference Include="CVARC.Engine">
- <HintPath>C:/Users/Администратор/Desktop/Unity/Assets/CVARC Assets/CVARC.Engine.dll</HintPath>
+ <HintPath>C:/Users/Администратор/Desktop/CVARC-Unity/Assets/CVARC Assets/CVARC.Engine.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
- <HintPath>C:/Users/Администратор/Desktop/Unity/Assets/CVARC Assets/nunit.framework.dll</HintPath>
+ <HintPath>C:/Users/Администратор/Desktop/CVARC-Unity/Assets/CVARC Assets/nunit.framework.dll</HintPath>
  </Reference>
  <Reference Include="RepairTheStarship.Common">
- <HintPath>C:/Users/Администратор/Desktop/Unity/Assets/CVARC Assets/RepairTheStarship.Common.dll</HintPath>
+ <HintPath>C:/Users/Администратор/Desktop/CVARC-Unity/Assets/CVARC Assets/RepairTheStarship.Common.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

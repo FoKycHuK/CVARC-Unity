@@ -22,7 +22,7 @@ public class creater : MonoBehaviour
         Instantiate(planePref, new Vector3(0, 0, 0), Quaternion.Euler(15, 0, 0));
         cubeObj.AddComponent(typeof(Rigidbody));
         cubeObj.name = "my cube:Cube:CVARC_obj";
-        //var engine = new UEngine();
+        var engine = new UEngine();
         //foreach (var value in engine.GetAllObjects())
         //    Debug.Log(value.Id + ' ' + value.Type);
 	}
