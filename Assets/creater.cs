@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Assets;
+using System.Threading;
 
 public class creater : MonoBehaviour 
 {
@@ -18,13 +19,41 @@ public class creater : MonoBehaviour
 	void Start () 
     {
         Instantiate(cameraPref, new Vector3(0, 3, -5), Quaternion.Euler(15, 0, 0));
-        var cubeObj = Instantiate(cubePref, new Vector3(0, 10, 0), new Quaternion()) as GameObject;
-        Instantiate(planePref, new Vector3(0, 0, 0), Quaternion.Euler(15, 0, 0));
-        cubeObj.AddComponent(typeof(Rigidbody));
-        cubeObj.name = "my cube:Cube:CVARC_obj";
-        var engine = new UEngine();
+        //var cubeObj = Instantiate(cubePref, new Vector3(0, 10, 0), new Quaternion()) as GameObject;
+        Instantiate(planePref, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
+        //cubeObj.AddComponent(typeof(Rigidbody));
+        //cubeObj.name = "my cube:Cube:CVARC_obj";
+        
+       
+
+        #region
+
+        var Competitions = new Gems.Levels.Level1();
+        Competitions.HelloPackage = new CVARC.Network.HelloPackage { MapSeed = -1 };
+
+        var engine = new UEngine(this);
+
+        Competitions.Initialize(
+               engine,
+               new[] { 
+                    new CVARC.Basic.RobotSettings(0, true), 
+                    new CVARC.Basic.RobotSettings(1, true) 
+                });
+
+        var bots = new[] 
+            { 
+                new CVARC.Basic.SquareMovingBot(), 
+                new CVARC.Basic.SquareMovingBot()
+            };
+
+
+        new Thread(() => Competitions.ProcessParticipants(true, int.MaxValue, bots)) { IsBackground = true }
+            .Start();
+
+        #endregion
         //foreach (var value in engine.GetAllObjects())
         //    Debug.Log(value.Id + ' ' + value.Type);
+
 	}
 	
 	// Update is called once per frame
