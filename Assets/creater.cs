@@ -18,7 +18,7 @@ public class creater : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        Instantiate(cameraPref, new Vector3(0, 3, -5), Quaternion.Euler(15, 0, 0));
+        Instantiate(cameraPref, new Vector3(0, 30, 0), Quaternion.Euler(90, 0, 0));
         //var cubeObj = Instantiate(cubePref, new Vector3(0, 10, 0), new Quaternion()) as GameObject;
         Instantiate(planePref, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
         //cubeObj.AddComponent(typeof(Rigidbody));

@@ -23,12 +23,15 @@ namespace Assets
         public void Initialize(CVARC.Basic.ISceneSettings settings)
         {
             
-            var robot1 = UnityEngine.Object.Instantiate(behaviour.cubePref, new Vector3(0, 5, 0), Quaternion.Euler(0, 0, 0));
-            var robot2 = UnityEngine.Object.Instantiate(behaviour.cubePref, new Vector3(0, 5, 5), Quaternion.Euler(0, 0, 0));
-            var robot3 = UnityEngine.Object.Instantiate(behaviour.cubePref, new Vector3(0, 5, 10), Quaternion.Euler(0, 0, 0));
+            var robot1 = GameObject.Instantiate(behaviour.cubePref, new Vector3(0, 5, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
+            var robot2 = GameObject.Instantiate(behaviour.cubePref, new Vector3(0, 5, 5), Quaternion.Euler(0, 0, 0)) as GameObject;
+            var robot3 = GameObject.Instantiate(behaviour.cubePref, new Vector3(0, 5, 10), Quaternion.Euler(0, 0, 0)) as GameObject;
             robot1.name = "1";
+            robot1.renderer.material.color = Color.black;
             robot2.name = "2";
-            robot2.name = "0";
+            robot2.renderer.material.color = Color.red;
+            robot3.name = "0";
+            robot3.renderer.material.color = Color.green;
         }
 
         public void SetSpeed(string id, Frame3D speed)
