@@ -5,6 +5,7 @@ using System.Text;
 using UnityEngine;
 using AIRLab.Mathematics;
 using CVARC.Basic.Sensors;
+using System.Threading;
 
 namespace Assets
 {
@@ -124,7 +125,8 @@ namespace Assets
 
         public void RunEngine(double timeInSeconds, bool inRealTime)
         {
-            throw new NotImplementedException();
+            behaviour.Clockdown = (long)(timeInSeconds * 1000);
+            while (behaviour.Clockdown > 0) Thread.Sleep(0);
         }
     }
 }

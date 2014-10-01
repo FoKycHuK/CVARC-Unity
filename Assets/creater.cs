@@ -2,7 +2,7 @@
 using System.Collections;
 using Assets;
 using System.Threading;
-
+using System;
 public class creater : MonoBehaviour 
 {
 
@@ -51,16 +51,29 @@ public class creater : MonoBehaviour
             .Start();
 
         #endregion
+
+        watch=  new System.Diagnostics.Stopwatch();
+        watch.Start();
         //foreach (var value in engine.GetAllObjects())
         //    Debug.Log(value.Id + ' ' + value.Type);
 
 	}
 
     public ConcurrentQueue<ITask> tasks = new ConcurrentQueue<ITask>();
-	
+    System.Diagnostics.Stopwatch watch ;
+    long oldTime = 0;
 	// Update is called once per frame
+
+    public long Clockdown;
+
 	void Update () 
     {
+        var time = watch.ElapsedMilliseconds;
+        var delta = time - oldTime;
+        oldTime = time;
+        Clockdown -= delta;
+       
+
         while (!tasks.IsEmpty)
         {
             tasks.Dequeue().Run();
