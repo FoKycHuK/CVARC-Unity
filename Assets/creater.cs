@@ -55,9 +55,15 @@ public class creater : MonoBehaviour
         //    Debug.Log(value.Id + ' ' + value.Type);
 
 	}
+
+    public ConcurrentQueue<ITask> tasks = new ConcurrentQueue<ITask>();
 	
 	// Update is called once per frame
 	void Update () 
     {
+        while (!tasks.IsEmpty)
+        {
+            tasks.Dequeue().Run();
+        }
 	}
 }

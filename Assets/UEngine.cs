@@ -32,11 +32,17 @@ namespace Assets
 
         public void SetSpeed(string id, Frame3D speed)
         {
-            Debug.Log(string.Format("{0,-10}{1}", id, speed.X));
-            GameObject MovingObject = GameObject.Find(id);
-            MovingObject.rigidbody.freezeRotation = true;
-            MovingObject.transform.Translate(new Vector3((float)speed.X, (float)speed.Y, (float)speed.Z) * Time.deltaTime);
-       
+
+            var tast = new Task<object>(() =>
+                {
+                    Debug.Log(string.Format("{0,-10}{1}", id, speed.X));
+                    GameObject MovingObject = GameObject.Find(id);
+                    MovingObject.rigidbody.freezeRotation = true;
+                    MovingObject.transform.Translate(new Vector3((float)speed.X, (float)speed.Y, (float)speed.Z) * Time.deltaTime);
+                    return new object();
+                });
+            behaviour.tasks.Enqueue(tast);
+            tast.Wait();
         //    //MovingObject.rigidbody.velocity = new Vector3((float)speed.X, (float)speed.Y, (float)speed.Z);
 
         }
