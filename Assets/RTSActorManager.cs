@@ -1,4 +1,5 @@
 ﻿using CVARC.V2;
+using DemoCompetitions;
 using RepairTheStarship;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 namespace Assets
 {
-    public class RTSActorManager : ActorManager<IRTSRobot>, IRTSActorManager
+    public class RTSActorManager : ActorManager<DemoRobot>
     {
 
         public override void CreateActorBody()
@@ -28,14 +29,6 @@ namespace Assets
             robot.name = Actor.World.IdGenerator.CreateNewId(Actor);
         }
 
-        public string Grip()
-        {
-            return null;
-        }
-
-        public bool Release()
-        {
-            return false;
-        }
+      
     }
 }

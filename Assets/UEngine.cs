@@ -28,7 +28,9 @@ namespace Assets
 
         public Frame3D GetAbsoluteLocation(string id)
         {
+            Debug.Log(id);
             var obj = GameObject.Find(id);
+            Debug.Log(obj == null);
             var pos = obj.transform.position;
             var rot = obj.transform.rotation.eulerAngles;
             return new Frame3D(pos.x, pos.y, pos.z, Angle.FromGrad(rot.x), Angle.FromGrad(rot.y), Angle.FromGrad(rot.z));

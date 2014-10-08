@@ -68,8 +68,8 @@
  <Reference Include="CVARC.Basic">
  <HintPath>C:/Users/user/Desktop 3/CVARC-Unity/Assets/CVARC Assets/CVARC.Basic.dll</HintPath>
  </Reference>
- <Reference Include="Demo">
- <HintPath>C:/Users/user/Desktop 3/CVARC-Unity/Assets/CVARC Assets/Demo.dll</HintPath>
+ <Reference Include="Demo.General">
+ <HintPath>C:/Users/user/Desktop 3/CVARC-Unity/Assets/CVARC Assets/Demo.General.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
  <HintPath>C:/Users/user/Desktop 3/CVARC-Unity/Assets/CVARC Assets/nunit.framework.dll</HintPath>

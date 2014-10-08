@@ -1,4 +1,6 @@
-﻿using RepairTheStarship;
+﻿using CVARC.V2;
+using DemoCompetitions;
+using RepairTheStarship;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,18 +8,13 @@ using System.Text;
 
 namespace Assets
 {
-    public class RTSWorldManager : IRTSWorldManager
+    public class RTSWorldManager : WorldManager<DemoWorld>
     {
-        RTSWorld world;
+      
 
-        public void CreateWorld(CVARC.V2.IdGenerator generator)
+        public override void CreateWorld(IdGenerator generator)
         {
-
-        }
-
-        public void Initialize(CVARC.V2.IWorld world)
-        {
-            world = (RTSWorld)world;
+            
         }
     }
 }
