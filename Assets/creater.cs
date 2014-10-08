@@ -3,9 +3,12 @@ using System.Collections;
 using Assets;
 using System.Threading;
 using System;
+using CVARC.V2;
 public class creater : MonoBehaviour 
 {
+    public static creater Behaviour { get; private set; }
 
+    IWorld world;
     public GameObject cubePref; // Эти поля -- прототипы, к ним самим обращаться не получится.
     public GameObject planePref; // Для этого, нужно найти объект в мире каким-либо образом.
     public GameObject cameraPref; // Например: GameObject.Find(name); написал, чтоб не забыть.
@@ -18,38 +21,23 @@ public class creater : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
+        Behaviour = this;
         Instantiate(cameraPref, new Vector3(0, 30, 0), Quaternion.Euler(90, 0, 0));
-        //var cubeObj = Instantiate(cubePref, new Vector3(0, 10, 0), new Quaternion()) as GameObject;
         Instantiate(planePref, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
-        //cubeObj.AddComponent(typeof(Rigidbody));
-        //cubeObj.name = "my cube:Cube:CVARC_obj";
         
        
 
         #region
 
-        var Competitions = new Gems.Levels.Level1();
-        Competitions.HelloPackage = new CVARC.Network.HelloPackage { MapSeed = -1 };
-
-        var engine = new UEngine(this);
-
-        Competitions.Initialize(
-               engine,
-               new[] { 
-                    new CVARC.Basic.RobotSettings(0, true), 
-                    new CVARC.Basic.RobotSettings(1, true) 
-                });
-
-        var bots = new[] 
-            { 
-                new CVARC.Basic.SquareMovingBot(), 
-                new CVARC.Basic.SquareMovingBot()
-            };
-
-
-        new Thread(() => Competitions.ProcessParticipants(true, int.MaxValue, bots)) { IsBackground = true }
-            .Start();
-
+        var enginePart = new EnginePart(new UEngine(), new UKeyboard());
+        var managerPart = new RTSManagerPart();
+        var logicPart = new DemoCompetitions.DemoLogicPart(); //Заменить только эту строчку для перехода на корабль
+        var competitions = new Competitions(logicPart, enginePart, managerPart);
+        var runMode = RunModes.Available["BotDemo"];
+        var cmdArguments = new RunModeArguments();
+        cmdArguments.ControllersInfo["Left"] = "Square";
+        cmdArguments.ControllersInfo["Right"] = "Random";
+        world=competitions.Create(cmdArguments, runMode());
         #endregion
 
         watch=  new System.Diagnostics.Stopwatch();
@@ -61,22 +49,10 @@ public class creater : MonoBehaviour
 
     public ConcurrentQueue<ITask> tasks = new ConcurrentQueue<ITask>();
     System.Diagnostics.Stopwatch watch ;
-    long oldTime = 0;
-	// Update is called once per frame
-
-    public long Clockdown;
-
+	
 	void Update () 
     {
-        var time = watch.ElapsedMilliseconds;
-        var delta = time - oldTime;
-        oldTime = time;
-        Clockdown -= delta;
-       
-
-        while (!tasks.IsEmpty)
-        {
-            tasks.Dequeue().Run();
-        }
+        var time =  watch.ElapsedMilliseconds/1000.0; // в этом месте надо использовать что-то другое, какие-то точные часы
+        world.Clocks.Tick(time);    
 	}
 }
