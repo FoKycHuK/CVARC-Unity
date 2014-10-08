@@ -131,5 +131,11 @@ namespace Assets
             behaviour.Clockdown = (long)(timeInSeconds * 1000);
             while (behaviour.Clockdown > 0) Thread.Sleep(0);
         }
+
+
+        public IEnumerable<CVARC.Basic.IGameObject> GetChilds(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
