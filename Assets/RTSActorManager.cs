@@ -26,7 +26,8 @@ namespace Assets
                 robot = GameObject.Instantiate(creater.Behaviour.cubePref, new Vector3(0, 5, 5), Quaternion.Euler(0, 0, 0)) as GameObject;
                 robot.renderer.material.color = Color.red;
             }
-            robot.name = Actor.World.IdGenerator.CreateNewId(Actor);
+            robot.name = Actor.ObjectId;
+            Debug.Log("THIS: " + robot.name);
         }
 
       
