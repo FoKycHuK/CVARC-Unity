@@ -27,7 +27,7 @@ namespace Assets
                 robot.renderer.material.color = Color.red;
             }
             robot.name = Actor.ObjectId;
-            Debug.Log("THIS: " + robot.name);
+            //Debug.Log("THIS: " + robot.name);
         }
 
       

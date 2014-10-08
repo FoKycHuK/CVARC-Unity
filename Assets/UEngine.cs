@@ -19,17 +19,27 @@ namespace Assets
 
         public void SetSpeed(string id, Frame3D speed)
         {
-            GameObject MovingObject = GameObject.Find(id);
-            MovingObject.rigidbody.freezeRotation = true;
-            MovingObject.transform.Translate(new Vector3((float)speed.X, (float)speed.Y, (float)speed.Z) * Time.deltaTime);
-            //    //MovingObject.rigidbody.velocity = new Vector3((float)speed.X, (float)speed.Y, (float)speed.Z);
+            var movingObject = GameObject.Find(id);
+            movingObject.rigidbody.useGravity = false;
+            float x = (float)(Math.Cos(movingObject.transform.rotation.eulerAngles.z * Math.PI / 180) * speed.X);
+            float y = (float)(Math.Sin(movingObject.transform.rotation.eulerAngles.z * Math.PI / 180) * speed.X);
+            if (movingObject.renderer.material.color == Color.green)
+            {
+                Debug.Log(movingObject.transform.rotation.eulerAngles.z * Math.PI / 180);
+                Debug.Log(movingObject.transform.position.x.ToString() + ' ' + movingObject.transform.position.z.ToString());
+            }
+            movingObject.rigidbody.velocity = new Vector3(x, 0, y);
+            movingObject.rigidbody.angularVelocity = new Vector3(0, 0, (float)speed.Yaw.Radian);
+            //Debug.Log(speed.Pitch.Grad.ToString() + ' ' + speed.Roll.Grad.ToString() + ' ' + speed.Yaw.Grad.ToString());
+            //Debug.Log(speed.X.ToString() + ' ' + speed.Y.ToString() + ' ' + speed.Z.ToString());
+
         }
 
         public Frame3D GetAbsoluteLocation(string id)
         {
-            Debug.Log(id);
+            //Debug.Log(id);
             var obj = GameObject.Find(id);
-            Debug.Log(obj == null);
+            //Debug.Log(obj == null);
             var pos = obj.transform.position;
             var rot = obj.transform.rotation.eulerAngles;
             return new Frame3D(pos.x, pos.y, pos.z, Angle.FromGrad(rot.x), Angle.FromGrad(rot.y), Angle.FromGrad(rot.z));
@@ -84,7 +94,9 @@ namespace Assets
 
         public Frame3D GetSpeed(string id)
         {
-            throw new NotImplementedException();
+            var movingObject = GameObject.Find(id);
+            var vel = movingObject.rigidbody.velocity;
+            return new Frame3D(vel.x, vel.y, vel.z);
         }
 
 
