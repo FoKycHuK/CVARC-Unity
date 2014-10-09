@@ -22,7 +22,7 @@ public class creater : MonoBehaviour
 	void Start () 
     {
         Behaviour = this;
-        Instantiate(cameraPref, new Vector3(0, 30, 0), Quaternion.Euler(90, 0, 0));
+        Instantiate(cameraPref, new Vector3(0, 100, 0), Quaternion.Euler(90, 0, 0));
         Instantiate(planePref, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
         
        
@@ -38,6 +38,7 @@ public class creater : MonoBehaviour
         cmdArguments.ControllersInfo["Left"] = "Square";
         cmdArguments.ControllersInfo["Right"] = "Random";
         world=competitions.Create(cmdArguments, runMode());
+
         #endregion
 
         watch=  new System.Diagnostics.Stopwatch();
