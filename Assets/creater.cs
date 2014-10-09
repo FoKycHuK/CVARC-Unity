@@ -7,7 +7,7 @@ using CVARC.V2;
 public class creater : MonoBehaviour 
 {
     public static creater Behaviour { get; private set; }
-
+    public double myTime;
     IWorld world;
     public GameObject cubePref; // Эти поля -- прототипы, к ним самим обращаться не получится.
     public GameObject planePref; // Для этого, нужно найти объект в мире каким-либо образом.
@@ -45,15 +45,40 @@ public class creater : MonoBehaviour
         watch.Start();
         //foreach (var value in engine.GetAllObjects())
         //    Debug.Log(value.Id + ' ' + value.Type);
-
+        myTime = 0;
 	}
 
     public ConcurrentQueue<ITask> tasks = new ConcurrentQueue<ITask>();
     System.Diagnostics.Stopwatch watch ;
-	
+
+
+
+    int frameCount = 0;
+    double dt = 0.0;
+    double fps = 0.0;
+    double updateRate = 1.0;  // 4 updates per sec.
 	void Update () 
     {
-        var time =  watch.ElapsedMilliseconds/1000.0; // в этом месте надо использовать что-то другое, какие-то точные часы
-        world.Clocks.Tick(time);    
+        //var time =  watch.ElapsedMilliseconds/1000.0; // в этом месте надо использовать что-то другое, какие-то точные часы
+        //world.Clocks.Tick(Time.realtimeSinceStartup);
+        //Debug.Log(Time.deltaTime);
+        //frameCount++;
+        //dt += Time.deltaTime;
+        //if (dt > 1.0 / updateRate)
+        //{
+        //    fps = frameCount / dt;
+        //    frameCount = 0;
+        //    dt -= 1.0 / updateRate;
+        //    world.Clocks.Tick(myTime / updateRate);
+        //    myTime += 1;
+        //}
 	}
+    void FixedUpdate()
+    {
+
+        //var time =  watch.ElapsedMilliseconds/1000.0; // в этом месте надо использовать что-то другое, какие-то точные часы
+        //world.Clocks.Tick(Time.fixedTime);
+        Debug.Log(Time.fixedTime);
+        //Debug.Log(Time.fixedDeltaTime);
+    }
 }

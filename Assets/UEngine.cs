@@ -25,7 +25,7 @@ namespace Assets
             float y = (float)(Math.Sin(movingObject.transform.rotation.eulerAngles.z * Math.PI / 180) * speed.X);
             if (movingObject.renderer.material.color == Color.green)
             {
-                Debug.Log(movingObject.transform.rotation.eulerAngles.z * Math.PI / 180);
+                Debug.Log(movingObject.transform.rotation.eulerAngles.z);
                 Debug.Log(movingObject.transform.position.x.ToString() + ' ' + movingObject.transform.position.z.ToString());
             }
             movingObject.rigidbody.velocity = new Vector3(x, 0, y);
