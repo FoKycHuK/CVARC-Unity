@@ -77,8 +77,9 @@ public class creater : MonoBehaviour
     {
 
         //var time =  watch.ElapsedMilliseconds/1000.0; // в этом месте надо использовать что-то другое, какие-то точные часы
-        //world.Clocks.Tick(Time.fixedTime);
-        Debug.Log(Time.fixedTime);
+        world.Clocks.Tick(Time.fixedTime);
+        ((UEngine)world.Engine).UpdateSpeeds();
+        //Debug.Log(Math.Round(Time.fixedTime/0.02,0) + " " + Time.fixedTime);
         //Debug.Log(Time.fixedDeltaTime);
     }
 }

@@ -12,6 +12,8 @@ namespace Assets
 
     public class UEngine : CVARC.V2.IEngine
     {
+        Dictionary<string, Frame2D> requested = new Dictionary<string, Frame2D>();
+
         public void Initialize(CVARC.V2.IWorld world)
         {
            
@@ -25,14 +27,25 @@ namespace Assets
             float y = (float)(Math.Sin(movingObject.transform.rotation.eulerAngles.z * Math.PI / 180) * speed.X);
             if (movingObject.renderer.material.color == Color.green)
             {
-                Debug.Log(movingObject.transform.rotation.eulerAngles.z);
-                Debug.Log(movingObject.transform.position.x.ToString() + ' ' + movingObject.transform.position.z.ToString());
+                //Debug.Log(movingObject.transform.rotation.eulerAngles.z);
+                //Debug.Log(movingObject.transform.position.x.ToString() + ' ' + movingObject.transform.position.z.ToString());
             }
-            movingObject.rigidbody.velocity = new Vector3(x, 0, y);
-            movingObject.rigidbody.angularVelocity = new Vector3(0, 0, (float)speed.Yaw.Radian);
+
+            requested[id] = new Frame2D(x, y, speed.Yaw);
+
             //Debug.Log(speed.Pitch.Grad.ToString() + ' ' + speed.Roll.Grad.ToString() + ' ' + speed.Yaw.Grad.ToString());
             //Debug.Log(speed.X.ToString() + ' ' + speed.Y.ToString() + ' ' + speed.Z.ToString());
 
+        }
+
+        public void UpdateSpeeds()
+        {
+            foreach (var e in requested.Keys)
+            {
+                var movingObject = GameObject.Find(e);
+                movingObject.rigidbody.velocity = new Vector3((float)requested[e].X, 0, (float)requested[e].Y);
+                movingObject.rigidbody.angularVelocity = new Vector3(0, 0, (float)requested[e].Angle.Radian);
+            }
         }
 
         public Frame3D GetAbsoluteLocation(string id)
