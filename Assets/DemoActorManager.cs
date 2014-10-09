@@ -9,12 +9,8 @@ using UnityEngine;
 
 namespace Assets
 {
-    public class RTSActorManager : ActorManager<IRTSRobot>, IRTSActorManager
+    public class DemoActorManager : ActorManager<DemoRobot>
     {
-
-        public string Grip() { return null;  }
-
-        public bool Release() { return false; }
 
         public override void CreateActorBody()
         {

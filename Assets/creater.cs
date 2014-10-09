@@ -19,27 +19,43 @@ public class creater : MonoBehaviour
     // %id%:%type%:CVARC_obj
 
 	// Use this for initialization
-	void Start () 
+
+
+    IWorld CreateDemoWorld()
     {
-        Behaviour = this;
-        Instantiate(cameraPref, new Vector3(0, 100, 0), Quaternion.Euler(90, 0, 0));
-        Instantiate(planePref, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
-        
-       
-
-        #region
-
         var enginePart = new EnginePart(new UEngine(), new UKeyboard());
-        var managerPart = new RTSManagerPart();
+        var managerPart = new DemoManagerPart();
         var logicPart = new DemoCompetitions.DemoLogicPart(); //Заменить только эту строчку для перехода на корабль
         var competitions = new Competitions(logicPart, enginePart, managerPart);
         var runMode = RunModes.Available["BotDemo"];
         var cmdArguments = new RunModeArguments();
         cmdArguments.ControllersInfo["Left"] = "Square";
         cmdArguments.ControllersInfo["Right"] = "Random";
-        world=competitions.Create(cmdArguments, runMode());
+        return competitions.Create(cmdArguments, runMode());
+        
+    }
 
-        #endregion
+    IWorld CreateRTSWorld()
+    {
+        var enginePart = new EnginePart(new UEngine(), new UKeyboard());
+        var managerPart = new RTSManagerPart();
+        var logicPart = new RepairTheStarship.RTSLogicPart(); //Заменить только эту строчку для перехода на корабль
+        var competitions = new Competitions(logicPart, enginePart, managerPart);
+        var runMode = RunModes.Available["BotDemo"];
+        var cmdArguments = new RunModeArguments();
+        cmdArguments.ControllersInfo["Left"] = "Azura";
+        cmdArguments.ControllersInfo["Right"] = "Sanguine";
+        return competitions.Create(cmdArguments, runMode());
+
+    }
+
+	void Start () 
+    {
+        Behaviour = this;
+        Instantiate(cameraPref, new Vector3(0, 100, 0), Quaternion.Euler(90, 0, 0));
+        Instantiate(planePref, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
+
+        world = CreateRTSWorld();
 
         watch=  new System.Diagnostics.Stopwatch();
         watch.Start();

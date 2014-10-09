@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Assets
 {
-    public class RTSWorldManager : WorldManager<RTSWorld>, IRTSWorldManager
+    public class DemoWorldManager : WorldManager<DemoWorld>
     {
       
 
