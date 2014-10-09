@@ -186,3 +186,6 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
+# Unity shader cache
+/Library/ShaderCache/
