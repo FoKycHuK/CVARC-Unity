@@ -50,9 +50,7 @@ namespace Assets
 
         public Frame3D GetAbsoluteLocation(string id)
         {
-            //Debug.Log(id);
             var obj = GameObject.Find(id);
-            //Debug.Log(obj == null);
             var pos = obj.transform.position;
             var rot = obj.transform.rotation.eulerAngles;
             return new Frame3D(pos.x, pos.y, pos.z, Angle.FromGrad(rot.x), Angle.FromGrad(rot.y), Angle.FromGrad(rot.z));
@@ -86,8 +84,7 @@ namespace Assets
             //var allGameObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[];
             //return allGameObjects.Where(obj => obj.name.Split(':').Length == 3 && obj.name.Split(':')[2] == "CVARC_obj")
             //    .Select(obj => (CVARC.Basic.IGameObject)new CVARC.Basic.GameObject(obj.name.Split(':')[0], obj.name.Split(':')[1]));
-
-            return true;
+            return !(GameObject.Find(id) == null);
         }
 
         public void DefineCamera(string cameraName, string host, CVARC.Basic.Sensors.RobotCameraSettings settings)
@@ -109,9 +106,8 @@ namespace Assets
         {
             var movingObject = GameObject.Find(id);
             var vel = movingObject.rigidbody.velocity;
-            return new Frame3D(vel.x, vel.y, vel.z);
+            var angVel = movingObject.rigidbody.angularVelocity;
+            return new Frame3D(vel.x, vel.y, vel.z, Angle.FromRad(angVel.y), Angle.FromRad(angVel.z), Angle.FromRad(angVel.x)); //???
         }
-
-
     }
 }
