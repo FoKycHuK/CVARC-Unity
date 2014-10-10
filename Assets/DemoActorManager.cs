@@ -25,6 +25,7 @@ namespace Assets
                 robot = GameObject.Instantiate(creater.Behaviour.cubePref, new Vector3(45, 5, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
                 robot.renderer.material.color = Color.red;
             }
+            robot.rigidbody.drag =  0; // трение
             robot.rigidbody.angularDrag = 0;
             robot.rigidbody.useGravity = false;
             robot.AddComponent("OnCollisionScript");

@@ -7,21 +7,23 @@ using CVARC.V2;
 using AIRLab;
 
 
-public class creater : MonoBehaviour 
+public class creater : MonoBehaviour
 {
     public static creater Behaviour { get; private set; }
     public static Tuple<string, string, int> CollisionInfo { get; set; }
     IWorld world;
+    GUIText scoresTextLeft;
+    GUIText scoresTextRight;
+    public GUIText scoresTextLeftPref;
+    public GUIText scoresTextRightPref;
     public GameObject cubePref; // Эти поля -- прототипы, к ним самим обращаться не получится.
     public GameObject planePref; // Для этого, нужно найти объект в мире каким-либо образом.
     public GameObject cameraPref; // Например: GameObject.Find(name); написал, чтоб не забыть.
     // А вот так можно получить все объекты в мире, а потом уже выбирать:
     // var allGameObjects = Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[];
-    // т.к. юнити сама создает кучу непонятных лишних объектов в мире, пусть будет так:
-    // Имя (gameObject.name) любого объекта, который будет нужен в методе GetAllObjects будет иметь такой формат:
-    // %id%:%type%:CVARC_obj
 
-	// Use this for initialization
+
+    // Use this for initialization
 
 
     IWorld CreateDemoWorld()
@@ -35,7 +37,7 @@ public class creater : MonoBehaviour
         cmdArguments.ControllersInfo["Left"] = "Square";
         cmdArguments.ControllersInfo["Right"] = "Random";
         return competitions.Create(cmdArguments, runMode());
-        
+
     }
 
     IWorld CreateRTSWorld()
@@ -52,7 +54,7 @@ public class creater : MonoBehaviour
 
     }
 
-	void Start () 
+    void Start()
     {
         Behaviour = this;
 
@@ -61,42 +63,36 @@ public class creater : MonoBehaviour
 
         world = CreateDemoWorld();
         CollisionInfo = new Tuple<string, string, int>(null, null, 0);
-	}
+        scoresTextLeft = Instantiate(scoresTextLeftPref) as GUIText;
+        scoresTextRight = Instantiate(scoresTextRightPref) as GUIText;
+        scoresTextLeft.text = "Left Scores: 0";
+        scoresTextRight.text = "Right Scores: 0";
+        world.Scores.ScoresChanged += UpdateScores;
+        //Instantiate(new GUIText());
+    }
 
-	void Update () 
+    void Update()
     {
         if (CollisionInfo.Item3 == 2)
         {
             ((UEngine)world.Engine).CollisionSender(CollisionInfo.Item1, CollisionInfo.Item2);
             CollisionInfo.Item3 = 0;
         }
-	}
+
+    }
     void FixedUpdate()
     {
-
         world.Clocks.Tick(Time.fixedTime);
-        //((UEngine)world.Engine).UpdateSpeeds();
+        ((UEngine)world.Engine).UpdateSpeeds();
     }
-    void OnCollisionEnter(Collision collision)
+    void UpdateScores()
     {
-        var a = collision.gameObject;
-        a.rigidbody.velocity = new Vector3(0, 0, 0);
-        Debug.Log("!");
-    }
-    void OnCollisionExit(Collision collision)
-    {
-        var a = collision.gameObject;
-        a.rigidbody.velocity = new Vector3(0, 0, 0);
-        Debug.Log("!");
-    }
-    void OnCollisionStay(Collision collision)
-    {
-        var a = collision.gameObject;
-        a.rigidbody.velocity = new Vector3(0, 0, 0);
-        Debug.Log("!");
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("!!");
+        foreach (var player in world.Scores.GetAllScores())
+        {
+            if (player.Item1 == "Left")
+                scoresTextLeft.text = "Left Scores: " + player.Item2;
+            if (player.Item1 == "Right")
+                scoresTextRight.text = "Right Scores: " + player.Item2;
+        }
     }
 }
