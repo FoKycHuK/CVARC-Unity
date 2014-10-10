@@ -78,6 +78,9 @@ public class creater : MonoBehaviour
             ((UEngine)world.Engine).CollisionSender(CollisionInfo.Item1, CollisionInfo.Item2);
             CollisionInfo.Item3 = 0;
         }
+        UKeyboard a = new UKeyboard();
+        foreach (string i in a.PressedKeys)
+            Debug.Log(i);
 
     }
     void FixedUpdate()

@@ -1,8 +1,9 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-firstpass-vs", "Assembly-CSharp-firstpass-vs.csproj", "{28958D83-C6A2-757E-BA88-2503236675F5}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{BBEA8D2A-2CEB-70D1-52EB-1E0DF230FC38}") = "CVARC-Unity", "Assembly-CSharp-firstpass-vs.csproj", "{28958D83-C6A2-757E-BA88-2503236675F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-vs", "Assembly-CSharp-vs.csproj", "{F3BE161D-68E6-5A87-70F6-B3AD050F0415}"
+Project("{BBEA8D2A-2CEB-70D1-52EB-1E0DF230FC38}") = "CVARC-Unity", "Assembly-CSharp-vs.csproj", "{F3BE161D-68E6-5A87-70F6-B3AD050F0415}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,16 +23,20 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
+																																											GlobalSection(MonoDevelopProperties) = preSolution
+=======
+																						GlobalSection(MonoDevelopProperties) = preSolution
+>>>>>>> 62f20e1c328353deb0fd46086bc050344698a7a6
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
-		$0.TextStylePolicy = $3
+		$0.TextStylePolicy = $1
 		$1.inheritsSet = null
 		$1.scope = text/x-csharp
 		$0.CSharpFormattingPolicy = $2
 		$2.inheritsSet = Mono
 		$2.inheritsScope = text/x-csharp
 		$2.scope = text/x-csharp
+		$0.TextStylePolicy = $3
 		$3.FileWidth = 120
 		$3.TabWidth = 4
 		$3.EolMarker = Unix
@@ -39,4 +44,5 @@ Global
 		$3.inheritsScope = text/plain
 		$3.scope = text/plain
 	EndGlobalSection
+
 EndGlobal
