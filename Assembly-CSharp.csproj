@@ -49,6 +49,7 @@
      <Compile Include="Assets\DemoActorManager.cs" />
      <Compile Include="Assets\DemoManagerPart.cs" />
      <Compile Include="Assets\DemoWorldManager.cs" />
+     <Compile Include="Assets\OnCollisionScript.cs" />
      <Compile Include="Assets\RTSActorManager.cs" />
      <Compile Include="Assets\RTSManagerPart.cs" />
      <Compile Include="Assets\RTSWorldManager.cs" />
