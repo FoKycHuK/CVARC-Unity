@@ -54,6 +54,20 @@ public class creater : MonoBehaviour
 
     }
 
+    IWorld CreateTutorialWorld()
+    {
+        var enginePart = new EnginePart(new UEngine(), new UKeyboard());
+        var managerPart = new RTSManagerPart();
+        var logicPart = new RepairTheStarship.RTSLogicPart(); //Заменить только эту строчку для перехода на корабль
+        var competitions = new Competitions(logicPart, enginePart, managerPart);
+        var runMode = RunModes.Available["Tutorial"];
+        var cmdArguments = new RunModeArguments();
+        cmdArguments.ControllersInfo["Left"] = "Azura";
+        cmdArguments.ControllersInfo["Right"] = "Sanguine";
+        return competitions.Create(cmdArguments, runMode());
+
+    }
+
     void Start()
     {
         Behaviour = this;
@@ -61,7 +75,8 @@ public class creater : MonoBehaviour
         Instantiate(cameraPref, new Vector3(0, 100, 0), Quaternion.Euler(90, 0, 0));
         Instantiate(planePref, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
 
-        world = CreateDemoWorld();
+        //world = CreateDemoWorld();
+        world = CreateTutorialWorld();
         CollisionInfo = new Tuple<string, string, int>(null, null, 0);
         scoresTextLeft = Instantiate(scoresTextLeftPref) as GUIText;
         scoresTextRight = Instantiate(scoresTextRightPref) as GUIText;
@@ -78,9 +93,9 @@ public class creater : MonoBehaviour
             ((UEngine)world.Engine).CollisionSender(CollisionInfo.Item1, CollisionInfo.Item2);
             CollisionInfo.Item3 = 0;
         }
-        UKeyboard a = new UKeyboard();
-        foreach (string i in a.PressedKeys)
-            Debug.Log(i);
+        //UKeyboard a = new UKeyboard();
+        //foreach (string i in a.PressedKeys)
+        //    Debug.Log(i);
 
     }
     void FixedUpdate()

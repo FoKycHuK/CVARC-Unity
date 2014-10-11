@@ -26,7 +26,7 @@ namespace Assets
             }
             else
             {
-                robot = GameObject.Instantiate(creater.Behaviour.cubePref, new Vector3(0, 5, 5), Quaternion.Euler(0, 0, 0)) as GameObject;
+                robot = GameObject.Instantiate(creater.Behaviour.cubePref, new Vector3(5, 5, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
                 robot.renderer.material.color = Color.red;
             }
             //robot.rigidbody.drag = 1;

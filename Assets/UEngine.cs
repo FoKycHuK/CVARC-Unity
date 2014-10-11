@@ -23,23 +23,38 @@ namespace Assets
         public void SetSpeed(string id, Frame3D speed)
         {
             var movingObject = GameObject.Find(id);
-            float x = (float)(Math.Cos(movingObject.transform.rotation.eulerAngles.z * Math.PI / 180) * speed.X);
-            float y = (float)(Math.Sin(movingObject.transform.rotation.eulerAngles.z * Math.PI / 180) * speed.X);
+            //var direction = (double)(movingObject.transform.rotation.eulerAngles.y * Math.PI / 180);
+            //if (direction > Math.PI)
+            //    direction -= 2 * Math.PI;
+            //if (movingObject.renderer.material.color == Color.green)
+            //{
+            //    Debug.Log(direction);
+            //    Debug.Log("X " + speed.X);
+            //    Debug.Log("Y " + speed.Y);
+            //    Debug.Log("Z " + speed.Z);
+            //}
+            //float x = (float)(Math.Cos(direction) * speed.X);
+            //float y = (float)(Math.Sin(direction) * speed.X);
+            //случился некий конфуз.
+
+
             //if (movingObject.renderer.material.color == Color.green)
             //{
                 
             //    Debug.Log(movingObject.transform.rotation.eulerAngles.z);
             //    Debug.Log(movingObject.transform.position.x.ToString() + ' ' + movingObject.transform.position.z.ToString());
             //}
+            movingObject.rigidbody.velocity = new Vector3((float)speed.X, 0, (float)speed.Y);
+            movingObject.rigidbody.angularVelocity = new Vector3(0, (float)speed.Yaw.Radian, 0);
+            //requested[id] = new Frame2D(x, y, speed.Yaw);
 
-
-
-            //if (movingObject.renderer.material.color == Color.green)
+            //if (movingObject.transform.position.y != 5)
             //{
-                movingObject.rigidbody.velocity = new Vector3(x, 0, y);
-                movingObject.rigidbody.angularVelocity = new Vector3(0, 0, (float)speed.Yaw.Radian);
-                requested[id] = new Frame2D(x, y, speed.Yaw);
+            //    var pos = movingObject.transform.position;
+            //    movingObject.transform.position = new Vector3(pos.x, 5, pos.y);
             //}
+            //movingObject.transform.position = new Vector3(movingObject.transform.position.x, 5, movingObject.transform.position.z);
+            //movingObject.transform.rotation = new Quaternion(0, movingObject.transform.rotation.y, 0, movingObject.transform.rotation.w);
         }
 
         public void UpdateSpeeds()
@@ -48,7 +63,7 @@ namespace Assets
             {
                 var movingObject = GameObject.Find(e);
                 movingObject.rigidbody.velocity = new Vector3((float)requested[e].X, 0, (float)requested[e].Y);
-                movingObject.rigidbody.angularVelocity = new Vector3(0, 0, (float)requested[e].Angle.Radian);
+                movingObject.rigidbody.angularVelocity = new Vector3(0, (float)requested[e].Angle.Radian, 0);
             }
         }
 
