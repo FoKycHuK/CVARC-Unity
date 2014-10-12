@@ -45,7 +45,7 @@ namespace Assets
             //    Debug.Log(movingObject.transform.position.x.ToString() + ' ' + movingObject.transform.position.z.ToString());
             //}
             movingObject.rigidbody.velocity = new Vector3((float)speed.X, 0, (float)speed.Y);
-            movingObject.rigidbody.angularVelocity = new Vector3(0, (float)speed.Yaw.Radian, 0);
+            movingObject.rigidbody.angularVelocity = new Vector3(0, (float)(speed.Yaw.Radian), 0); // странная бага очень
             //requested[id] = new Frame2D(x, y, speed.Yaw);
 
             //if (movingObject.transform.position.y != 5)
