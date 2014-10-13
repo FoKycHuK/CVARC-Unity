@@ -106,8 +106,8 @@ public class creater : MonoBehaviour
         //Instantiate(cameraPref, new Vector3(0, 20, 0), Quaternion.Euler(90, 0, 0));
         //Instantiate(planePref, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
 
-        //world = CreateDemoWorld();
         world = CreateTutorialWorld();
+        //world = CreateDemoWorld();
         world.Scores.ScoresChanged += UpdateScores;
         CollisionInfo = new Tuple<string, string, int>(null, null, 0);
         //scoresTextLeft = Instantiate(scoresTextLeftPref) as GUIText;
