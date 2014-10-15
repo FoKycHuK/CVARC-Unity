@@ -20,6 +20,12 @@ namespace Assets
            
         }
 
+        public void Stop()
+        {
+            foreach (var id in requested.Keys.ToArray())
+                requested[id] = new Frame2D();
+        }
+
         public void SetSpeed(string id, Frame3D speed)
         {
             var movingObject = GameObject.Find(id);
@@ -43,7 +49,7 @@ namespace Assets
             var rot = obj.transform.rotation.eulerAngles;
             var y = -rot.y;
             if (y < -180) y += 360;
-            Debug.Log(y);
+            //Debug.Log(y);
             return new Frame3D(pos.x, pos.y, pos.z, Angle.FromGrad(rot.x), Angle.FromGrad(y), Angle.FromGrad(rot.z));
         }
 

@@ -34,11 +34,14 @@ public class creater : MonoBehaviour
         var managerPart = new DemoManagerPart();
         var logicPart = new DemoCompetitions.DemoLogicPart(); //Заменить только эту строчку для перехода на корабль
         var competitions = new Competitions(logicPart, enginePart, managerPart);
-        var runMode = RunModes.Available["BotDemo"];
-        var cmdArguments = new RunModeArguments();
-        cmdArguments.ControllersInfo["Left"] = "Square";
-        cmdArguments.ControllersInfo["Right"] = "Random";
-        return competitions.Create(cmdArguments, runMode());
+        var runMode = RunModeFactory.Create(RunModes.BotDemo);
+        var cmdArguments = new Configuration();
+        cmdArguments.Controllers.Add(new ControllerConfiguration { ControllerId = "Left", Name = "Square", Type = ControllerType.Bot });
+        cmdArguments.Controllers.Add(new ControllerConfiguration { ControllerId = "Right", Name = "Square", Type = ControllerType.Bot });
+        cmdArguments.EnableLog = true;
+        cmdArguments.TimeLimit = 10;
+        runMode.CheckArguments(cmdArguments); 
+        return competitions.Create(cmdArguments, runMode);
 
     }
 
@@ -48,11 +51,12 @@ public class creater : MonoBehaviour
         var managerPart = new RTSManagerPart();
         var logicPart = new RepairTheStarship.RTSLogicPart(); //Заменить только эту строчку для перехода на корабль
         var competitions = new Competitions(logicPart, enginePart, managerPart);
-        var runMode = RunModes.Available["BotDemo"];
-        var cmdArguments = new RunModeArguments();
-        cmdArguments.ControllersInfo["Left"] = "Azura";
-        cmdArguments.ControllersInfo["Right"] = "Sanguine";
-        return competitions.Create(cmdArguments, runMode());
+        var runMode = RunModeFactory.Create(RunModes.BotDemo);
+        var cmdArguments = new Configuration();
+        cmdArguments.Controllers.Add(new ControllerConfiguration { ControllerId = "Left", Name = "Azura", Type = ControllerType.Bot });
+        cmdArguments.Controllers.Add(new ControllerConfiguration { ControllerId = "Right", Name = "Sanguine", Type = ControllerType.Bot });
+        runMode.CheckArguments(cmdArguments);
+        return competitions.Create(cmdArguments, runMode);
 
     }
 
@@ -62,11 +66,11 @@ public class creater : MonoBehaviour
         var managerPart = new RTSManagerPart();
         var logicPart = new RepairTheStarship.RTSLogicPart(); //Заменить только эту строчку для перехода на корабль
         var competitions = new Competitions(logicPart, enginePart, managerPart);
-        var runMode = RunModes.Available["Tutorial"];
-        var cmdArguments = new RunModeArguments();
-        cmdArguments.ControllersInfo["Left"] = "Azura";
-        cmdArguments.ControllersInfo["Right"] = "Sanguine";
-        return competitions.Create(cmdArguments, runMode());
+        var runMode = RunModeFactory.Create(RunModes.Tutorial);
+        var cmdArguments = new Configuration();
+        runMode.CheckArguments(cmdArguments); 
+        return competitions.Create(cmdArguments, runMode);
+
 
     }
 
@@ -76,7 +80,7 @@ public class creater : MonoBehaviour
         myCamera.AddComponent<Camera>();
         myCamera.AddComponent<GUILayer>();
         myCamera.AddComponent<AudioListener>();
-        myCamera.transform.position = new Vector3(0, 20, 0);
+        myCamera.transform.position = new Vector3(0, 100, 0);
         myCamera.transform.rotation = Quaternion.Euler(90, 0, 0);
     }
     void PlaneCreator()
@@ -106,7 +110,7 @@ public class creater : MonoBehaviour
         //Instantiate(cameraPref, new Vector3(0, 20, 0), Quaternion.Euler(90, 0, 0));
         //Instantiate(planePref, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
 
-        world = CreateTutorialWorld();
+        world = CreateDemoWorld();
         //world = CreateDemoWorld();
         world.Scores.ScoresChanged += UpdateScores;
         CollisionInfo = new Tuple<string, string, int>(null, null, 0);
@@ -129,8 +133,20 @@ public class creater : MonoBehaviour
         //    Debug.Log(i);
 
     }
+
+    bool worldRunning = true;
+
     void FixedUpdate()
     {
+        if (!worldRunning) return;
+        if (Time.fixedTime > world.Clocks.TimeLimit)
+        {
+            worldRunning = false;
+            world.OnExit();
+            ((UEngine)world.Engine).Stop();
+            ((UEngine)world.Engine).UpdateSpeeds();
+            return;
+        }
         world.Clocks.Tick(Time.fixedTime);
         ((UEngine)world.Engine).UpdateSpeeds();
     }
