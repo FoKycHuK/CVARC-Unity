@@ -34,14 +34,22 @@ public class creater : MonoBehaviour
         var managerPart = new DemoManagerPart();
         var logicPart = new DemoCompetitions.DemoLogicPart(); //Заменить только эту строчку для перехода на корабль
         var competitions = new Competitions(logicPart, enginePart, managerPart);
-        var runMode = RunModeFactory.Create(RunModes.BotDemo);
-        var cmdArguments = new Configuration();
-        cmdArguments.Controllers.Add(new ControllerConfiguration { ControllerId = "Left", Name = "Square", Type = ControllerType.Bot });
-        cmdArguments.Controllers.Add(new ControllerConfiguration { ControllerId = "Right", Name = "Square", Type = ControllerType.Bot });
-        cmdArguments.EnableLog = true;
-        cmdArguments.TimeLimit = 10;
-        runMode.CheckArguments(cmdArguments); 
-        return competitions.Create(cmdArguments, runMode);
+
+        //var runMode = RunModeFactory.Create(RunModes.BotDemo);
+        //var cmdArguments = new Configuration();
+        //cmdArguments.Controllers.Add(new ControllerConfiguration { ControllerId = "Left", Name = "Square", Type = ControllerType.Bot });
+        //cmdArguments.Controllers.Add(new ControllerConfiguration { ControllerId = "Right", Name = "Square", Type = ControllerType.Bot });
+        //cmdArguments.EnableLog = true;
+        //cmdArguments.TimeLimit = 10;
+
+        IRunMode runMode = null;
+        //runMode = Competitions.CreateMode("Demo","Level1","BotDemo", "-TimeLimit", "10", "-EnableLog", "-Controller.Left", "Bot.Square", "-Controller.Right", "Bot.Square");
+        runMode = Competitions.CreateMode("log0.cvarclog");
+
+        //var runMode = RunModeFactory.Create(RunModes.Play);
+        //var cmdArguments = new Configuration();
+        //cmdArguments.LogFile = "log0.cvarclog";
+        return competitions.Create(runMode.Configuration, runMode);
 
     }
 
