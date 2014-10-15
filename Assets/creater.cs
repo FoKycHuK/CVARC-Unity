@@ -17,7 +17,6 @@ public class creater : MonoBehaviour
     //public GUIText scoresTextLeftPref;
     //public GUIText scoresTextRightPref;
     GameObject myCamera;
-    GameObject myPlane;
     public GameObject cubePref; // Эти поля -- прототипы, к ним самим обращаться не получится.
     //public GameObject planePref; // Для этого, нужно найти объект в мире каким-либо образом.
     //public GameObject cameraPref; // Например: GameObject.Find(name); написал, чтоб не забыть.
@@ -91,13 +90,7 @@ public class creater : MonoBehaviour
         myCamera.transform.position = new Vector3(0, 100, 0);
         myCamera.transform.rotation = Quaternion.Euler(90, 0, 0);
     }
-    void PlaneCreator()
-    {
-        myPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-        myPlane.transform.position = new Vector3(0, 0, 0);
-        myPlane.transform.rotation = Quaternion.Euler(0, 0, 0);
-        myPlane.transform.localScale = new Vector3(5, 5, 5);
-    }
+    
     void ScoresFieldsCreator()
     {
         scoresTextLeft = new GameObject("LeftScoreText").AddComponent<GUIText>() as GUIText;
@@ -113,7 +106,6 @@ public class creater : MonoBehaviour
     {
         Behaviour = this;
         CameraCreator();
-        PlaneCreator();
         ScoresFieldsCreator();
         //Instantiate(cameraPref, new Vector3(0, 20, 0), Quaternion.Euler(90, 0, 0));
         //Instantiate(planePref, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
