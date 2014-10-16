@@ -19,13 +19,11 @@ namespace Assets
             {
                 robot = GameObject.Instantiate(creater.Behaviour.cubePref, new Vector3(0, 5, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
                 robot.renderer.material.color = Color.green;
-                robot.tag = "Left";
             }
             else
             {
                 robot = GameObject.Instantiate(creater.Behaviour.cubePref, new Vector3(45, 5, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
                 robot.renderer.material.color = Color.red;
-                robot.tag = "Right";
             }
             robot.rigidbody.drag =  0; // трение
             robot.rigidbody.angularDrag = 0;
