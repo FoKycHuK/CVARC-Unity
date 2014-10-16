@@ -89,7 +89,18 @@ namespace Assets
 
         public void DefineCamera(string cameraName, string host, CVARC.Basic.Sensors.RobotCameraSettings settings)
         {
-            throw new NotImplementedException();
+            var cam = new GameObject(cameraName).AddComponent<Camera>();
+            var robot = GameObject.Find(host);
+            cam.transform.parent = robot.transform;
+            var camPos = settings.Location;
+            var camRot = settings.ViewAngle;
+            cam.transform.localPosition = new Vector3((float)camPos.X, (float)camPos.Y, (float)camPos.Z);
+            cam.transform.localRotation = Quaternion.Euler(0, (float)camRot.Grad + 90, 0);
+            if (robot.tag == "Left")
+                cam.rect = new Rect(0, 0.7f, 0.3f, 0.3f);
+            else
+                cam.rect = new Rect(0.7f, 0.7f, 0.3f, 0.3f);
+            Debug.Log("cam created");
         }
 
         public void DefineKinect(string kinectName, string host)
