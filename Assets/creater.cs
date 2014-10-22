@@ -31,7 +31,7 @@ public partial class creater : MonoBehaviour
     void Start()
     {
         Behaviour = this;
-        //CameraCreator();
+        CameraCreator();
         ScoresFieldsCreator();
         //Instantiate(cameraPref, new Vector3(0, 20, 0), Quaternion.Euler(90, 0, 0));
         //Instantiate(planePref, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
