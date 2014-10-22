@@ -12,9 +12,7 @@ namespace Assets
     public class RTSActorManager : ActorManager<IRTSRobot>, IRTSActorManager
     {
 
-        public string Grip() { return null;  }
 
-        public bool Release() { return false; }
 
         public override void CreateActorBody()
         {
@@ -37,6 +35,21 @@ namespace Assets
 
         }
 
-      
+
+
+        public void Capture(string detailId)
+        {
+            
+        }
+
+        public bool IsDetailFree(string detailId)
+        {
+            return true;
+        }
+
+        public void Release(string detailId)
+        {
+            
+        }
     }
 }

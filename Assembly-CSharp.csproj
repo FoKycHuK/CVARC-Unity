@@ -47,14 +47,17 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Demo\DemoActorManager.cs" />
+     <Compile Include="Assets\Demo\DemoCompetitions.cs" />
      <Compile Include="Assets\Demo\DemoManagerPart.cs" />
      <Compile Include="Assets\Demo\DemoWorldManager.cs" />
      <Compile Include="Assets\OnCollisionScript.cs" />
+     <Compile Include="Assets\RTS\Level1.cs" />
      <Compile Include="Assets\RTS\RTSActorManager.cs" />
      <Compile Include="Assets\RTS\RTSManagerPart.cs" />
      <Compile Include="Assets\RTS\RTSWorldManager.cs" />
-     <Compile Include="Assets\UEngine.cs" />
-     <Compile Include="Assets\UKeyboard.cs" />
+     <Compile Include="Assets\UEngine\UEngine.cs" />
+     <Compile Include="Assets\UEngine\UKeyboard.cs" />
+     <Compile Include="Assets\UEngine\UnityEnginePack.cs" />
      <Compile Include="Assets\WorldCreator.cs" />
      <Compile Include="Assets\creater.cs" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />

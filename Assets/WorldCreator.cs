@@ -9,57 +9,39 @@ using UnityEngine;
 
 public partial class creater : MonoBehaviour
 {
+    IWorld CreateWorld(params string[] args)
+    {
+        var loader = new Loader();
+        loader.AddLevel("Demo", "Level1", () => new DemoCompetitions.Level1());
+        loader.AddLevel("RepairTheStarship", "Level1", () => new RepairTheStarship.Level1());
+
+        ////для Насти:
+        //loader.Levels.Keys.ToArray(); // список всех соревнований
+        //loader.Levels["Demo"].Keys.ToArray(); //список всех уровней соревнования
+        //var competitions = loader.Levels["Demo"]["Level1"]();
+        //competitions.Logic.Bots.Keys.ToArray(); //список всех доступных ботов
+        //competitions.Logic.World.ControllersId.ToArray(); //список всех контроллеров (Left/Right в наших соревнованиях)
+        //// надо создать
+        //LoadingData data = null;
+        //SettingsProposal proposal = null;
+        //// и из этого мы потом сделаем соревнования
+
+        return loader.Load(args);
+    }
+
     IWorld CreateDemoWorld()
     {
-        var enginePart = new EnginePart(new UEngine(), new UKeyboard());
-        var managerPart = new DemoManagerPart();
-        var logicPart = new DemoCompetitions.DemoLogicPart(); //Заменить только эту строчку для перехода на корабль
-        var competitions = new Competitions(logicPart, enginePart, managerPart);
-
-        //var runMode = RunModeFactory.Create(RunModes.BotDemo);
-        //var cmdArguments = new Configuration();
-        //cmdArguments.Controllers.Add(new ControllerConfiguration { ControllerId = "Left", Name = "Square", Type = ControllerType.Bot });
-        //cmdArguments.Controllers.Add(new ControllerConfiguration { ControllerId = "Right", Name = "Square", Type = ControllerType.Bot });
-        //cmdArguments.EnableLog = true;
-        //cmdArguments.TimeLimit = 10;
-
-        IRunMode runMode = null;
-        runMode = Competitions.CreateMode("Demo", "Level1", "BotDemo", "-TimeLimit", "10", "-EnableLog", "-Controller.Left", "Bot.Square", "-Controller.Right", "Bot.Square");
-        //runMode = Competitions.CreateMode("log0.cvarclog");
-
-        //var runMode = RunModeFactory.Create(RunModes.Play);
-        //var cmdArguments = new Configuration();
-        //cmdArguments.LogFile = "log0.cvarclog";
-        return competitions.Create(runMode.Configuration, runMode);
-
+        return CreateWorld("Demo", "Level1", "BotDemo", "-TimeLimit", "10", "-EnableLog", "-Controller.Left", "Bot.Square", "-Controller.Right", "Bot.Square");
     }
 
     IWorld CreateRTSWorld()
     {
-        var enginePart = new EnginePart(new UEngine(), new UKeyboard());
-        var managerPart = new RTSManagerPart();
-        var logicPart = new RepairTheStarship.RTSLogicPart(); //Заменить только эту строчку для перехода на корабль
-        var competitions = new Competitions(logicPart, enginePart, managerPart);
-        var runMode = RunModeFactory.Create(RunModes.BotDemo);
-        var cmdArguments = new Configuration();
-        cmdArguments.Controllers.Add(new ControllerConfiguration { ControllerId = "Left", Name = "Azura", Type = ControllerType.Bot });
-        cmdArguments.Controllers.Add(new ControllerConfiguration { ControllerId = "Right", Name = "Sanguine", Type = ControllerType.Bot });
-        runMode.CheckArguments(cmdArguments);
-        return competitions.Create(cmdArguments, runMode);
-
+        return CreateWorld("RepairTheStarship", "Level1", "BotDemo", "-Controller.Left", "Bot.Azura", "-Controller.Right", "Bot.Sanguine");
     }
 
     IWorld CreateTutorialWorld()
     {
-        var enginePart = new EnginePart(new UEngine(), new UKeyboard());
-        var managerPart = new RTSManagerPart();
-        var logicPart = new RepairTheStarship.RTSLogicPart(); //Заменить только эту строчку для перехода на корабль
-        var competitions = new Competitions(logicPart, enginePart, managerPart);
-        var runMode = RunModeFactory.Create(RunModes.Tutorial);
-        var cmdArguments = new Configuration();
-        runMode.CheckArguments(cmdArguments);
-        return competitions.Create(cmdArguments, runMode);
-
+        return CreateWorld("RepairTheStarship", "Level1", "Tutorial");
 
     }
 

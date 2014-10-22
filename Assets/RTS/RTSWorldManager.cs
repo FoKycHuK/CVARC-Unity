@@ -16,5 +16,15 @@ namespace Assets
         {
             
         }
+
+        public void RemoveDetail(string detailId)
+        {
+            
+        }
+
+        public void ShutTheWall(string wallId)
+        {
+            
+        }
     }
 }

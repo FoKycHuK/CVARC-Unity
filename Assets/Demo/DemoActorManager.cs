@@ -30,6 +30,9 @@ namespace Assets
             robot.rigidbody.useGravity = false;
             robot.AddComponent("OnCollisionScript");
             robot.name = Actor.ObjectId;
+
+            Actor.World.Engine.DefineCamera(Actor.ObjectId + ".Camera", Actor.ObjectId, new CVARC.Basic.Sensors.RobotCameraSettings());
+        
         }
     }
 }

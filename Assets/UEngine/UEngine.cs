@@ -6,6 +6,7 @@ using UnityEngine;
 using AIRLab.Mathematics;
 using System.Threading;
 using AIRLab;
+using CVARC.Basic.Sensors;
 
 namespace Assets
 {
@@ -89,14 +90,14 @@ namespace Assets
 
         public void DefineCamera(string cameraName, string host, CVARC.Basic.Sensors.RobotCameraSettings settings)
         {
-            //Debug.Log(host);
+            Debug.Log(host);
             var cam = new GameObject(cameraName).AddComponent<Camera>();
             var robot = GameObject.Find(host);
             cam.transform.parent = robot.transform;
             var camPos = settings.Location;
             var camRot = settings.ViewAngle;
             cam.transform.localPosition = new Vector3((float)camPos.X, (float)camPos.Y, (float)camPos.Z);
-            cam.transform.localRotation = Quaternion.Euler(0, (float)camRot.Grad + 90, 0);
+            cam.transform.localRotation = Quaternion.Euler(0, 90, 0);
             if (robot.renderer.material.color == Color.green)
                 cam.rect = new Rect(0, 0.7f, 0.3f, 0.3f);
             else
@@ -106,6 +107,8 @@ namespace Assets
 
         public void DefineKinect(string kinectName, string host)
         {
+            var sets = new RobotCameraSettings();
+            //и вот с ним работать
             throw new NotImplementedException();
         }
 
