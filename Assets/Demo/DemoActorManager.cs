@@ -25,6 +25,11 @@ namespace Assets
                 robot = GameObject.Instantiate(creater.Behaviour.cubePref, new Vector3(45, 5, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
                 robot.renderer.material.color = Color.red;
             }
+            var plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+            plane.transform.parent = robot.transform;
+            plane.transform.localScale = new Vector3(0.03f, 0.03f, 0.03f);
+            plane.renderer.material.color = Color.white;
+            plane.transform.localPosition = new Vector3(0.3f, 0.51f, 0f); 
             robot.rigidbody.drag =  0; // трение
             robot.rigidbody.angularDrag = 0;
             robot.rigidbody.useGravity = false;

@@ -90,19 +90,19 @@ namespace Assets
 
         public void DefineCamera(string cameraName, string host, CVARC.Basic.Sensors.RobotCameraSettings settings)
         {
-            Debug.Log(host);
             var cam = new GameObject(cameraName).AddComponent<Camera>();
             var robot = GameObject.Find(host);
             cam.transform.parent = robot.transform;
             var camPos = settings.Location;
             var camRot = settings.ViewAngle;
-            cam.transform.localPosition = new Vector3((float)camPos.X, (float)camPos.Y, (float)camPos.Z);
-            cam.transform.localRotation = Quaternion.Euler(0, 90, 0);
+            Debug.Log(camPos.Pitch.Grad + " " + camPos.Roll.Grad + " " + camPos.Yaw.Grad);
+            cam.transform.localPosition = new Vector3(-(float)camPos.X, (float)camPos.Z / 20, (float)camPos.Y); // ???????
+            cam.transform.localRotation = Quaternion.Euler((float)camPos.Pitch.Grad, 90 + (float)camPos.Yaw.Grad, (float)camPos.Roll.Grad);
+            cam.fieldOfView = (float)camRot.Grad;
             if (robot.renderer.material.color == Color.green)
                 cam.rect = new Rect(0, 0.7f, 0.3f, 0.3f);
             else
                 cam.rect = new Rect(0.7f, 0.7f, 0.3f, 0.3f);
-            Debug.Log("cam created");
         }
 
         public void DefineKinect(string kinectName, string host)
