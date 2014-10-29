@@ -1,8 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-Project("{D026F617-52BE-601C-52BC-44945A63E4C3}") = "cvarc-unity", "Assembly-CSharp-firstpass-vs.csproj", "{AD9C4ECC-6D0E-51A9-92ED-3806A8ADD89D}"
-EndProject
 Project("{D026F617-52BE-601C-52BC-44945A63E4C3}") = "cvarc-unity", "Assembly-CSharp-vs.csproj", "{E0D40AD3-F688-08E6-C05A-E60D4ADBD120}"
 EndProject
 Global
@@ -11,10 +9,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AD9C4ECC-6D0E-51A9-92ED-3806A8ADD89D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD9C4ECC-6D0E-51A9-92ED-3806A8ADD89D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD9C4ECC-6D0E-51A9-92ED-3806A8ADD89D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD9C4ECC-6D0E-51A9-92ED-3806A8ADD89D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E0D40AD3-F688-08E6-C05A-E60D4ADBD120}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E0D40AD3-F688-08E6-C05A-E60D4ADBD120}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0D40AD3-F688-08E6-C05A-E60D4ADBD120}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -23,7 +17,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																					GlobalSection(MonoDevelopProperties) = preSolution
+																																																																							GlobalSection(MonoDevelopProperties) = preSolution
 =======
 																						GlobalSection(MonoDevelopProperties) = preSolution
 >>>>>>> 62f20e1c328353deb0fd46086bc050344698a7a6
