@@ -20,12 +20,11 @@ public partial class creater : MonoBehaviour
         //loader.Levels["Demo"].Keys.ToArray(); //список всех уровней соревнования
         //var competitions = loader.Levels["Demo"]["Level1"]();
         //competitions.Logic.Bots.Keys.ToArray(); //список всех доступных ботов
-        //competitions.Logic.World.ControllersId.ToArray(); //список всех контроллеров (Left/Right в наших соревнованиях)
+        //competitions.Logic.ControllersId.ToArray(); //список всех контроллеров (Left/Right в наших соревнованиях)
         //// надо создать
         //LoadingData data = null;
         //SettingsProposal proposal = null;
         //// и из этого мы потом сделаем соревнования
-
         return loader.Load(args);
     }
 

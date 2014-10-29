@@ -50,6 +50,9 @@
      <Compile Include="Assets\Demo\DemoCompetitions.cs" />
      <Compile Include="Assets\Demo\DemoManagerPart.cs" />
      <Compile Include="Assets\Demo\DemoWorldManager.cs" />
+     <Compile Include="Assets\Demo\Interation\InteractionWorldManager.cs" />
+     <Compile Include="Assets\Demo\Interation\Interation.cs" />
+     <Compile Include="Assets\Demo\Interation\InterationManagerPart.cs" />
      <Compile Include="Assets\OnCollisionScript.cs" />
      <Compile Include="Assets\RTS\Level1.cs" />
      <Compile Include="Assets\RTS\RTSActorManager.cs" />
