@@ -1,5 +1,6 @@
 ﻿using Assets;
 using CVARC.V2;
+using Demo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace DemoCompetitions
     public class Level1 : Competitions
     {
         public Level1()
-            : base(new DemoLogicPart(), new UnityEnginePack(), new DemoManagerPart())
+            : base(new MovementLogicPart(), new UnityEnginePack(), new DemoManagerPart())
         { }
     }
 }

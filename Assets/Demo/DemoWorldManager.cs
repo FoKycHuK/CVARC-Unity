@@ -1,4 +1,5 @@
 ﻿using CVARC.V2;
+using Demo;
 using DemoCompetitions;
 using RepairTheStarship;
 using System;
@@ -9,7 +10,7 @@ using UnityEngine;
 
 namespace Assets
 {
-    public class DemoWorldManager : WorldManager<DemoWorld>
+    public class DemoWorldManager : WorldManager<MovementWorld>
     {
 
 

@@ -1,4 +1,5 @@
 ﻿using CVARC.V2;
+using Demo;
 using DemoCompetitions;
 using RepairTheStarship;
 using System;
@@ -9,7 +10,7 @@ using UnityEngine;
 
 namespace Assets
 {
-    public class DemoActorManager : ActorManager<DemoRobot>
+    public class DemoActorManager : ActorManager<MovementRobot>
     {
 
         public override void CreateActorBody()
@@ -36,7 +37,7 @@ namespace Assets
             robot.AddComponent("OnCollisionScript");
             robot.name = Actor.ObjectId;
 
-            Actor.World.Engine.DefineCamera(Actor.ObjectId + ".Camera", Actor.ObjectId, new CVARC.Basic.Sensors.RobotCameraSettings());
+            Actor.World.Engine.DefineCamera(Actor.ObjectId + ".Camera", Actor.ObjectId, new CVARC.V2.RobotCameraSettings());
         
         }
     }

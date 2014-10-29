@@ -88,14 +88,14 @@ namespace Assets
             return !(GameObject.Find(id) == null);
         }
 
-        public void DefineCamera(string cameraName, string host, CVARC.Basic.Sensors.RobotCameraSettings settings)
+        public void DefineCamera(string cameraName, string host, CVARC.V2.RobotCameraSettings settings)
         {
             var cam = new GameObject(cameraName).AddComponent<Camera>();
             var robot = GameObject.Find(host);
             cam.transform.parent = robot.transform;
             var camPos = settings.Location;
             var camRot = settings.ViewAngle;
-            Debug.Log(camPos.Pitch.Grad + " " + camPos.Roll.Grad + " " + camPos.Yaw.Grad);
+           // Debug.Log(camPos.Pitch.Grad + " " + camPos.Roll.Grad + " " + camPos.Yaw.Grad);
             cam.transform.localPosition = new Vector3(-(float)camPos.X, (float)camPos.Z / 20, (float)camPos.Y); // ???????
             cam.transform.localRotation = Quaternion.Euler((float)camPos.Pitch.Grad, 90 + (float)camPos.Yaw.Grad, (float)camPos.Roll.Grad);
             cam.fieldOfView = (float)camRot.Grad;
@@ -107,7 +107,7 @@ namespace Assets
 
         public void DefineKinect(string kinectName, string host)
         {
-            var sets = new RobotCameraSettings();
+            var sets = new CVARC.V2.RobotCameraSettings();
             //и вот с ним работать
             throw new NotImplementedException();
         }
