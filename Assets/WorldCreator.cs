@@ -41,7 +41,10 @@ public partial class creater : MonoBehaviour
     IWorld CreateTutorialWorld()
     {
         return CreateWorld("RepairTheStarship", "Level1", "Tutorial");
-
+    }
+    IWorld CreateCameraDemo()
+    {
+        return CreateWorld("");
     }
 
     void CameraCreator()

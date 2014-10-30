@@ -96,8 +96,8 @@ namespace Assets
             var camPos = settings.Location;
             var camRot = settings.ViewAngle;
            // Debug.Log(camPos.Pitch.Grad + " " + camPos.Roll.Grad + " " + camPos.Yaw.Grad);
-            cam.transform.localPosition = new Vector3(-(float)camPos.X, (float)camPos.Z / 20, (float)camPos.Y); // ???????
-            cam.transform.localRotation = Quaternion.Euler((float)camPos.Pitch.Grad, 90 + (float)camPos.Yaw.Grad, (float)camPos.Roll.Grad);
+            cam.transform.localPosition = new Vector3((float)camPos.X, (float)camPos.Z / 20, (float)camPos.Y); // ???????
+            cam.transform.localRotation = Quaternion.Euler(-(float)camPos.Pitch.Grad, 90 + (float)camPos.Yaw.Grad, (float)camPos.Roll.Grad);
             cam.fieldOfView = (float)camRot.Grad;
             if (robot.renderer.material.color == Color.green)
                 cam.rect = new Rect(0, 0.7f, 0.3f, 0.3f);

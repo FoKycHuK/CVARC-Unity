@@ -12,8 +12,6 @@ namespace Assets
 {
     public class DemoWorldManager : WorldManager<MovementWorld>
     {
-
-
         public override void CreateWorld(IdGenerator generator)
         {
             var myPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
