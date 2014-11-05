@@ -41,6 +41,12 @@ public partial class creater : MonoBehaviour
         var client = new CvarcTcpClient(socket);
         client.SerializeAndSend(proposal);
         client.ReadObject<SensorsData>();
+        while (true)
+        {
+            client.SerializeAndSend(SimpleMovementCommand.Move(10, 1));
+            client.ReadObject<SensorsData>();
+        }
+
     }
 
     IWorld world;
