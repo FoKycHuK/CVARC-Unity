@@ -9,6 +9,11 @@ using UnityEngine;
 
 public partial class creater : MonoBehaviour
 {
+	IWorld CreateDebug()
+	{
+		return CreateWorld ("Debug", "14000");
+	}
+
     IWorld CreateWorld(params string[] args)
     {
         var loader = new Loader();
