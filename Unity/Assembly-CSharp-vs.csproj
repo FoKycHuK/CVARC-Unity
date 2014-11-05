@@ -1,103 +1,328 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.20506</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F3BE161D-68E6-5A87-70F6-B3AD050F0415}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>
-    </RootNamespace>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <BaseDirectory>Assets</BaseDirectory>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{CD8C9303-404B-FB8D-6B9B-21988D5CAC0A}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+	<BaseDirectory>Assets</BaseDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_4_5_1;UNITY_4_5;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>0169</NoWarn>
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_5_4;UNITY_4_5;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>Temp\bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>0169</NoWarn>
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+	<Reference Include="System" />
     <Reference Include="System.XML" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="UnityEngine">
-      <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor">
-      <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
-    </Reference>
+	<Reference Include="System.Core" />
+	<Reference Include="System.Xml.Linq" />
+	<Reference Include="UnityEngine">
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	</Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Demo\Camera\CameraActorManager.cs" />
-    <Compile Include="Assets\Demo\Camera\CameraCompetitions.cs" />
-    <Compile Include="Assets\Demo\Camera\CameraManagerPart.cs" />
-    <Compile Include="Assets\Demo\Camera\CameraWorldManager.cs" />
-    <Compile Include="Assets\Demo\DemoActorManager.cs" />
-    <Compile Include="Assets\Demo\DemoCompetitions.cs" />
-    <Compile Include="Assets\Demo\DemoManagerPart.cs" />
-    <Compile Include="Assets\Demo\DemoWorldManager.cs" />
-    <Compile Include="Assets\Demo\Interation\InteractionWorldManager.cs" />
-    <Compile Include="Assets\Demo\Interation\Interation.cs" />
-    <Compile Include="Assets\Demo\Interation\InterationManagerPart.cs" />
-    <Compile Include="Assets\OnCollisionScript.cs" />
-    <Compile Include="Assets\RTS\Level1.cs" />
-    <Compile Include="Assets\RTS\RTSActorManager.cs" />
-    <Compile Include="Assets\RTS\RTSManagerPart.cs" />
-    <Compile Include="Assets\RTS\RTSWorldManager.cs" />
-    <Compile Include="Assets\UEngine\UEngine.cs" />
-    <Compile Include="Assets\UEngine\UKeyboard.cs" />
-    <Compile Include="Assets\UEngine\UnityEnginePack.cs" />
-    <Compile Include="Assets\WorldCreator.cs" />
-    <Compile Include="Assets\creater.cs" />
-    <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
-    <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
-    <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
-    <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
-    <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
-    <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
-    <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Light.shader" />
-    <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-LightedOutline.shader" />
-    <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
-    <Reference Include="Assembly-UnityScript-firstpass">
-      <HintPath>C:/Users/Администратор/Desktop/CVARC-Unity/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
-    </Reference>
-    <Reference Include="CVARC.Core">
-      <HintPath>C:/Users/Администратор/Desktop/CVARC-Unity/Assets/CVARC Assets/CVARC.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Demo.General">
-      <HintPath>C:/Users/Администратор/Desktop/CVARC-Unity/Assets/CVARC Assets/Demo.General.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>C:/Users/Администратор/Desktop/CVARC-Unity/Assets/CVARC Assets/nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="RepairTheStarship.General">
-      <HintPath>C:/Users/Администратор/Desktop/CVARC-Unity/Assets/CVARC Assets/RepairTheStarship.General.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
-      <Project>{28958D83-C6A2-757E-BA88-2503236675F5}</Project>
-      <Name>Assembly-CSharp-firstpass-vs</Name>
-    </ProjectReference>
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Angem\Structuries\Angle.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Angem\Structuries\Circle2D.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Angem\Structuries\Frame2D.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Angem\Structuries\Frame3D.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Angem\Structuries\Line2D.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Angem\Structuries\Line3D.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Angem\Structuries\Matrix.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Angem\Structuries\Plane.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Angem\Structuries\Point2D.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Angem\Structuries\Point3D.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Angem\Structuries\PolarPoint2D.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Angem\Structuries\Quat.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Angem\Structuries\Segment2D.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Angem\Structuries\Triangle2D.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\ArythmeticProgressionFunctions.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\CalcResearch\MathFunction.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Common\Geometry.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Common\GeometryFunctions.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Common\Mechanics.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Common\TestGeometry.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Common\Trigonometry.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Common\Vectors.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\CommonFunctions.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\RandomExtensions.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Vectors\Implementation\ArrayEnumerator.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Vectors\Implementation\HashVector.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Vectors\Implementation\Linearizer.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Vectors\Implementation\RealVector.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Vectors\VectorBase\Locked.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Vectors\VectorBase\ReadOnlyVector.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Vectors\VectorBase\Unlocked.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Mathematics\Vectors\VectorBase\Vector.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\AIRLabs\Tuple.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Client\CvarcClient.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Clocks\ControlTrigger.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Clocks\OneTimeTrigger.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Clocks\RenewableTrigger.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Clocks\TimerTrigger.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Clocks\Trigger.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Clocks\WorldClocks.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\CollisionDetector\CollisionDetector.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\CompatibilityException.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Controllers\Controller.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Controllers\IController.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Controllers\Keyboard\IKeyboard.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Controllers\Keyboard\IKeyboardControllerPool.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Controllers\Keyboard\KeyboardController.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Controllers\Keyboard\KeyboardControllerPool.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Controllers\Keyboard\WinformsKey.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Controllers\LogPlayController.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Controllers\Network\GroboTcpClient.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Controllers\Network\INetworkController.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Controllers\Network\ISerializer.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Controllers\Network\JSonSerializer.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Controllers\Network\NetworkController.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Engine\ActorManager.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Engine\IActorManager.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Engine\IEngine.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Engine\IWorldManager.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Engine\WorldManager.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\Competitions\Competitions.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\Competitions\EnginePart.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\Competitions\LogicPart.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\Competitions\LogicPart{}.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\Competitions\ManagerPart.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\Configuration\CommandLineData.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\Configuration\Configuration.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\Configuration\ConfigurationProposal.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\Configuration\IConfigurationPull.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\Configuration\LoadingData.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\Configuration\Settings.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\Configuration\SettingsProposal.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\Loader.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\RunModes\BotDemoRunMode.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\RunModes\DebugRunMode.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\RunModes\IRunMode.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\RunModes\LogPlayerRunMode.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\RunModes\RunModeFactory.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\RunModes\RunModes.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\RunModes\StandardRunMode.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\RunModes\TournamentRunMode.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Loading\RunModes\TutorialRunMode.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Logging\Log.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Logging\Logger.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Sensors\FromSensorAttribute.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Sensors\ISensor.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Sensors\Implementation\LocatorItem.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Sensors\Implementation\LocatorSensor.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Sensors\Implementation\RobotCamera.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Sensors\Implementation\SelfIdSensor.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Sensors\Sensor.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\Sensors\SensorPack.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\SimpleMovementCase\ISimpleMovementRobot.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\SimpleMovementCase\ISimpleMovementWorld.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\SimpleMovementCase\RandomWalkingBot.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\SimpleMovementCase\SimpleMovement2PlayersKeyboardControllerPool.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\SimpleMovementCase\SimpleMovementCommand.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\SimpleMovementCase\SimpleMovementPreprocessor.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\SimpleMovementCase\SimpleMovementRobot.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\SimpleMovementCase\SquareWalkingBot.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\SimpleMovementCase\StandingBot.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\SimpleMovementCase\TwoPlayersId.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\World\Actor.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\World\CommandPreprocessor.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\World\IActor.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\World\ICommand.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\World\ICommandPreprocessor.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\World\IWorld.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\World\IdGenerator.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\World\Robot.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\World\Scores\ScoreRecord.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\World\Scores\Scores.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\World\World.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\__other\HelpExtensions.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\__other\IImageSensorData.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\__other\ISceneSettings.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\__other\ISensorData.cs" />
+     <Compile Include="Assets\CVARC Sources\Core\__other\ImageSensorData.cs" />
+     <Compile Include="Assets\CVARC Sources\Demo\Camera\CameraSensor.cs" />
+     <Compile Include="Assets\CVARC Sources\Demo\Camera\LogicPart.cs" />
+     <Compile Include="Assets\CVARC Sources\Demo\Camera\Robot.cs" />
+     <Compile Include="Assets\CVARC Sources\Demo\Camera\SensorsWithCamera.cs" />
+     <Compile Include="Assets\CVARC Sources\Demo\Interaction\LogicPart.cs" />
+     <Compile Include="Assets\CVARC Sources\Demo\Interaction\MovingForwardBot.cs" />
+     <Compile Include="Assets\CVARC Sources\Demo\Movement\LogicPart.cs" />
+     <Compile Include="Assets\CVARC Sources\Demo\Movement\Robot.cs" />
+     <Compile Include="Assets\CVARC Sources\Demo\Movement\SceneSettings.cs" />
+     <Compile Include="Assets\CVARC Sources\Demo\Movement\SensorsData.cs" />
+     <Compile Include="Assets\CVARC Sources\Demo\Movement\World.cs" />
+     <Compile Include="Assets\CVARC Sources\Demo\MultiControl\DisplacementCommand.cs" />
+     <Compile Include="Assets\CVARC Sources\Demo\MultiControl\MultiCommandKeyboardPool.cs" />
+     <Compile Include="Assets\CVARC Sources\Demo\MultiControl\MultiCommandPreprocessir.cs" />
+     <Compile Include="Assets\CVARC Sources\Demo\MultiControl\MultiControlLogicPart.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Bots\Azura.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Bots\MapHelper\Direction.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Bots\MapHelper\Map.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Bots\MapHelper\MapBuilder.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Bots\MapHelper\PathSearcher.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Bots\MapHelper\Point.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Bots\MapHelper\RobotLocator.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Bots\MapHelper\StarshipObject.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Bots\MolagBal.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Bots\RepairTheStarshipBot.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Bots\RepairTheStarshipBots.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Bots\Sanguine.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Bots\Vaermina.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Clients\LevelClients.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Clients\RTSAction.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Clients\RTSClient.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\RTSKeyboardControllerPool.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\RTSLogic.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Robot\IRTSActorManager.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Robot\IRTSRobot.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Robot\RTSCommandPreprocessor.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Robot\RTSRobot.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\SceneSettings\DataClasses.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\SceneSettings\Map.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\SceneSettings\Node.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\SceneSettings\SceneSettings.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Sensors\Bots\BotsSensorsData.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Sensors\Bots\MapItem.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Sensors\Bots\MapSensor.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Sensors\GripSensor.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Sensors\Level1SensorData.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Sensors\Level2SensorData.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Sensors\Level3SensorData.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Sensors\LocationSensor.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Sensors\LocatorItem.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Sensors\Map\DetailMapData.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Sensors\Map\Map.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Sensors\Map\MapSensor.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Sensors\Map\MapSensorLimited.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\Sensors\Map\WallMapData.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\World\IRTSWorldManager.cs" />
+     <Compile Include="Assets\CVARC Sources\RTS\World\RTSWorld.cs" />
+     <Compile Include="Assets\Demo\Camera\CameraActorManager.cs" />
+     <Compile Include="Assets\Demo\Camera\CameraCompetitions.cs" />
+     <Compile Include="Assets\Demo\Camera\CameraManagerPart.cs" />
+     <Compile Include="Assets\Demo\Camera\CameraWorldManager.cs" />
+     <Compile Include="Assets\Demo\DemoActorManager.cs" />
+     <Compile Include="Assets\Demo\DemoCompetitions.cs" />
+     <Compile Include="Assets\Demo\DemoManagerPart.cs" />
+     <Compile Include="Assets\Demo\DemoWorldManager.cs" />
+     <Compile Include="Assets\Demo\Interation\InteractionWorldManager.cs" />
+     <Compile Include="Assets\Demo\Interation\Interation.cs" />
+     <Compile Include="Assets\Demo\Interation\InterationManagerPart.cs" />
+     <Compile Include="Assets\OnCollisionScript.cs" />
+     <Compile Include="Assets\RTS\Level1.cs" />
+     <Compile Include="Assets\RTS\RTSActorManager.cs" />
+     <Compile Include="Assets\RTS\RTSManagerPart.cs" />
+     <Compile Include="Assets\RTS\RTSWorldManager.cs" />
+     <Compile Include="Assets\UEngine\UEngine.cs" />
+     <Compile Include="Assets\UEngine\UKeyboard.cs" />
+     <Compile Include="Assets\UEngine\UnityEnginePack.cs" />
+     <Compile Include="Assets\WorldCreator.cs" />
+     <Compile Include="Assets\creater.cs" />
+ <Reference Include="nunit.framework">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/CVARC Assets/nunit.framework.dll</HintPath>
+ </Reference>
+ <Reference Include="System.configuration">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.configuration.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Configuration.Install">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.Configuration.Install.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Data.SqlXml">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.Data.SqlXml.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Deployment">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.Deployment.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Design">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.Design.dll</HintPath>
+ </Reference>
+ <Reference Include="System.DirectoryServices">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.DirectoryServices.dll</HintPath>
+ </Reference>
+ <Reference Include="System.DirectoryServices.Protocols">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.DirectoryServices.Protocols.dll</HintPath>
+ </Reference>
+ <Reference Include="System">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Drawing.Design">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.Drawing.Design.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Drawing">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.Drawing.dll</HintPath>
+ </Reference>
+ <Reference Include="System.EnterpriseServices">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.EnterpriseServices.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Management">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.Management.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Messaging">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.Messaging.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Runtime.Remoting">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.Runtime.Remoting.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Runtime.Serialization">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.Runtime.Serialization.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Runtime.Serialization.Formatters.Soap">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.Runtime.Serialization.Formatters.Soap.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Security">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.Security.dll</HintPath>
+ </Reference>
+ <Reference Include="System.ServiceModel.Web">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.ServiceModel.Web.dll</HintPath>
+ </Reference>
+ <Reference Include="System.ServiceProcess">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.ServiceProcess.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Web">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.Web.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Web.Extensions">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.Web.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Web.Mobile">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.Web.Mobile.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Web.RegularExpressions">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.Web.RegularExpressions.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Web.Services">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.Web.Services.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Windows.Forms">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.Windows.Forms.dll</HintPath>
+ </Reference>
+ <Reference Include="System.XML">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/NET Framework/System.XML.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -107,4 +332,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  
 </Project>
