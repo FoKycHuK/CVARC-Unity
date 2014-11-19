@@ -7,7 +7,7 @@ using System.Text;
 using UnityEngine;
 
 
-public partial class creater : MonoBehaviour
+public partial class RoundScript : MonoBehaviour
 {
     IWorld CreateWorld(params string[] args)
     {

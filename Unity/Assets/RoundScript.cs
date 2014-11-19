@@ -7,9 +7,9 @@ using CVARC.V2;
 using AIRLab;
 
 
-public partial class creater : MonoBehaviour
+public partial class RoundScript : MonoBehaviour
 {
-    public static creater Behaviour { get; private set; }
+    public static RoundScript Behaviour { get; private set; }
     public static Tuple<string, string, int> CollisionInfo { get; set; }
     IWorld world;
     GUIText scoresTextLeft;
@@ -27,7 +27,17 @@ public partial class creater : MonoBehaviour
         Behaviour = this;
         CameraCreator();
         ScoresFieldsCreator();
-        world = CreateDemoWorld();
+        Debug.Log("Started");
+        try
+        {
+            world = IntroductionStript.worldInitializer();
+            Debug.Log("Loaded");
+        }
+        catch(Exception e)
+        {
+            Debug.Log("Fail");
+            Debug.Log(e.Message);
+        }
         world.Scores.ScoresChanged += UpdateScores;
         CollisionInfo = new Tuple<string, string, int>(null, null, 0);
 

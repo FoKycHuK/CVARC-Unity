@@ -19,12 +19,12 @@ namespace Assets
             GameObject robot = null;
             if (Actor.ControllerId == "Left")
             {
-                robot = GameObject.Instantiate(creater.Behaviour.cubePref, new Vector3(0, 5, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
+                robot = GameObject.Instantiate(RoundScript.Behaviour.cubePref, new Vector3(0, 5, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
                 robot.renderer.material.color = Color.green;
             }
             else
             {
-                robot = GameObject.Instantiate(creater.Behaviour.cubePref, new Vector3(5, 5, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
+                robot = GameObject.Instantiate(RoundScript.Behaviour.cubePref, new Vector3(5, 5, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
                 robot.renderer.material.color = Color.red;
             }
 //эксепшн

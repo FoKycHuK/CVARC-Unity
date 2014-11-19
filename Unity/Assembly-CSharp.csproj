@@ -64,11 +64,11 @@
      <Compile Include="Assets\RTS\RTSActorManager.cs" />
      <Compile Include="Assets\RTS\RTSManagerPart.cs" />
      <Compile Include="Assets\RTS\RTSWorldManager.cs" />
+     <Compile Include="Assets\RoundScript.cs" />
      <Compile Include="Assets\UEngine\UEngine.cs" />
      <Compile Include="Assets\UEngine\UKeyboard.cs" />
      <Compile Include="Assets\UEngine\UnityEnginePack.cs" />
      <Compile Include="Assets\WorldCreator.cs" />
-     <Compile Include="Assets\creater.cs" />
  <Reference Include="CVARC.Core">
  <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/CVARC Assets/CVARC.Core.dll</HintPath>
  </Reference>

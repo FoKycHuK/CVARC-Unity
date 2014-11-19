@@ -10,15 +10,15 @@ namespace Assets
     {
         void OnCollisionEnter(Collision collision)
         {
-            if (creater.CollisionInfo.Item3 == 0)
+            if (RoundScript.CollisionInfo.Item3 == 0)
             {
-                creater.CollisionInfo.Item3 = 1;
-                creater.CollisionInfo.Item1 = collision.gameObject.name;
+                RoundScript.CollisionInfo.Item3 = 1;
+                RoundScript.CollisionInfo.Item1 = collision.gameObject.name;
             }
             else
             {
-                creater.CollisionInfo.Item2 = collision.gameObject.name;
-                creater.CollisionInfo.Item3 = 2;
+                RoundScript.CollisionInfo.Item2 = collision.gameObject.name;
+                RoundScript.CollisionInfo.Item3 = 2;
             }
         }
         //void OnCollisionExit(Collision collision)

@@ -5,7 +5,7 @@ using System;
 
 public class IntroductionStript : MonoBehaviour {
 
-	static Func<IWorld> worldInitializer;
+	public static Func<IWorld> worldInitializer;
 
 	CVARC.V2.Loader loader;
 
@@ -40,7 +40,7 @@ public class IntroductionStript : MonoBehaviour {
                     new ControllerSettings { ControllerId="Right", Type= ControllerType.Bot, Name="Square"}
                 };
                 worldInitializer=()=>loader.LoadNonLogFile(mode, data, proposal);
-                Application.LoadLevel("scene");
+                Application.LoadLevel("Round");
                 Debug.Log("Ok");
 			}
 		}
