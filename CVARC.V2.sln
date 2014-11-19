@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.General", "CVARC\CVARC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnicalProject", "TechnicalProject\TechnicalProject.csproj", "{034E795C-9DAA-40C9-BE25-1393088791D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepairTheStarship.General", "CVARC\CVARC.V2\RepairTheStarship\RepairTheStarship\RepairTheStarship.General.csproj", "{11B6A7C1-E6AA-4F81-9710-EC84069CA858}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{034E795C-9DAA-40C9-BE25-1393088791D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{034E795C-9DAA-40C9-BE25-1393088791D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{034E795C-9DAA-40C9-BE25-1393088791D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11B6A7C1-E6AA-4F81-9710-EC84069CA858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11B6A7C1-E6AA-4F81-9710-EC84069CA858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11B6A7C1-E6AA-4F81-9710-EC84069CA858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11B6A7C1-E6AA-4F81-9710-EC84069CA858}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

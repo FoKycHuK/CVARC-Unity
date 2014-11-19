@@ -56,6 +56,10 @@
       <Project>{f7b5021f-09e8-4388-97a2-4b44b9770d03}</Project>
       <Name>CVARC.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CVARC\CVARC.V2\RepairTheStarship\RepairTheStarship\RepairTheStarship.General.csproj">
+      <Project>{11b6a7c1-e6aa-4f81-9710-ec84069ca858}</Project>
+      <Name>RepairTheStarship.General</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
