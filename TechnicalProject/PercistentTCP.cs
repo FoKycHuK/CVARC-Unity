@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TechnicalProject
 {
-    class Program
+    class PercistentTCP
     {
         static void Main(string[] args)
         {

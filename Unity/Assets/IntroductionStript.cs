@@ -14,8 +14,21 @@ public class IntroductionStript : MonoBehaviour {
 		loader = new CVARC.V2.Loader ();
 		loader.AddLevel ("Demo", "Test", () => new DemoCompetitions.Level1());
 		//copy here other levels of demo
+
+        //надо запустить тред Server
 	}
 
+    void Server()
+    {
+        // var server=new PercistentServer(); - открывает TcpListener, делает AcceptClient, останавливается и выходит из Run. 
+        // server.Run()
+        // server.ReadObject(typeof()); //из открытого клиента читает строку и десериализует ее. Если фейл, то снова сделать AcceptClient. Если и это фейл - пересоздать листенерю Можно сносить вообще все.
+        // var mode = new DebugRunMode(server); // PercistentServer должен реализовывать интерфейс IMessagingClient
+        // var configProposal = mode.GetConfigurationProposal();
+        //worldInitializer = () => loader.LoadNonLogFile(mode, data, proposal);
+        //Application.LoadLevel("Round");
+        //Debug.Log("Ok");
+    }
 
 	public void OnGUI()
 	{
