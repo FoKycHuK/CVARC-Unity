@@ -57,7 +57,6 @@
      <Compile Include="Assets\Demo\Interation\InteractionWorldManager.cs" />
      <Compile Include="Assets\Demo\Interation\Interation.cs" />
      <Compile Include="Assets\Demo\Interation\InterationManagerPart.cs" />
-     <Compile Include="Assets\FirstMenu.cs" />
      <Compile Include="Assets\IntroductionStript.cs" />
      <Compile Include="Assets\OnCollisionScript.cs" />
      <Compile Include="Assets\RTS\Level1.cs" />
@@ -70,16 +69,16 @@
      <Compile Include="Assets\UEngine\UnityEnginePack.cs" />
      <Compile Include="Assets\WorldCreator.cs" />
  <Reference Include="CVARC.Core">
- <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/CVARC Assets/CVARC.Core.dll</HintPath>
+ <HintPath>C:/Users/Lenovo/Desktop/CVARC-Unity/Unity/Assets/CVARC Assets/CVARC.Core.dll</HintPath>
  </Reference>
  <Reference Include="Demo.General">
- <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/CVARC Assets/Demo.General.dll</HintPath>
+ <HintPath>C:/Users/Lenovo/Desktop/CVARC-Unity/Unity/Assets/CVARC Assets/Demo.General.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
- <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/CVARC Assets/nunit.framework.dll</HintPath>
+ <HintPath>C:/Users/Lenovo/Desktop/CVARC-Unity/Unity/Assets/CVARC Assets/nunit.framework.dll</HintPath>
  </Reference>
  <Reference Include="RepairTheStarship.General">
- <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/CVARC Assets/RepairTheStarship.General.dll</HintPath>
+ <HintPath>C:/Users/Lenovo/Desktop/CVARC-Unity/Unity/Assets/CVARC Assets/RepairTheStarship.General.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

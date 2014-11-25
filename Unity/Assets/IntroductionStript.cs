@@ -1,22 +1,26 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEditor;
+using UnityEngine;
 using System.Collections;
 using CVARC.V2;
 using System;
 
 public class IntroductionStript : MonoBehaviour {
 
-	public static Func<IWorld> worldInitializer;
+    public static Func<IWorld> worldInitializer;
 
-	CVARC.V2.Loader loader;
+    public static CVARC.V2.Loader loader;
+    private bool flag = true;
 
-	void Start()
-	{
-		loader = new CVARC.V2.Loader ();
-		loader.AddLevel ("Demo", "Test", () => new DemoCompetitions.Level1());
-		//copy here other levels of demo
+    void Start()
+    {
+        loader = new CVARC.V2.Loader ();
+        loader.AddLevel ("Demo", "Test", () => new DemoCompetitions.Level1());
+        loader.AddLevel("RepairTheStarship", "Level1", () => new RepairTheStarship.Level1());
+        //copy here other levels of demo
 
         //надо запустить тред Server
-	}
+    }
 
     void Server()
     {
@@ -30,35 +34,110 @@ public class IntroductionStript : MonoBehaviour {
         //Debug.Log("Ok");
     }
 
-	public void OnGUI()
-	{
-		GUILayout.BeginArea (new Rect (0, 0, Screen.height, Screen.width), GUI.skin.textArea);
-		{
-			GUIStyle style = new GUIStyle (GUI.skin.button);
-			style.margin = new RectOffset (50, 50, 50, 50);
-			style.font = new Font ();
-			bool result=GUILayout.Button("Create",style,GUILayout.MinHeight(60));
-			if (result)
-			{
-				IRunMode mode = RunModeFactory.Create(RunModes.BotDemo); // <-- выбор из списка Tutorial/BotDemo
-				LoadingData data = new LoadingData();
+    public void OnGUI()
+    {
+        if (flag)
+        {
+            EditorGUILayoutEnumPopup.Init();
+            flag = false;
+        }
+//        GUILayout.BeginArea (new Rect (0, 0, Screen.height, Screen.width), GUI.skin.textArea);
+//        {
+//            GUIStyle style = new GUIStyle (GUI.skin.button);
+//            style.margin = new RectOffset (50, 50, 50, 50);
+//            style.font = new Font ();
+//            bool result=GUILayout.Button(new GUIContent("Create"), style,GUILayout.MinHeight(60));
+//            if (result)
+//            {
+//                IRunMode mode = RunModeFactory.Create(RunModes.BotDemo); // <-- выбор из списка Tutorial/BotDemo
+//                LoadingData data = new LoadingData();
+//
+//                data.AssemblyName="Demo"; // <-- выбор из списка loader.Levels.Keys
+//                data.Level="Test"; // <-- loader.Levels[AsseblyName].Keys;
+//
+//                SettingsProposal proposal=new SettingsProposal();
+//                proposal.Controllers = new System.Collections.Generic.List<ControllerSettings> // <-- только BotDemo
+//                {
+//                    new ControllerSettings { ControllerId="Left", Type= ControllerType.Bot, Name="Random"},
+//                    new ControllerSettings { ControllerId="Right", Type= ControllerType.Bot, Name="Square"}
+//                };
+//                worldInitializer=()=>loader.LoadNonLogFile(mode, data, proposal);
+//                Application.LoadLevel("Round");
+//                Debug.Log("Ok");
+//            }
+//        }
+//        GUILayout.EndArea ();
+    }
 
-				data.AssemblyName="Demo"; // <-- выбор из списка loader.Levels.Keys
-				data.Level="Test"; // <-- loader.Levels[AsseblyName].Keys;
+}
+internal class EditorGUILayoutEnumPopup : EditorWindow
+{
+    public static void Init()
+    {
+        var window = GetWindow(typeof(EditorGUILayoutEnumPopup));
+        window.Show();
+    }
 
-				SettingsProposal proposal=new SettingsProposal();
-                proposal.Controllers = new System.Collections.Generic.List<ControllerSettings> // <-- только BotDemo
+    int competitionIndex = 0;
+    int levelIndex = 0;
+    int botIndex = 0;
+    int controllerIndex = 0;
+    Font buttonFont;
+    float buttonMinHeight = 60f;
+    CVARC.V2.RunModes runMode;
+
+    int leftBot = 0;
+    int rightBot = 0;
+
+
+    public void OnGUI()
+    {
+        var competitions = IntroductionStript.loader.Levels.Keys.ToArray();
+        var competitionsGUI = competitions.Select(x => new GUIContent(x.ToString())).ToArray();
+        competitionIndex = EditorGUILayout.Popup(new GUIContent("Choose competition:"), competitionIndex, competitionsGUI);
+
+        var levels = IntroductionStript.loader.Levels[competitions[competitionIndex]].Keys.ToArray();
+        var levelsGUI = levels.Select(x => new GUIContent(x.ToString())).ToArray();
+        levelIndex = EditorGUILayout.Popup(new GUIContent("Choose level:"), levelIndex, levelsGUI);
+
+        var comp = IntroductionStript.loader.Levels[competitions[competitionIndex]][levels[levelIndex]]();
+        
+
+        runMode = (CVARC.V2.RunModes)EditorGUILayout.EnumPopup("Chose run mode", runMode);
+
+        var bots = comp.Logic.Bots.Keys.ToArray();
+        var botsGUI = bots.Select(x => new GUIContent(x.ToString())).ToArray();
+        if (runMode == RunModes.BotDemo)
+        {
+            leftBot = EditorGUILayout.Popup(new GUIContent("Choose left controller:"), leftBot, botsGUI);
+            rightBot = EditorGUILayout.Popup(new GUIContent("Choose right controller:"), rightBot, botsGUI);
+        }
+        else
+            botIndex = EditorGUILayout.Popup(new GUIContent("Choose bot:"), botIndex, botsGUI);
+
+        GUIStyle buttonStyle = new GUIStyle(GUI.skin.button);
+        buttonStyle.font = buttonFont;
+        buttonStyle.margin = new RectOffset(20, 20, 3, 3);
+        if (GUILayout.Button("Start", buttonStyle, GUILayout.MinHeight(buttonMinHeight)))
+        {
+            IRunMode mode = RunModeFactory.Create(runMode);
+            LoadingData data = new LoadingData();
+
+            data.AssemblyName = competitions[competitionIndex];
+            data.Level = levels[levelIndex];
+
+            SettingsProposal proposal = new SettingsProposal();
+            if (runMode == RunModes.BotDemo)
+                proposal.Controllers = new System.Collections.Generic.List<ControllerSettings>
                 {
-                    new ControllerSettings { ControllerId="Left", Type= ControllerType.Bot, Name="Random"},
-                    new ControllerSettings { ControllerId="Right", Type= ControllerType.Bot, Name="Square"}
+                    new ControllerSettings {ControllerId = "Left", Type = ControllerType.Bot, Name = bots[leftBot]},
+                    new ControllerSettings {ControllerId = "Right", Type = ControllerType.Bot, Name = bots[rightBot]}
                 };
-                worldInitializer=()=>loader.LoadNonLogFile(mode, data, proposal);
-                Application.LoadLevel("Round");
-                Debug.Log("Ok");
-			}
-		}
-		GUILayout.EndArea ();
+            IntroductionStript.worldInitializer = () => IntroductionStript.loader.LoadNonLogFile(mode, data, proposal);
+//            Debug.Log("Ok");
+            this.Close();
+            Application.LoadLevel("Round");
+        }
+    }
 
-
-	}
 }
