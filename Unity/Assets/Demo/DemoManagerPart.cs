@@ -9,7 +9,7 @@ namespace Assets
     public class DemoManagerPart : ManagerPart
     {
         public DemoManagerPart()
-            : base(new  DemoWorldManager())
+            : base(()=>new  DemoWorldManager())
         { }
 
         public override IActorManager CreateActorManagerFor(IActor actor)

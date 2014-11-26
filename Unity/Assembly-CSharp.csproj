@@ -69,16 +69,19 @@
      <Compile Include="Assets\UEngine\UnityEnginePack.cs" />
      <Compile Include="Assets\WorldCreator.cs" />
  <Reference Include="CVARC.Core">
- <HintPath>C:/Users/Lenovo/Desktop/CVARC-Unity/Unity/Assets/CVARC Assets/CVARC.Core.dll</HintPath>
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/CVARC Assets/CVARC.Core.dll</HintPath>
  </Reference>
  <Reference Include="Demo.General">
- <HintPath>C:/Users/Lenovo/Desktop/CVARC-Unity/Unity/Assets/CVARC Assets/Demo.General.dll</HintPath>
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/CVARC Assets/Demo.General.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
- <HintPath>C:/Users/Lenovo/Desktop/CVARC-Unity/Unity/Assets/CVARC Assets/nunit.framework.dll</HintPath>
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/CVARC Assets/nunit.framework.dll</HintPath>
  </Reference>
  <Reference Include="RepairTheStarship.General">
- <HintPath>C:/Users/Lenovo/Desktop/CVARC-Unity/Unity/Assets/CVARC Assets/RepairTheStarship.General.dll</HintPath>
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/CVARC Assets/RepairTheStarship.General.dll</HintPath>
+ </Reference>
+ <Reference Include="TechnicalProject">
+ <HintPath>C:/Users/user/Desktop 3/cvarc-unity/Unity/Assets/CVARC Assets/TechnicalProject.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

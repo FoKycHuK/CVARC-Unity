@@ -124,5 +124,25 @@ namespace Assets
             var angVel = movingObject.rigidbody.angularVelocity;
             return new Frame3D(vel.x, vel.y, vel.z, Angle.FromRad(angVel.y), Angle.FromRad(angVel.z), Angle.FromRad(angVel.x)); //???
         }
-    }
+
+		public void Attach(string objectToAttach, string host, Frame3D relativePosition)
+		{
+			
+		}
+
+		public void DeleteObject(string objectId)
+		{
+			
+		}
+
+		public void Detach(string objectToDetach, Frame3D absolutePosition)
+		{
+			
+		}
+
+		public string FindParent(string objectId)
+		{
+			return null;
+		}
+	}
 }

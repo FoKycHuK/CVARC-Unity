@@ -10,21 +10,35 @@ namespace Assets
 {
     public class RTSWorldManager : WorldManager<RTSWorld>, IRTSWorldManager
     {
-      
 
-        public override void CreateWorld(IdGenerator generator)
-        {
-            
-        }
+		public void CreateDetail(string detailId, AIRLab.Mathematics.Point2D detailLocation, DetailColor color)
+		{
+			
+		}
 
-        public void RemoveDetail(string detailId)
-        {
-            
-        }
+		public void CreateEmptyTable()
+		{
+			
+		}
 
-        public void ShutTheWall(string wallId)
-        {
-            
-        }
-    }
+		public void CreateWall(string wallId, AIRLab.Mathematics.Point2D centerLocation, WallData settings)
+		{
+			
+		}
+
+		public void RemoveDetail(string detailId)
+		{
+			
+		}
+
+		public void ShutTheWall(string wallId)
+		{
+			
+		}
+
+		public override void CreateWorld(IdGenerator generator)
+		{
+			//оставить пустым!
+		}
+	}
 }

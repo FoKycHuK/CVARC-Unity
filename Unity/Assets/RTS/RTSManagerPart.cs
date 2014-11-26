@@ -9,7 +9,7 @@ namespace Assets
     public class RTSManagerPart : ManagerPart
     {
         public RTSManagerPart()
-            : base(new RTSWorldManager())
+            : base(()=>new RTSWorldManager())
         { }
 
         public override IActorManager CreateActorManagerFor(IActor actor)

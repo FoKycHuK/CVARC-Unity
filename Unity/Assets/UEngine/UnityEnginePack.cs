@@ -9,7 +9,7 @@ namespace Assets
     public class UnityEnginePack : EnginePart
     {
         public UnityEnginePack()
-            : base(new UEngine(), new UKeyboard())
+            : base(()=>new UEngine(), ()=>new UKeyboard())
         { }
     }
 }
