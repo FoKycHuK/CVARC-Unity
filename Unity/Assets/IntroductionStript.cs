@@ -89,6 +89,10 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
     int leftBot = 0;
     int rightBot = 0;
 
+	const string Tutorial = "Tutorial";
+	const string BotDemo = "BotDemo";
+	const string Test = "Test";
+
 
     public void OnGUI()
     {
@@ -101,13 +105,15 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
         levelIndex = EditorGUILayout.Popup(new GUIContent("Choose level:"), levelIndex, levelsGUI);
 
         var comp = IntroductionStript.loader.Levels[competitions[competitionIndex]][levels[levelIndex]]();
-        
 
-        runMode = (CVARC.V2.RunModes)EditorGUILayout.EnumPopup("Chose run mode", runMode);
+		var modeNames=new[] { Tutorial, BotDemo, Test};
+		var modesGui = modeNames.Select(z => new GUIContent(z)).ToArray();
+		controllerIndex = EditorGUILayout.Popup(new GUIContent("Choose mode:"), controllerIndex, modesGui);
+		var runMode = modeNames[controllerIndex];
 
         var bots = comp.Logic.Bots.Keys.ToArray();
         var botsGUI = bots.Select(x => new GUIContent(x.ToString())).ToArray();
-        if (runMode == RunModes.BotDemo)
+        if (runMode == BotDemo)
         {
             leftBot = EditorGUILayout.Popup(new GUIContent("Choose left controller:"), leftBot, botsGUI);
             rightBot = EditorGUILayout.Popup(new GUIContent("Choose right controller:"), rightBot, botsGUI);
@@ -119,25 +125,38 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
         buttonStyle.font = buttonFont;
         buttonStyle.margin = new RectOffset(20, 20, 3, 3);
         if (GUILayout.Button("Start", buttonStyle, GUILayout.MinHeight(buttonMinHeight)))
-        {
-            IRunMode mode = RunModeFactory.Create(runMode);
-            LoadingData data = new LoadingData();
+		{
+			LoadingData data = new LoadingData();
 
-            data.AssemblyName = competitions[competitionIndex];
-            data.Level = levels[levelIndex];
+			data.AssemblyName = competitions[competitionIndex];
+			data.Level = levels[levelIndex];
 
-            SettingsProposal proposal = new SettingsProposal();
-            if (runMode == RunModes.BotDemo)
-                proposal.Controllers = new System.Collections.Generic.List<ControllerSettings>
+			if (runMode != Test)
+			{
+				var factory = IntroductionStript.loader.CreateControllerFactory(runMode);
+				
+
+				SettingsProposal proposal = new SettingsProposal();
+				if (runMode == "BotDemo")
+					proposal.Controllers = new System.Collections.Generic.List<ControllerSettings>
                 {
                     new ControllerSettings {ControllerId = "Left", Type = ControllerType.Bot, Name = bots[leftBot]},
                     new ControllerSettings {ControllerId = "Right", Type = ControllerType.Bot, Name = bots[rightBot]}
                 };
-            IntroductionStript.worldInitializer = () => IntroductionStript.loader.LoadNonLogFile(mode, data, proposal);
-//            Debug.Log("Ok");
-            this.Close();
-            Application.LoadLevel("Round");
-        }
+
+				//            Debug.Log("Ok");
+				this.Close();
+				Dispatcher.WorldPrepared(() => IntroductionStript.loader.CreateSimpleMode(data, proposal, factory));
+
+			}
+			else
+			{
+				//var competitions = IntroductionStript.loader.GetCompetitions(data);
+				//var testName=competitions.Logic.Tests.First().Key; //Насте - нужен попапчик
+				//IntroductionStript.loader.S
+			}
+
+		}
     }
 
 }

@@ -30,7 +30,7 @@ public partial class RoundScript : MonoBehaviour
         Debug.Log("Started");
         try
         {
-            world = IntroductionStript.worldInitializer();
+            world = Dispatcher.InitializeWorld();
             Debug.Log("Loaded");
         }
         catch(Exception e)
@@ -80,6 +80,7 @@ public partial class RoundScript : MonoBehaviour
 
     void FixedUpdate() //только физика и строгие расчеты. вызывается строго каждые 20 мс
     {
+		Debug.Log(Time.fixedTime);
         world.Clocks.Tick(Time.fixedTime);
         ((UEngine)world.Engine).UpdateSpeeds();
     }
