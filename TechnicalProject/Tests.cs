@@ -44,6 +44,8 @@ namespace TechnicalProject
                         exception = e;
                     }
                 });
+            clientThread.IsBackground = true;
+            serverThread.IsBackground = true;
             serverThread.Start();
             Thread.Sleep(10);
 
@@ -64,12 +66,10 @@ namespace TechnicalProject
                         secondClientException = e;
                     }
                 });
+            clientThread.IsBackground = true;
             clientThread.Start();
 
             Thread.Sleep(50);
-
-            server.RequestStop(); //lol
-            new TcpClient().Connect("127.0.0.1", 14000); // КОСТЫЛЬ на закрытие треда.
 
             if (secondClientException != null)
                 throw secondClientException; //второй не должен кидать эксепшн, а должен успешно подключиться.
@@ -89,6 +89,7 @@ namespace TechnicalProject
             server.ClientConnected += ClientConnected;
 
             var serverThread = new Thread(() => server.StartThread());
+            serverThread.IsBackground = true;
             serverThread.Start();
 
             var clientThread = new Thread(() =>
@@ -132,8 +133,6 @@ namespace TechnicalProject
             if (exceptionHandled)
                 throw exception;
 
-            server.RequestStop();
-            new TcpClient().Connect("127.0.0.1", 14000); // КОСТЫЛЬ на закрытие треда.
         }
 
         [Test]
@@ -146,6 +145,7 @@ namespace TechnicalProject
             server.ClientConnected += ClientConnected;
 
             var serverThread = new Thread(() => server.StartThread());
+            serverThread.IsBackground = true;
             serverThread.Start();
 
             var clientThread = new Thread(() =>
@@ -187,18 +187,17 @@ namespace TechnicalProject
 
             if (exceptionHandled)
                 throw exception;
-
-            server.RequestStop();
-            new TcpClient().Connect("127.0.0.1", 14000); // КОСТЫЛЬ на закрытие треда.
         }
 
         void ClientConnected(CvarcClient client)
         {
-            new Thread(() =>
+            var th = new Thread(() =>
             {
                 client.WriteLine(new byte[] { 1, 2, 3 });
                 client.ReadLine();
-            }).Start();
+            });
+            th.IsBackground = true;
+            th.Start();
         }
     }
 }
