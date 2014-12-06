@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,9 +19,10 @@ namespace TechnicalProject
 
 		public event Action<CvarcClient> ClientConnected;
 
-		void StartThread()
+		public void StartThread()
 		{
-			var listner=new TcpListener(port);
+			var listner=new TcpListener(IPAddress.Any, port);
+            listner.Start();
 			CvarcClient cvarcClient = null;
 			while(true)
 			{

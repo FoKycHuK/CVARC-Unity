@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TechnicalProject;
 using UnityEngine;
 
 class Dispatcher
@@ -13,10 +14,13 @@ class Dispatcher
 	//Этот метод нужно вызвать ровно один раз навсегда!
 	static void Start()
 	{
+        
 		//создание и заполнение loader-а сюда
-
+        loader = new Loader();
+        //?? AddLevel? CreateNetwork?
 		//создает PercistentServer и подписываемся на его событие
-
+        var server = new PercistentTCPServer(14000);
+        server.ClientConnected += ClientConnected;
 	}
 
 	static void ClientConnected(CvarcClient client)
