@@ -11,6 +11,7 @@ namespace TechnicalProject
 {
     public class PercistentTCPServer
 	{
+        volatile bool shouldStop = false;
 		int port;
 		public PercistentTCPServer(int port)
 		{
@@ -24,7 +25,7 @@ namespace TechnicalProject
 			var listner=new TcpListener(IPAddress.Any, port);
             listner.Start();
 			CvarcClient cvarcClient = null;
-			while(true)
+			while(!shouldStop)
 			{
 				var client = listner.AcceptTcpClient();
 				if (cvarcClient != null)
@@ -33,7 +34,15 @@ namespace TechnicalProject
 				if (ClientConnected != null)
 					ClientConnected(cvarcClient);
 			}
+            if (cvarcClient != null)
+            {
+                cvarcClient.Close();
+            }
 		}
+        public void RequestStop() // КОСТЫЛЬ на закрытие треда.
+        {
+            shouldStop = true;
+        }
 
 		//Тесты:
 		//поднимаешь сервер, делаешь обработчик события, который инициирует трэд чтения и читает-пишет

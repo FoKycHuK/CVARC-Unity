@@ -9,21 +9,24 @@ using System.Threading;
 using System.Net.Sockets;
 namespace TechnicalProject
 {
+    //в тестах ексепшены и фейлы в тредах не влияют на результат (тесты зеленые)
+    //треды продолжают работу после завершения теста (жму кэнсл)
+    //что-то делаю не так?
+    //Два теста не хотят запускаться одновременно. Хотя по очереди работают хорошо.
     [TestFixture]
     public class Tests
     {
-        byte[] message = new byte[] { 1, 2, 3 };
+        
 
         [Test]
-        public void Some()
+        public void First_client_throws_exception_when_second_connected()
         {
-            //в тестах ексепшены и фейлы в тредах не влияют на результат (тесты зеленые)
-            //треды продолжают работу после завершения теста (жму кэнсл)
-            //что-то делаю не так?
+            byte[] message = new byte[] { 1, 2, 3 };
             var server = new PercistentTCPServer(14000);
             server.ClientConnected += ClientConnected;
             var exceptionHandled = false;
             Exception exception = null;
+            Exception secondClientException = null;
             var serverThread = new Thread(() => server.StartThread());
             var clientThread = new Thread(() =>
                 {
@@ -31,13 +34,9 @@ namespace TechnicalProject
                     {
                         var client = new TcpClient();
                         client.Connect("127.0.0.1", 14000);
-                        Thread.Sleep(50);
-                        //client.ReceiveTimeout = 15;
-                        //client.Client.ReceiveTimeout = 15;
-                        client.Client.Send(message);
+                        Thread.Sleep(30); //ждем, пока другой клиент подсоединится. 
+                        client.Client.Send(message); //где-то тут сервер должен разорвать соединение.
                         client.Client.Receive(message);
-                        //exceptionHandled = true; //оно доходит до сюда, значит не виснет и значит сервер не закрывает клиент?
-                        //попозже разберусь
                     }
                     catch (Exception e)
                     {
@@ -52,20 +51,154 @@ namespace TechnicalProject
             Thread.Sleep(10);
 
             if (exceptionHandled)
-                throw exception;
+                throw exception; //на этот момент не должно быть эксепшна, первый должен к этому моменту успешно подключиться и ждать в слипе.
 
-            clientThread = new Thread(() => new TcpClient().Connect("127.0.0.1", 14000));
+            clientThread = new Thread(() => 
+                {
+                    try
+                    {
+                        new TcpClient().Connect("127.0.0.1", 14000);
+                    }
+                    catch (Exception e)
+                    {
+                        secondClientException = e;
+                    }
+                });
             clientThread.Start();
 
-            Thread.Sleep(100);
-            if (!exceptionHandled)
+            Thread.Sleep(50);
+
+            server.RequestStop(); //lol
+            new TcpClient().Connect("127.0.0.1", 14000); // КОСТЫЛЬ на закрытие треда.
+
+            if (secondClientException != null)
+                throw secondClientException; //второй не должен кидать эксепшн, а должен успешно подключиться.
+
+            if (!exceptionHandled) // первый должен кинуть эксепшн после подключения второго
                 Assert.Fail();
+
         }
 
-        public void ClientConnected(CvarcClient client)
+        [Test]
+        public void Second_can_connect_when_first_correct_close()
         {
-            client.WriteLine(message);
-            client.ReadLine();
+            byte[] message = new byte[] { 1, 2, 3 };
+            var exceptionHandled = false;
+            Exception exception = null;
+            var server = new PercistentTCPServer(14000);
+            server.ClientConnected += ClientConnected;
+
+            var serverThread = new Thread(() => server.StartThread());
+            serverThread.Start();
+
+            var clientThread = new Thread(() =>
+            {
+                try
+                {
+                    var client = new TcpClient();
+                    client.Connect("127.0.0.1", 14000);
+                    client.Client.Close();
+                }
+                catch (Exception e)
+                {
+                    exceptionHandled = true;
+                    exception = e;
+                }
+            });
+            clientThread.Start();
+            clientThread.Join();
+
+            if (exceptionHandled)
+                throw exception;
+
+            clientThread = new Thread(() =>
+            {
+                try
+                {
+                    var client = new TcpClient();
+                    client.Connect("127.0.0.1", 14000);
+                    //client.Client.Send(message); //с этими строчками работает по отдельности, но не работает когда жмешь Ран Олл
+                    //client.Client.Receive(message);
+                }
+                catch (Exception e)
+                {
+                    exceptionHandled = true;
+                    exception = e;
+                }
+            });
+            clientThread.Start();
+            clientThread.Join();
+
+            if (exceptionHandled)
+                throw exception;
+
+            server.RequestStop();
+            new TcpClient().Connect("127.0.0.1", 14000); // КОСТЫЛЬ на закрытие треда.
+        }
+
+        [Test]
+        public void Second_can_connect_when_first_not_close()
+        {
+            byte[] message = new byte[] { 1, 2, 3 };
+            var exceptionHandled = false;
+            Exception exception = null;
+            var server = new PercistentTCPServer(14000);
+            server.ClientConnected += ClientConnected;
+
+            var serverThread = new Thread(() => server.StartThread());
+            serverThread.Start();
+
+            var clientThread = new Thread(() =>
+            {
+                try
+                {
+                    var client = new TcpClient();
+                    client.Connect("127.0.0.1", 14000);
+                }
+                catch (Exception e)
+                {
+                    exceptionHandled = true;
+                    exception = e;
+                }
+            });
+            clientThread.Start();
+            clientThread.Join();
+
+            if (exceptionHandled)
+                throw exception;
+
+            clientThread = new Thread(() =>
+            {
+                try
+                {
+                    var client = new TcpClient();
+                    client.Connect("127.0.0.1", 14000);
+                    //client.Client.Send(message); //с этими строчками работает по отдельности, но не работает когда жмешь Ран Олл
+                    //client.Client.Receive(message);
+                }
+                catch (Exception e)
+                {
+                    exceptionHandled = true;
+                    exception = e;
+                }
+            });
+            clientThread.Start();
+            clientThread.Join();
+
+            if (exceptionHandled)
+                throw exception;
+
+            server.RequestStop();
+            new TcpClient().Connect("127.0.0.1", 14000); // КОСТЫЛЬ на закрытие треда.
+        }
+
+        void ClientConnected(CvarcClient client)
+        {
+            new Thread(() =>
+            {
+                client.WriteLine(new byte[] { 1, 2, 3 });
+                client.ReadLine();
+            }).Start();
         }
     }
 }
