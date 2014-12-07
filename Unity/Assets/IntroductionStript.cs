@@ -10,7 +10,8 @@ public class IntroductionStript : MonoBehaviour {
     public static Func<IWorld> worldInitializer;
 
     public static CVARC.V2.Loader loader;
-    private bool flag = true;
+    bool guiIsRunned = false;
+    bool serverIsRunned = false;
 
     void Start()
     {
@@ -20,10 +21,23 @@ public class IntroductionStript : MonoBehaviour {
         //copy here other levels of demo
 
         //надо запустить тред Server
+        if (!serverIsRunned)
+        {
+            Server();
+            serverIsRunned = true;
+        }
+    }
+
+    void Update()
+    {
+        Dispatcher.CheckNetworkClient(); // нарм?
     }
 
     void Server()
     {
+        Dispatcher.Start();
+
+        // кажется, все снизу устарело чуть менее, чем полностью.
         // var server=new PercistentServer(); - открывает TcpListener, делает AcceptClient, останавливается и выходит из Run. 
         // server.Run()
         // server.ReadObject(typeof()); //из открытого клиента читает строку и десериализует ее. Если фейл, то снова сделать AcceptClient. Если и это фейл - пересоздать листенерю Можно сносить вообще все.
@@ -36,10 +50,10 @@ public class IntroductionStript : MonoBehaviour {
 
     public void OnGUI()
     {
-        if (flag)
+        if (!guiIsRunned)
         {
             EditorGUILayoutEnumPopup.Init();
-            flag = false;
+            guiIsRunned = true;
         }
 //        GUILayout.BeginArea (new Rect (0, 0, Screen.height, Screen.width), GUI.skin.textArea);
 //        {

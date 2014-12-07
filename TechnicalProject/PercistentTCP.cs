@@ -33,10 +33,6 @@ namespace TechnicalProject
 				if (ClientConnected != null)
 					ClientConnected(cvarcClient);
 			}
-            if (cvarcClient != null)
-            {
-                cvarcClient.Close();
-            }
 		}
 
 		//Тесты:
