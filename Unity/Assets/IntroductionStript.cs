@@ -16,7 +16,7 @@ public class IntroductionStript : MonoBehaviour {
     void Start()
     {
         loader = new CVARC.V2.Loader ();
-        loader.AddLevel ("Demo", "Test", () => new DemoCompetitions.DemoMovement());
+        loader.AddLevel ("Demo", "Test", () => new DemoCompetitions.Level1());
        // loader.AddLevel("RepairTheStarship", "Level1", () => new RepairTheStarship.Level1());
         //copy here other levels of demo
 
@@ -162,7 +162,7 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
 				var asserter = new UnityAsserter();
 				Dispatcher.WaitingNetworkServer.LoadingData = data;
 				Action action = () => test.Run(Dispatcher.WaitingNetworkServer, asserter);
-				Dispatcher.RunThread(action);
+				action.BeginInvoke(null, null);
 			}
 
 		}

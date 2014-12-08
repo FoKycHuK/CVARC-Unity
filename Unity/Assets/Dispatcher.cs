@@ -19,7 +19,7 @@ class Dispatcher
         
 		//создание и заполнение loader-а сюда
         loader = new Loader();
-        loader.AddLevel("Demo", "Test", () => new DemoCompetitions.DemoMovement());
+        loader.AddLevel("Demo", "Test", () => new DemoCompetitions.Level1());
 
 		RenewWaitingNetworkServer();
 		//создает PercistentServer и подписываемся на его событие
@@ -52,7 +52,7 @@ class Dispatcher
 	static void RenewWaitingNetworkServer()
 	{
 		WaitingNetworkServer = new NetworkServerData() { Port = 14000 };
-		WaitingNetworkServer.ServerState = NetworkServerState.Ready;
+		WaitingNetworkServer.ServerLoaded = true;
 	}
 
 	static void ClientConnected(CvarcClient client)
