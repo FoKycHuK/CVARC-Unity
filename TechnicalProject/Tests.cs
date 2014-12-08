@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using CVARC.V2;
 using System.Threading;
 using System.Net.Sockets;
-namespace TechnicalProject
+namespace CVARC.V2
 {
     //в тестах ексепшены и фейлы в тредах не влияют на результат (тесты зеленые)
     //треды продолжают работу после завершения теста (жму кэнсл)

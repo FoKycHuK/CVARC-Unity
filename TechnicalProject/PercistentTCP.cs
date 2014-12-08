@@ -5,9 +5,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace TechnicalProject
+namespace CVARC.V2
 {
     public class PercistentTCPServer
 	{
@@ -19,14 +18,24 @@ namespace TechnicalProject
 
 		public event Action<CvarcClient> ClientConnected;
 
+		public Action<string> Printer;
+
+		void Print(string str)
+		{
+			if (Printer != null)
+				Printer(str);
+		}
+
 		public void StartThread()
 		{
+			Print("Server started");
 			var listner=new TcpListener(IPAddress.Any, port);
             listner.Start();
 			CvarcClient cvarcClient = null;
 			while(true)
 			{
 				var client = listner.AcceptTcpClient();
+				Print("Client accepted");
 				if (cvarcClient != null)
 					cvarcClient.Close(); // этот метод должен внутри CvarcClient устанавливать флаг, при котором цикл внутри Read заканчивается исключением
 				cvarcClient = new CvarcClient(client);

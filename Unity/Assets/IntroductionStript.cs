@@ -11,13 +11,13 @@ public class IntroductionStript : MonoBehaviour {
 
     public static CVARC.V2.Loader loader;
     bool guiIsRunned = false;
-    bool serverIsRunned = false;
+    static bool serverIsRunned = false;
 
     void Start()
     {
         loader = new CVARC.V2.Loader ();
-        loader.AddLevel ("Demo", "Test", () => new DemoCompetitions.Level1());
-        loader.AddLevel("RepairTheStarship", "Level1", () => new RepairTheStarship.Level1());
+        loader.AddLevel ("Demo", "Test", () => new DemoCompetitions.DemoMovement());
+       // loader.AddLevel("RepairTheStarship", "Level1", () => new RepairTheStarship.Level1());
         //copy here other levels of demo
 
         //надо запустить тред Server
@@ -36,16 +36,6 @@ public class IntroductionStript : MonoBehaviour {
     void Server()
     {
         Dispatcher.Start();
-
-        // кажется, все снизу устарело чуть менее, чем полностью.
-        // var server=new PercistentServer(); - открывает TcpListener, делает AcceptClient, останавливается и выходит из Run. 
-        // server.Run()
-        // server.ReadObject(typeof()); //из открытого клиента читает строку и десериализует ее. Если фейл, то снова сделать AcceptClient. Если и это фейл - пересоздать листенерю Можно сносить вообще все.
-        // var mode = new DebugRunMode(server); // PercistentServer должен реализовывать интерфейс IMessagingClient
-        // var configProposal = mode.GetConfigurationProposal();
-        //worldInitializer = () => loader.LoadNonLogFile(mode, data, proposal);
-        //Application.LoadLevel("Round");
-        //Debug.Log("Ok");
     }
 
     public void OnGUI()
@@ -98,7 +88,6 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
     int controllerIndex = 0;
     Font buttonFont;
     float buttonMinHeight = 60f;
-    CVARC.V2.RunModes runMode;
 
     int leftBot = 0;
     int rightBot = 0;
@@ -120,7 +109,7 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
 
         var comp = IntroductionStript.loader.Levels[competitions[competitionIndex]][levels[levelIndex]]();
 
-		var modeNames=new[] { Tutorial, BotDemo, Test};
+		var modeNames = new[] { Test, Tutorial, BotDemo};
 		var modesGui = modeNames.Select(z => new GUIContent(z)).ToArray();
 		controllerIndex = EditorGUILayout.Popup(new GUIContent("Choose mode:"), controllerIndex, modesGui);
 		var runMode = modeNames[controllerIndex];
@@ -147,6 +136,7 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
 
 			if (runMode != Test)
 			{
+				Debug.Log("Non test starting");
 				var factory = IntroductionStript.loader.CreateControllerFactory(runMode);
 				
 
@@ -165,9 +155,14 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
 			}
 			else
 			{
-				//var competitions = IntroductionStript.loader.GetCompetitions(data);
-				//var testName=competitions.Logic.Tests.First().Key; //Насте - нужен попапчик
-				//IntroductionStript.loader.S
+				Debug.Log("Test starting");
+				var competitionsInstance = IntroductionStript.loader.GetCompetitions(data);
+				var testName = "Square";// competitionsInstance.Logic.Tests.First().Key; //Насте - нужен PopUp
+				var test = IntroductionStript.loader.GetTest(data, testName);
+				var asserter = new UnityAsserter();
+				Dispatcher.WaitingNetworkServer.LoadingData = data;
+				Action action = () => test.Run(Dispatcher.WaitingNetworkServer, asserter);
+				Dispatcher.RunThread(action);
 			}
 
 		}
