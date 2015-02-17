@@ -153,7 +153,7 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
 				Dispatcher.WorldPrepared(() => IntroductionStript.loader.CreateSimpleMode(data, proposal, factory));
 
 			}
-			else
+			else // запуск одного теста
 			{
 				Debug.Log("Test starting");
 				var competitionsInstance = IntroductionStript.loader.GetCompetitions(data);

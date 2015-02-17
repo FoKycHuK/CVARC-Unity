@@ -9,11 +9,17 @@ using UnityEngine;
 class Dispatcher
 {
 	static Loader loader;
+	
+	//Данные уже установленного соединения
 	static NetworkServerData loadedNetworkServerData = null;
+
+	//Данные соединения, которое еще не установлено. 
 	public static NetworkServerData WaitingNetworkServer { get; private set; }
+
+	//Делегат, который запустит мир, определенный очередным клиентом.
     static Func<IWorld> WorldInitializer;
 
-	//Этот метод нужно вызвать ровно один раз навсегда!
+	//Этот метод нужно вызвать ровно один раз навсегда! для этого завести флаг.
 	public static void Start()
 	{
         
@@ -29,12 +35,13 @@ class Dispatcher
 		new Thread(server.StartThread) { IsBackground = true }.Start();
 	}
 
+	//Запускать трэды надо не руками, а через этот метод! Это касается тестов в первую очередь.
 	public static void RunThread(Action thread)
 	{
 		//их в какой-то список складывать
 	}
 
-	//Вызывать этот метод при завершении Unity
+	//Вызывать этот метод при завершении Unity. Найти метод, который вызывается в Unity перед завершением. 
 	public static void Exit()
 	{
 		//убивать трэды как угодно
@@ -49,6 +56,7 @@ class Dispatcher
 		//должен появится флаг тестового режима, и в этом режиме Exited должен запускать следующий тест. Если кончились, возвращение на Intro.
 	}
 
+	//Подготавливает диспетчер к приему нового клиента.
 	static void RenewWaitingNetworkServer()
 	{
 		WaitingNetworkServer = new NetworkServerData() { Port = 14000 };
@@ -63,7 +71,7 @@ class Dispatcher
 				WaitingNetworkServer.ClientOnServerSide = client;
 				loader.ReceiveConfiguration(WaitingNetworkServer);
 				loadedNetworkServerData = WaitingNetworkServer; // сигнал того, что мир готов к созданию.
-				RenewWaitingNetworkServer();
+				RenewWaitingNetworkServer(); // а это мы делаем, чтобы следующее подключение удалось.
 				// создавать его прямо здесь нельзя, потому что другой трэд
 			}).BeginInvoke(null, null);
 	}
