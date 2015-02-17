@@ -32,7 +32,7 @@ class Dispatcher
         var server = new PercistentTCPServer(14000);
         server.ClientConnected += ClientConnected;
 		server.Printer = str => Debug.Log(str);
-		new Thread(server.StartThread) { IsBackground = true }.Start();
+		//new Thread(server.StartThread) { IsBackground = true }.Start();
 	}
 
 	//Запускать трэды надо не руками, а через этот метод! Это касается тестов в первую очередь.

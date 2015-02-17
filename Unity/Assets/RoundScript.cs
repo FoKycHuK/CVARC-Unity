@@ -40,6 +40,10 @@ public partial class RoundScript : MonoBehaviour
         }
         world.Scores.ScoresChanged += UpdateScores;
         CollisionInfo = new Tuple<string, string, int>(null, null, 0);
+		Time.timeScale = 1; // вот почему так?
+
+		//в момент повторного запуска время уже не нулевое
+		
 
     }
 
@@ -60,8 +64,10 @@ public partial class RoundScript : MonoBehaviour
 
 
         if (!worldRunning) return;
-        if (Time.fixedTime > world.Clocks.TimeLimit)
+		
+        if (Time.fixedTime > 10)
         {
+			Debug.Log("Time is Up");
             worldRunning = false;
             world.OnExit();
             Time.timeScale = 0;
