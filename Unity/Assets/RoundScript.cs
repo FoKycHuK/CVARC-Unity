@@ -86,7 +86,7 @@ public partial class RoundScript : MonoBehaviour
 
     void FixedUpdate() //только физика и строгие расчеты. вызывается строго каждые 20 мс
     {
-		Debug.Log(Time.fixedTime);
+		//Debug.Log(Time.fixedTime);
         world.Clocks.Tick(Time.fixedTime);
         ((UEngine)world.Engine).UpdateSpeeds();
     }
