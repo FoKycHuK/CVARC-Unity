@@ -20,6 +20,8 @@ class Dispatcher
 	//Делегат, который запустит мир, определенный очередным клиентом.
     static Func<IWorld> WorldInitializer;
 
+	static public bool TestMode;
+
 	static List<Thread> Threads = new List<Thread>();
 	//Этот метод нужно вызвать ровно один раз навсегда! для этого завести флаг.
 	public static void Start()
@@ -48,10 +50,11 @@ class Dispatcher
 	}
 
 	//Вызывать этот метод при завершении Unity. Найти метод, который вызывается в Unity перед завершением. 
-	public static void Exit()
+	public static void KillThreads()
 	{
 		foreach (var thread in Threads)
 		{
+			Debug.Log(thread.IsAlive);
 			thread.Abort();
 			Debug.Log("one of thread kill success");
 		}
@@ -66,6 +69,8 @@ class Dispatcher
 		//ты умеешь запускать тесты, см. IntroductionScript
 		//и ты знаешь, когда очередной тест закончился, тогда вызывается метод Exited
 		//должен появится флаг тестового режима, и в этом режиме Exited должен запускать следующий тест. Если кончились, возвращение на Intro.
+
+		var asserter = new UnityAsserter();
 	}
 
 	//Подготавливает диспетчер к приему нового клиента.
@@ -110,10 +115,13 @@ class Dispatcher
 
 	static void Exited()
 	{
-		EditorApplication.isPlaying = false; // так мы "отжимаем" кнопку play. при этом скрипты продолжают выполняться, но юнити сцены закрываются и вызывается метод OnDisable
-		//Application.LoadLevel("Intro"); //может не надо этого?
+		if (!TestMode)
+		{
+			EditorApplication.isPlaying = false; // так мы "отжимаем" кнопку play. при этом скрипты продолжают выполняться, но юнити сцены закрываются и вызывается метод OnDisable
+			//Application.LoadLevel("Intro"); //может не надо этого?
+		}
 		Debug.Log("Exited");
-		Exit(); // я не уверен, что это должно быть тут, но походу этого больше нигде нет.
+		KillThreads(); // я не уверен, что это должно быть тут, но походу этого больше нигде нет.
 	}
 
 	//Запускать из Intro по типа таймеру

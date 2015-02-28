@@ -42,7 +42,7 @@ public class IntroductionStript : MonoBehaviour {
 
 	void OnDisable()
 	{
-		Dispatcher.Exit();
+		//Dispatcher.KillThreads();
 	}
 
     public void OnGUI()
@@ -169,7 +169,9 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
 				var asserter = new UnityAsserter();
 				Dispatcher.WaitingNetworkServer.LoadingData = data;
 				Action action = () => test.Run(Dispatcher.WaitingNetworkServer, asserter);
-				action.BeginInvoke(null, null);
+				//action.BeginInvoke(null, null);
+				Dispatcher.RunThread(action);
+				Debug.Log("test started");
 			}
 
 		}

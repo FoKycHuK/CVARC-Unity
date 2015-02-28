@@ -10,8 +10,11 @@ class UnityAsserter : IAsserter
 {
 	public void IsEqual(bool expected, bool actual)
 	{
+		
 		if (expected != actual)
 			Debug.Log("Expected " + expected + ", but was " + actual);
+		else
+			Debug.Log("OK");
 	}
 
 	public void IsEqual(double expected, double actual, double delta)

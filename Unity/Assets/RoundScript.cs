@@ -18,6 +18,7 @@ public partial class RoundScript : MonoBehaviour
     GameObject myCamera;
     public GameObject cubePref; // Эти поля -- прототипы, к ним самим обращаться не получится.
     bool worldRunning = true;
+	bool worldPrepearedToExit;
 
     // Use this for initialization
 
@@ -98,10 +99,13 @@ public partial class RoundScript : MonoBehaviour
 
 	void WorldPrepareToExit() // не встроенный, свой метод.
 	{
+		if (worldPrepearedToExit)
+			return;
 		Debug.Log("prepearing to exit...");
 		worldRunning = false;
 		world.OnExit();
 		Time.timeScale = 0;
 		Debug.Log("prepare to exit complete");
+		worldPrepearedToExit = true;
 	}
 }
