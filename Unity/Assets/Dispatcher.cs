@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using UnityEditor;
 using UnityEngine;
 
 class Dispatcher
@@ -19,6 +20,7 @@ class Dispatcher
 	//Делегат, который запустит мир, определенный очередным клиентом.
     static Func<IWorld> WorldInitializer;
 
+	static List<Thread> Threads = new List<Thread>();
 	//Этот метод нужно вызвать ровно один раз навсегда! для этого завести флаг.
 	public static void Start()
 	{
@@ -31,19 +33,29 @@ class Dispatcher
 		//создает PercistentServer и подписываемся на его событие
         var server = new PercistentTCPServer(14000);
         server.ClientConnected += ClientConnected;
-		server.Printer = str => Debug.Log(str);
-		new Thread(server.StartThread) { IsBackground = true }.Start();
+		server.Printer = str => Debug.Log("FROM SERVER: " + str);
+		//new Thread(server.StartThread) { IsBackground = true }.Start();
+		RunThread(server.StartThread);
 	}
 
 	//Запускать трэды надо не руками, а через этот метод! Это касается тестов в первую очередь.
-	public static void RunThread(Action thread)
+	public static void RunThread(Action action)
 	{
+		var thread = new Thread(new ThreadStart(action)) { IsBackground = true };
+		Threads.Add(thread);
+		thread.Start();
 		//их в какой-то список складывать
 	}
 
 	//Вызывать этот метод при завершении Unity. Найти метод, который вызывается в Unity перед завершением. 
 	public static void Exit()
 	{
+		foreach (var thread in Threads)
+		{
+			thread.Abort();
+			Debug.Log("one of thread kill success");
+		}
+		Debug.Log("all threads killed");
 		//убивать трэды как угодно
 	}
 
@@ -66,6 +78,7 @@ class Dispatcher
 	static void ClientConnected(CvarcClient client)
 	{
 		//в отдельном трэде делать!
+		RunThread(
 		new Action(() =>
 			{
 				WaitingNetworkServer.ClientOnServerSide = client;
@@ -73,7 +86,7 @@ class Dispatcher
 				loadedNetworkServerData = WaitingNetworkServer; // сигнал того, что мир готов к созданию.
 				RenewWaitingNetworkServer(); // а это мы делаем, чтобы следующее подключение удалось.
 				// создавать его прямо здесь нельзя, потому что другой трэд
-			}).BeginInvoke(null, null);
+			}));//.BeginInvoke(null, null);
 	}
 
 
@@ -97,15 +110,19 @@ class Dispatcher
 
 	static void Exited()
 	{
-		Application.LoadLevel("Intro");
+		EditorApplication.isPlaying = false; // так мы "отжимаем" кнопку play. при этом скрипты продолжают выполняться, но юнити сцены закрываются и вызывается метод OnDisable
+		//Application.LoadLevel("Intro"); //может не надо этого?
 		Debug.Log("Exited");
+		Exit(); // я не уверен, что это должно быть тут, но походу этого больше нигде нет.
 	}
 
 	//Запускать из Intro по типа таймеру
 	public static void CheckNetworkClient()
 	{
+		
 		if (loadedNetworkServerData != null)
 		{
+			Debug.Log("WOW! Someone connected?");
 			Func<IWorld> worldInitializer = () =>
 			{
 				loader.InstantiateWorld(loadedNetworkServerData);

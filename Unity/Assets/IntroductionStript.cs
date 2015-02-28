@@ -21,11 +21,13 @@ public class IntroductionStript : MonoBehaviour {
         //copy here other levels of demo
 
         //надо запустить тред Server
-        if (!serverIsRunned)
-        {
-            Server();
-            serverIsRunned = true;
-        }
+
+		if (!serverIsRunned)
+		{
+			Server();
+			serverIsRunned = true;
+		}
+		
     }
 
     void Update()
@@ -37,6 +39,11 @@ public class IntroductionStript : MonoBehaviour {
     {
         Dispatcher.Start();
     }
+
+	void OnDisable()
+	{
+		Dispatcher.Exit();
+	}
 
     public void OnGUI()
     {

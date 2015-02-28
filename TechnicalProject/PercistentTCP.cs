@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 namespace CVARC.V2
 {
@@ -34,6 +35,8 @@ namespace CVARC.V2
 			CvarcClient cvarcClient = null;
 			while(true)
 			{
+				while (!listner.Pending())
+					Thread.Sleep(10);
 				var client = listner.AcceptTcpClient();
 				Print("Client accepted");
 				if (cvarcClient != null)

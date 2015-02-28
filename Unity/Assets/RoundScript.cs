@@ -5,6 +5,7 @@ using System.Threading;
 using System;
 using CVARC.V2;
 using AIRLab;
+using UnityEditor;
 
 
 public partial class RoundScript : MonoBehaviour
@@ -68,9 +69,7 @@ public partial class RoundScript : MonoBehaviour
         if (Time.fixedTime > 10)
         {
 			Debug.Log("Time is Up");
-            worldRunning = false;
-            world.OnExit();
-            Time.timeScale = 0;
+			WorldPrepareToExit();
             //((UEngine)world.Engine).Stop();
             //((UEngine)world.Engine).UpdateSpeeds();
             return;
@@ -90,5 +89,19 @@ public partial class RoundScript : MonoBehaviour
         world.Clocks.Tick(Time.fixedTime);
         ((UEngine)world.Engine).UpdateSpeeds();
     }
-    
+
+	void OnDisable()
+	{
+		WorldPrepareToExit();
+		Debug.Log("FINAL exit");
+	}
+
+	void WorldPrepareToExit() // не встроенный, свой метод.
+	{
+		Debug.Log("prepearing to exit...");
+		worldRunning = false;
+		world.OnExit();
+		Time.timeScale = 0;
+		Debug.Log("prepare to exit complete");
+	}
 }
