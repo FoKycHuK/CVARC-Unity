@@ -168,7 +168,9 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
 				var test = IntroductionStript.loader.GetTest(data, testName);
 				var asserter = new UnityAsserter();
 				Dispatcher.WaitingNetworkServer.LoadingData = data;
-				Action action = () => test.Run(Dispatcher.WaitingNetworkServer, asserter);
+				//Action action = () => test.Run(Dispatcher.WaitingNetworkServer, asserter);
+				var testInfo = new BullShi();
+				Action action = () => testInfo.Run(Dispatcher.WaitingNetworkServer, asserter);
 				//action.BeginInvoke(null, null);
 				Dispatcher.RunThread(action);
 				Debug.Log("test started");

@@ -26,7 +26,7 @@ class Dispatcher
 	//Этот метод нужно вызвать ровно один раз навсегда! для этого завести флаг.
 	public static void Start()
 	{
-        
+		Debugger.Logger = s => Debug.Log("CVARC:" + s);
 		//создание и заполнение loader-а сюда
         loader = new Loader();
         loader.AddLevel("Demo", "Test", () => new DemoCompetitions.Level1());
