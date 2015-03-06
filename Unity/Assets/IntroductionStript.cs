@@ -164,7 +164,7 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
 			{
 				Debug.Log("Test starting");
 				var competitionsInstance = IntroductionStript.loader.GetCompetitions(data);
-				var testName = "Forward";// competitionsInstance.Logic.Tests.First().Key; //Насте - нужен PopUp
+				var testName = "Square";// competitionsInstance.Logic.Tests.First().Key; //Насте - нужен PopUp
 				var test = IntroductionStript.loader.GetTest(data, testName);
 				var asserter = new UnityAsserter();
 				Dispatcher.WaitingNetworkServer.LoadingData = data;

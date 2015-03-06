@@ -19,7 +19,9 @@ class UnityAsserter : IAsserter
 
 	public void IsEqual(double expected, double actual, double delta)
 	{
-		if (Math.Abs(expected - actual) < delta)
+		var difference = Math.Abs(expected - actual);
+		if (difference > delta)
 			Debug.Log("Expected " + expected + "+- " + delta + ", but was " + actual);
+
 	}
 }

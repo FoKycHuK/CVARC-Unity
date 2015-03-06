@@ -29,8 +29,7 @@ namespace Assets
 
         public void SetSpeed(string id, Frame3D speed)
         {
-			Debug.Log(speed.Y);
-            var movingObject = GameObject.Find(id);
+		    var movingObject = GameObject.Find(id);
             requested[id] = new Frame2D(speed.X, speed.Y, -speed.Yaw);
         }
 
@@ -52,7 +51,7 @@ namespace Assets
             var y = -rot.y;
             if (y < -180) y += 360;
             //Debug.Log(y);
-            return new Frame3D(pos.x, pos.y, pos.z, Angle.FromGrad(rot.x), Angle.FromGrad(y), Angle.FromGrad(rot.z));
+            return new Frame3D(pos.x, pos.z, pos.y, Angle.FromGrad(rot.x), Angle.FromGrad(y), Angle.FromGrad(rot.z));
         }
 
 

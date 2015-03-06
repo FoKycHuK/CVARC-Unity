@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CVARC.Core", "CVARC\CVARC.V2\Framework\CVARC.Core\CVARC.Core.csproj", "{F7B5021F-09E8-4388-97A2-4B44B9770D03}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.General", "CVARC\CVARC.V2\Demo\DemoCompetitions\Demo.General.csproj", "{CE636D44-57A4-48FA-A178-88CA2C3E9DD4}"
