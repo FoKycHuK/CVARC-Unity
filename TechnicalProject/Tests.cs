@@ -193,7 +193,7 @@ namespace CVARC.V2
             var th = new Thread(() =>
             {
                 client.WriteLine(new byte[] { 1, 2, 3 });
-                client.ReadLine();
+				client.ReadLine();
             });
             th.IsBackground = true;
             th.Start();

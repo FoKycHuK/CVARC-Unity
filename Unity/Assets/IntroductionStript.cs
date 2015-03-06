@@ -42,6 +42,7 @@ public class IntroductionStript : MonoBehaviour {
 
 	void OnDisable()
 	{
+		Dispatcher.OnDispose();
 		//Dispatcher.KillThreads();
 	}
 
@@ -162,18 +163,27 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
 			}
 			else // запуск одного теста
 			{
-				Debug.Log("Test starting");
-				var competitionsInstance = IntroductionStript.loader.GetCompetitions(data);
-				var testName = "Square";// competitionsInstance.Logic.Tests.First().Key; //Насте - нужен PopUp
-				var test = IntroductionStript.loader.GetTest(data, testName);
-				var asserter = new UnityAsserter();
-				Dispatcher.WaitingNetworkServer.LoadingData = data;
-				Action action = () => test.Run(Dispatcher.WaitingNetworkServer, asserter);
-				//var testInfo = new BullShi();
-				//Action action = () => testInfo.Run(Dispatcher.WaitingNetworkServer, asserter);
-				//action.BeginInvoke(null, null);
-				Dispatcher.RunThread(action);
-				Debug.Log("test started");
+				Debug.Log("Tests starting");
+				//
+				Dispatcher.RunAllTests(data);
+				//Action runner = () => Dispatcher.RunAllTests(data);
+				//Dispatcher.RunThread(runner, "test runner");
+
+				if (false)
+				{
+					//var competitionsInstance = IntroductionStript.loader.GetCompetitions(data);
+					//var testName = "Forward";// competitionsInstance.Logic.Tests.First().Key; //Насте - нужен PopUp
+					//var test = IntroductionStript.loader.GetTest(data, testName);
+					//var asserter = new UnityAsserter();
+					//Dispatcher.WaitingNetworkServer.LoadingData = data;
+
+					//Action action = () => test.Run(Dispatcher.WaitingNetworkServer, asserter);
+					//var testInfo = new BullShi();
+					//Action action = () => testInfo.Run(Dispatcher.WaitingNetworkServer, asserter);
+					//action.BeginInvoke(null, null);
+					//Dispatcher.RunThread(action, "test thread");
+				}
+				Debug.Log("tests started");
 			}
 
 		}

@@ -27,6 +27,18 @@ namespace CVARC.V2
 				Printer(str);
 		}
 
+		bool exitRequest = false;
+
+		public void RequestExit()
+		{
+			exitRequest = true;
+		}
+
+		public void Exit()
+		{
+			exitRequest = true;
+		}
+
 		public void StartThread()
 		{
 			Print("Server started");
@@ -36,7 +48,16 @@ namespace CVARC.V2
 			while(true)
 			{
 				while (!listner.Pending())
-					Thread.Sleep(10);
+				{
+					if (exitRequest)
+					{
+						if (cvarcClient != null)
+							cvarcClient.Close();
+						listner.Stop();
+						return;
+					}
+					Thread.Sleep(1);
+				}
 				var client = listner.AcceptTcpClient();
 				Print("Client accepted");
 				if (cvarcClient != null)

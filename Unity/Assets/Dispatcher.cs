@@ -10,7 +10,7 @@ using UnityEngine;
 class Dispatcher
 {
 	static Loader loader;
-	
+
 	//Данные уже установленного соединения
 	static NetworkServerData loadedNetworkServerData = null;
 
@@ -18,32 +18,38 @@ class Dispatcher
 	public static NetworkServerData WaitingNetworkServer { get; private set; }
 
 	//Делегат, который запустит мир, определенный очередным клиентом.
-    static Func<IWorld> WorldInitializer;
+	static Func<IWorld> WorldInitializer;
+
+	static bool ExpectedExit;
+
+	static bool IsRoundScene;
 
 	static public bool TestMode;
 
 	static List<Thread> Threads = new List<Thread>();
+
+	static PercistentTCPServer server;
 	//Этот метод нужно вызвать ровно один раз навсегда! для этого завести флаг.
 	public static void Start()
 	{
 		Debugger.Logger = s => Debug.Log("CVARC:" + s);
 		//создание и заполнение loader-а сюда
-        loader = new Loader();
-        loader.AddLevel("Demo", "Test", () => new DemoCompetitions.Level1());
+		loader = new Loader();
+		loader.AddLevel("Demo", "Test", () => new DemoCompetitions.Level1());
 
 		RenewWaitingNetworkServer();
 		//создает PercistentServer и подписываемся на его событие
-        var server = new PercistentTCPServer(14000);
-        server.ClientConnected += ClientConnected;
+		server = new PercistentTCPServer(14000);
+		server.ClientConnected += ClientConnected;
 		server.Printer = str => Debug.Log("FROM SERVER: " + str);
 		//new Thread(server.StartThread) { IsBackground = true }.Start();
-		RunThread(server.StartThread);
+		RunThread(server.StartThread, "Server");
 	}
 
 	//Запускать трэды надо не руками, а через этот метод! Это касается тестов в первую очередь.
-	public static void RunThread(Action action)
+	public static void RunThread(Action action, string name)
 	{
-		var thread = new Thread(new ThreadStart(action)) { IsBackground = true };
+		var thread = new Thread(new ThreadStart(action)) { IsBackground = true, Name = name };
 		Threads.Add(thread);
 		thread.Start();
 		//их в какой-то список складывать
@@ -54,11 +60,12 @@ class Dispatcher
 	{
 		foreach (var thread in Threads)
 		{
-			Debug.Log(thread.IsAlive);
-			thread.Abort();
-			Debug.Log("one of thread kill success");
+			if (thread.IsAlive)
+			{
+				Debug.Log("THREAD WARN: thread " + thread.Name + " not closed yet. I'll kill it");
+				thread.Abort();
+			}
 		}
-		Debug.Log("all threads killed");
 		//убивать трэды как угодно
 	}
 
@@ -66,11 +73,25 @@ class Dispatcher
 	{
 		var competitions = loader.GetCompetitions(data);
 		var testsNames = competitions.Logic.Tests.Keys.ToArray();
+		var asserter = new UnityAsserter();
+		Action runOneTest = () => 
+			{
+				foreach(var testName in testsNames)
+				{
+					Debug.Log("Test is ready");
+					Thread.Sleep(500);
+					Dispatcher.WaitingNetworkServer.LoadingData = data;
+					var test = IntroductionStript.loader.GetTest(data, testName);
+					test.Run(WaitingNetworkServer, asserter);
+					//while (IsRoundScene	)					Thread.Sleep(1);
+				}
+			};
+		
+		RunThread(runOneTest, "test runner");
 		//ты умеешь запускать тесты, см. IntroductionScript
 		//и ты знаешь, когда очередной тест закончился, тогда вызывается метод Exited
 		//должен появится флаг тестового режима, и в этом режиме Exited должен запускать следующий тест. Если кончились, возвращение на Intro.
 
-		var asserter = new UnityAsserter();
 	}
 
 	//Подготавливает диспетчер к приему нового клиента.
@@ -91,17 +112,21 @@ class Dispatcher
 				loadedNetworkServerData = WaitingNetworkServer; // сигнал того, что мир готов к созданию.
 				RenewWaitingNetworkServer(); // а это мы делаем, чтобы следующее подключение удалось.
 				// создавать его прямо здесь нельзя, потому что другой трэд
-			}));//.BeginInvoke(null, null);
+			}), "Connection");//.BeginInvoke(null, null);
 	}
 
 
+	
 	// этот метод означает, что можно создавать мир
 	public static void WorldPrepared(Func<IWorld> worldInitializer)
 	{
 		//устанавливаем инициализатор
 		WorldInitializer = worldInitializer;
+		Dispatcher.SetExpectedExit();
 		//переключаемся на уровень. Этот уровень в старте позовет метод InitializeWorld ...
+		IsRoundScene = true; 
 		Application.LoadLevel("Round");
+
 	}
 
 	// .. и в этом методе мы завершим инициализацию
@@ -115,22 +140,19 @@ class Dispatcher
 
 	static void Exited()
 	{
-		if (!TestMode)
-		{
-			EditorApplication.isPlaying = false; // так мы "отжимаем" кнопку play. при этом скрипты продолжают выполняться, но юнити сцены закрываются и вызывается метод OnDisable
-			//Application.LoadLevel("Intro"); //может не надо этого?
-		}
-		Debug.Log("Exited");
-		KillThreads(); // я не уверен, что это должно быть тут, но походу этого больше нигде нет.
+			//EditorApplication.isPlaying = false; // так мы "отжимаем" кнопку play. при этом скрипты продолжают выполняться, но юнити сцены закрываются и вызывается метод OnDisable
+		IsRoundScene = false;
+		Application.LoadLevel("Intro"); //может не надо этого?
+		Debug.Log("local exit");
+		//KillThreads(); // я не уверен, что это должно быть тут, но походу этого больше нигде нет.
 	}
 
 	//Запускать из Intro по типа таймеру
 	public static void CheckNetworkClient()
 	{
-		
+
 		if (loadedNetworkServerData != null)
 		{
-			Debug.Log("WOW! Someone connected?");
 			Func<IWorld> worldInitializer = () =>
 			{
 				loader.InstantiateWorld(loadedNetworkServerData);
@@ -142,5 +164,22 @@ class Dispatcher
 		}
 	}
 
+	public static void OnDispose()
+	{
+		if (!ExpectedExit)
+		{
+			server.RequestExit();
+			Thread.Sleep(100);
+			KillThreads();
+			Debug.Log("GLOBAL exit");
+		}
+		else
+			ExpectedExit = false;
+	}
+
+	public static void SetExpectedExit()
+	{
+		ExpectedExit = true;
+	}
 
 }

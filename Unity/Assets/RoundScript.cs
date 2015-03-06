@@ -19,6 +19,8 @@ public partial class RoundScript : MonoBehaviour
     public GameObject cubePref; // Эти поля -- прототипы, к ним самим обращаться не получится.
     bool worldRunning = true;
 	bool worldPrepearedToExit;
+	float curWorldTime;
+	float timeOnStartSession;
 
     // Use this for initialization
 
@@ -26,14 +28,16 @@ public partial class RoundScript : MonoBehaviour
     
     void Start()
     {
+		timeOnStartSession = Time.fixedTime;
+		curWorldTime = 0;
         Behaviour = this;
         CameraCreator();
         ScoresFieldsCreator();
-        Debug.Log("Started");
+        //Debug.Log("Started");
         try
         {
             world = Dispatcher.InitializeWorld();
-            Debug.Log("Loaded");
+            Debug.Log("World loaded");
         }
         catch(Exception e)
         {
@@ -67,15 +71,16 @@ public partial class RoundScript : MonoBehaviour
 
         if (!worldRunning) return;
 		
-        if (Time.fixedTime > 10)
+        if (curWorldTime > 10)
         {
 			Debug.Log("Time is Up");
-			WorldPrepareToExit();
+			Dispatcher.SetExpectedExit();
+			world.OnExit();
             //((UEngine)world.Engine).Stop();
             //((UEngine)world.Engine).UpdateSpeeds();
             return;
         }
-
+		Dispatcher.CheckNetworkClient();
 
         if (CollisionInfo.Item3 == 2)
         {
@@ -87,25 +92,13 @@ public partial class RoundScript : MonoBehaviour
     void FixedUpdate() //только физика и строгие расчеты. вызывается строго каждые 20 мс
     {
 		//Debug.Log(Time.fixedTime);
-        world.Clocks.Tick(Time.fixedTime);
+		curWorldTime = Time.fixedTime - timeOnStartSession;
+        world.Clocks.Tick(curWorldTime);
         ((UEngine)world.Engine).UpdateSpeeds();
     }
 
 	void OnDisable()
 	{
-		WorldPrepareToExit();
-		Debug.Log("FINAL exit");
-	}
-
-	void WorldPrepareToExit() // не встроенный, свой метод.
-	{
-		if (worldPrepearedToExit)
-			return;
-		Debug.Log("prepearing to exit...");
-		worldRunning = false;
-		world.OnExit();
-		Time.timeScale = 0;
-		Debug.Log("prepare to exit complete");
-		worldPrepearedToExit = true;
+		Dispatcher.OnDispose();
 	}
 }
