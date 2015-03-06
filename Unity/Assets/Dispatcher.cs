@@ -79,7 +79,7 @@ class Dispatcher
 				foreach(var testName in testsNames)
 				{
 					Debug.Log("Test is ready");
-					Thread.Sleep(500);
+					//Thread.Sleep(500);
 					Dispatcher.WaitingNetworkServer.LoadingData = data;
 					var test = IntroductionStript.loader.GetTest(data, testName);
 					test.Run(WaitingNetworkServer, asserter);
