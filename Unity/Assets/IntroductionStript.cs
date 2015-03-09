@@ -5,7 +5,8 @@ using System.Collections;
 using CVARC.V2;
 using System;
 
-public class IntroductionStript : MonoBehaviour {
+public class IntroductionStript : MonoBehaviour
+{
 
     public static Func<IWorld> worldInitializer;
 
@@ -15,19 +16,19 @@ public class IntroductionStript : MonoBehaviour {
 
     void Start()
     {
-        loader = new CVARC.V2.Loader ();
-        loader.AddLevel ("Demo", "Test", () => new DemoCompetitions.Level1());
-       // loader.AddLevel("RepairTheStarship", "Level1", () => new RepairTheStarship.Level1());
+        loader = new CVARC.V2.Loader();
+        loader.AddLevel("Demo", "Test", () => new DemoCompetitions.Level1());
+        // loader.AddLevel("RepairTheStarship", "Level1", () => new RepairTheStarship.Level1());
         //copy here other levels of demo
 
         //надо запустить тред Server
 
-		if (!serverIsRunned)
-		{
-			Server();
-			serverIsRunned = true;
-		}
-		
+        if (!serverIsRunned)
+        {
+            Server();
+            serverIsRunned = true;
+        }
+
     }
 
     void Update()
@@ -40,11 +41,22 @@ public class IntroductionStript : MonoBehaviour {
         Dispatcher.Start();
     }
 
-	void OnDisable()
-	{
-		Dispatcher.OnDispose();
-		//Dispatcher.KillThreads();
-	}
+    void OnDisable()
+    {
+        Dispatcher.OnDispose();
+        //Dispatcher.KillThreads();
+    }
+
+    const float
+        kMenuWidth = 200.0f, // ширина меню то, куда кнопочки натыканы
+        kMenuHeight = 241.0f,
+        kMenuHeaderHeight = 26.0f,
+        kButtonWidth = 175.0f,
+        kButtonHeight = 30.0f;
+
+    public Texture menuBackground, button;
+    private Texture background; //то, что будет на заднем фоне
+    private int competitionIndex;
 
     public void OnGUI()
     {
@@ -53,34 +65,102 @@ public class IntroductionStript : MonoBehaviour {
             EditorGUILayoutEnumPopup.Init();
             guiIsRunned = true;
         }
-//        GUILayout.BeginArea (new Rect (0, 0, Screen.height, Screen.width), GUI.skin.textArea);
+//        background = new Texture2D(2, 2);
+//        Color preColor = GUI.color;
+//        if (Event.current.type == EventType.repaint)
 //        {
-//            GUIStyle style = new GUIStyle (GUI.skin.button);
-//            style.margin = new RectOffset (50, 50, 50, 50);
-//            style.font = new Font ();
-//            bool result=GUILayout.Button(new GUIContent("Create"), style,GUILayout.MinHeight(60));
-//            if (result)
-//            {
-//                IRunMode mode = RunModeFactory.Create(RunModes.BotDemo); // <-- выбор из списка Tutorial/BotDemo
-//                LoadingData data = new LoadingData();
-//
-//                data.AssemblyName="Demo"; // <-- выбор из списка loader.Levels.Keys
-//                data.Level="Test"; // <-- loader.Levels[AsseblyName].Keys;
-//
-//                SettingsProposal proposal=new SettingsProposal();
-//                proposal.Controllers = new System.Collections.Generic.List<ControllerSettings> // <-- только BotDemo
-//                {
-//                    new ControllerSettings { ControllerId="Left", Type= ControllerType.Bot, Name="Random"},
-//                    new ControllerSettings { ControllerId="Right", Type= ControllerType.Bot, Name="Square"}
-//                };
-//                worldInitializer=()=>loader.LoadNonLogFile(mode, data, proposal);
-//                Application.LoadLevel("Round");
-//                Debug.Log("Ok");
-//            }
+//            GUI.color = new Color(preColor.r, preColor.g, preColor.b, 10);
+//            GUI.DrawTexture(new Rect(0.0f, 0.0f, Screen.width, Screen.height), background);
 //        }
-//        GUILayout.EndArea ();
+//        GUI.color = new Color(preColor.r, preColor.g, preColor.b, 10);
+//        Rect menuRect = new Rect(
+//            (Screen.width - kMenuWidth) * 0.5f,
+//            (Screen.height - kMenuHeight) * 0.5f,
+//            kMenuWidth,
+//            kMenuHeight
+//        );
+//        GUI.DrawTexture(menuRect, menuBackground);
+//
+//        var competitions = IntroductionStript.loader.Levels.Keys.ToArray();
+//        var competitionsGUI = competitions.Select(x => x.ToString()).ToArray();
+//        var levels = IntroductionStript.loader.Levels[competitions[0]].Keys.ToArray();
+//        var levelsGUI = levels.Select(x => x.ToString()).ToArray();
+//        var comp = IntroductionStript.loader.Levels[competitions[0]][levels[0]]();
+//        var modeNames = new[] { "Test", "Tutorial", "BotDemo" };
+//        var modesGUI = modeNames.Select(z => z).ToArray();
+//        var bots = comp.Logic.Bots.Keys.ToArray();
+//        var botsGUI = bots.Select(x => x.ToString()).ToArray();
+//
+//        GUILayout.BeginArea(menuRect);
+////        GUILayout.Space(kMenuHeaderHeight);
+//        GUILayout.FlexibleSpace();
+//        foreach (string competition in modeNames)
+//        {
+//            if (MenuButton(button, competition))
+//            {
+//                Debug.Log(competition);
+//                run();
+//                //            StartCoroutine(DoRestart());
+//            }
+//            GUILayout.FlexibleSpace();
+//        }
+//        GUILayout.EndArea();
+//        GUI.color = preColor;
     }
 
+//        GUI.color = Color.red; GUILayout.Box("I'm red");
+//        GUI.color = Color.yellow; GUILayout.Box("I'm yellow");
+//        GUI.color = new Color(1, 1, 1, 0.5f); GUILayout.Box("I'm translucent");
+//        GUI.color = Color.white; GUILayout.Box("I'm normal");
+
+    void run()
+    {
+        var modeNames = new[] { "Test", "Tutorial", "BotDemo" };
+        var runMode = modeNames[1];
+        var competitions = IntroductionStript.loader.Levels.Keys.ToArray();
+        var levels = IntroductionStript.loader.Levels[competitions[0]].Keys.ToArray();
+        LoadingData data = new LoadingData();
+        data.AssemblyName = competitions[competitionIndex];
+        data.Level = levels[0];
+        var factory = IntroductionStript.loader.CreateControllerFactory(runMode);
+        SettingsProposal proposal = new SettingsProposal();
+//            proposal.Controllers = new System.Collections.Generic.List<ControllerSettings>
+//                {
+//                    new ControllerSettings {ControllerId = "Left", Type = ControllerType.Bot, Name = bots[leftBot]},
+//                    new ControllerSettings {ControllerId = "Right", Type = ControllerType.Bot, Name = bots[rightBot]}
+//                };
+        Dispatcher.WorldPrepared(() => IntroductionStript.loader.CreateSimpleMode(data, proposal, factory));
+        
+    }
+
+    bool MenuButton(Texture icon, string text)
+    {
+        bool wasPressed = false;
+
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+
+        Rect rect = GUILayoutUtility.GetRect(kButtonWidth, kButtonHeight, GUILayout.Width(kButtonWidth), GUILayout.Height(kButtonHeight));
+
+        switch (Event.current.type)
+        {
+            case EventType.MouseUp:
+                if (rect.Contains(Event.current.mousePosition))
+                {
+                    wasPressed = true;
+                }
+                break;
+            case EventType.Repaint:
+//                GUI.DrawTexture(rect, icon);
+                GUI.TextField(rect, text);
+                break;
+        }
+
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+
+        return wasPressed;
+    }
 }
 internal class EditorGUILayoutEnumPopup : EditorWindow
 {
@@ -100,9 +180,9 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
     int leftBot = 0;
     int rightBot = 0;
 
-	const string Tutorial = "Tutorial";
-	const string BotDemo = "BotDemo";
-	const string Test = "Test";
+    const string Tutorial = "Tutorial";
+    const string BotDemo = "BotDemo";
+    const string Test = "Test";
 
 
     public void OnGUI()
@@ -117,10 +197,10 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
 
         var comp = IntroductionStript.loader.Levels[competitions[competitionIndex]][levels[levelIndex]]();
 
-		var modeNames = new[] { Test, Tutorial, BotDemo};
-		var modesGui = modeNames.Select(z => new GUIContent(z)).ToArray();
-		controllerIndex = EditorGUILayout.Popup(new GUIContent("Choose mode:"), controllerIndex, modesGui);
-		var runMode = modeNames[controllerIndex];
+        var modeNames = new[] { Test, Tutorial, BotDemo };
+        var modesGui = modeNames.Select(z => new GUIContent(z)).ToArray();
+        controllerIndex = EditorGUILayout.Popup(new GUIContent("Choose mode:"), controllerIndex, modesGui);
+        var runMode = modeNames[controllerIndex];
 
         var bots = comp.Logic.Bots.Keys.ToArray();
         var botsGUI = bots.Select(x => new GUIContent(x.ToString())).ToArray();
@@ -136,57 +216,57 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
         buttonStyle.font = buttonFont;
         buttonStyle.margin = new RectOffset(20, 20, 3, 3);
         if (GUILayout.Button("Start", buttonStyle, GUILayout.MinHeight(buttonMinHeight)))
-		{
-			LoadingData data = new LoadingData();
+        {
+            LoadingData data = new LoadingData();
 
-			data.AssemblyName = competitions[competitionIndex];
-			data.Level = levels[levelIndex];
+            data.AssemblyName = competitions[competitionIndex];
+            data.Level = levels[levelIndex];
 
-			if (runMode != Test)
-			{
-				Debug.Log("Non test starting");
-				var factory = IntroductionStript.loader.CreateControllerFactory(runMode);
-				
+            if (runMode != Test)
+            {
+                Debug.Log("Non test starting");
+                var factory = IntroductionStript.loader.CreateControllerFactory(runMode);
 
-				SettingsProposal proposal = new SettingsProposal();
-				if (runMode == "BotDemo")
-					proposal.Controllers = new System.Collections.Generic.List<ControllerSettings>
+
+                SettingsProposal proposal = new SettingsProposal();
+                if (runMode == "BotDemo")
+                    proposal.Controllers = new System.Collections.Generic.List<ControllerSettings>
                 {
                     new ControllerSettings {ControllerId = "Left", Type = ControllerType.Bot, Name = bots[leftBot]},
                     new ControllerSettings {ControllerId = "Right", Type = ControllerType.Bot, Name = bots[rightBot]}
                 };
 
-				//            Debug.Log("Ok");
-				this.Close();
-				Dispatcher.WorldPrepared(() => IntroductionStript.loader.CreateSimpleMode(data, proposal, factory));
+                //            Debug.Log("Ok");
+                this.Close();
+                Dispatcher.WorldPrepared(() => IntroductionStript.loader.CreateSimpleMode(data, proposal, factory));
 
-			}
-			else // запуск одного теста
-			{
-				Debug.Log("Tests starting");
-				//
-				Dispatcher.RunAllTests(data);
-				//Action runner = () => Dispatcher.RunAllTests(data);
-				//Dispatcher.RunThread(runner, "test runner");
+            }
+            else // запуск одного теста
+            {
+                Debug.Log("Tests starting");
+                //
+                Dispatcher.RunAllTests(data);
+                //Action runner = () => Dispatcher.RunAllTests(data);
+                //Dispatcher.RunThread(runner, "test runner");
 
-				if (false)
-				{
-					//var competitionsInstance = IntroductionStript.loader.GetCompetitions(data);
-					//var testName = "Forward";// competitionsInstance.Logic.Tests.First().Key; //Насте - нужен PopUp
-					//var test = IntroductionStript.loader.GetTest(data, testName);
-					//var asserter = new UnityAsserter();
-					//Dispatcher.WaitingNetworkServer.LoadingData = data;
+                if (false)
+                {
+                    //var competitionsInstance = IntroductionStript.loader.GetCompetitions(data);
+                    //var testName = "Forward";// competitionsInstance.Logic.Tests.First().Key; //Насте - нужен PopUp
+                    //var test = IntroductionStript.loader.GetTest(data, testName);
+                    //var asserter = new UnityAsserter();
+                    //Dispatcher.WaitingNetworkServer.LoadingData = data;
 
-					//Action action = () => test.Run(Dispatcher.WaitingNetworkServer, asserter);
-					//var testInfo = new BullShi();
-					//Action action = () => testInfo.Run(Dispatcher.WaitingNetworkServer, asserter);
-					//action.BeginInvoke(null, null);
-					//Dispatcher.RunThread(action, "test thread");
-				}
-				Debug.Log("tests started");
-			}
+                    //Action action = () => test.Run(Dispatcher.WaitingNetworkServer, asserter);
+                    //var testInfo = new BullShi();
+                    //Action action = () => testInfo.Run(Dispatcher.WaitingNetworkServer, asserter);
+                    //action.BeginInvoke(null, null);
+                    //Dispatcher.RunThread(action, "test thread");
+                }
+                Debug.Log("tests started");
+            }
 
-		}
+        }
     }
 
 }
