@@ -60,52 +60,53 @@ public class IntroductionStript : MonoBehaviour
 
     public void OnGUI()
     {
-        if (!guiIsRunned)
+//        if (!guiIsRunned)
+//        {
+//            EditorGUILayoutEnumPopup.Init();
+//            guiIsRunned = true;
+//        }
+        background = new Texture2D(2, 2);
+        Color preColor = GUI.color;
+        if (Event.current.type == EventType.repaint)
         {
-            EditorGUILayoutEnumPopup.Init();
-            guiIsRunned = true;
+            GUI.color = new Color(preColor.r, preColor.g, preColor.b, 10);
+            GUI.DrawTexture(new Rect(0.0f, 0.0f, Screen.width, Screen.height), background);
         }
-//        background = new Texture2D(2, 2);
-//        Color preColor = GUI.color;
-//        if (Event.current.type == EventType.repaint)
-//        {
-//            GUI.color = new Color(preColor.r, preColor.g, preColor.b, 10);
-//            GUI.DrawTexture(new Rect(0.0f, 0.0f, Screen.width, Screen.height), background);
-//        }
-//        GUI.color = new Color(preColor.r, preColor.g, preColor.b, 10);
-//        Rect menuRect = new Rect(
-//            (Screen.width - kMenuWidth) * 0.5f,
-//            (Screen.height - kMenuHeight) * 0.5f,
-//            kMenuWidth,
-//            kMenuHeight
-//        );
-//        GUI.DrawTexture(menuRect, menuBackground);
-//
-//        var competitions = IntroductionStript.loader.Levels.Keys.ToArray();
+        GUI.color = new Color(preColor.r, preColor.g, preColor.b, 10);
+        Rect menuRect = new Rect(
+            (Screen.width - kMenuWidth) * 0.5f,
+            (Screen.height - kMenuHeight) * 0.5f,
+            kMenuWidth,
+            kMenuHeight
+        );
+        GUI.DrawTexture(menuRect, menuBackground);
+
+        var competitions = loader.Levels.Keys.ToArray();
 //        var competitionsGUI = competitions.Select(x => x.ToString()).ToArray();
-//        var levels = IntroductionStript.loader.Levels[competitions[0]].Keys.ToArray();
+        var levels = loader.Levels[competitions[0]].Keys.ToArray();
+//        Debug.Log(levels[0]);
 //        var levelsGUI = levels.Select(x => x.ToString()).ToArray();
-//        var comp = IntroductionStript.loader.Levels[competitions[0]][levels[0]]();
-//        var modeNames = new[] { "Test", "Tutorial", "BotDemo" };
+        var comp = loader.Levels[competitions[0]][levels[0]]();
+        var modeNames = new[] { "Test", "Tutorial", "BotDemo" };
 //        var modesGUI = modeNames.Select(z => z).ToArray();
-//        var bots = comp.Logic.Bots.Keys.ToArray();
+        var bots = comp.Logic.Bots.Keys.ToArray();
 //        var botsGUI = bots.Select(x => x.ToString()).ToArray();
-//
-//        GUILayout.BeginArea(menuRect);
-////        GUILayout.Space(kMenuHeaderHeight);
-//        GUILayout.FlexibleSpace();
-//        foreach (string competition in modeNames)
-//        {
-//            if (MenuButton(button, competition))
-//            {
-//                Debug.Log(competition);
-//                run();
-//                //            StartCoroutine(DoRestart());
-//            }
-//            GUILayout.FlexibleSpace();
-//        }
-//        GUILayout.EndArea();
-//        GUI.color = preColor;
+
+        GUILayout.BeginArea(menuRect);
+//        GUILayout.Space(kMenuHeaderHeight);
+        GUILayout.FlexibleSpace();
+        foreach (string competition in modeNames)
+        {
+            if (MenuButton(button, competition))
+            {
+                Debug.Log(competition);
+                run();
+                //            StartCoroutine(DoRestart());
+            }
+            GUILayout.FlexibleSpace();
+        }
+        GUILayout.EndArea();
+        GUI.color = preColor;
     }
 
 //        GUI.color = Color.red; GUILayout.Box("I'm red");
@@ -115,21 +116,28 @@ public class IntroductionStript : MonoBehaviour
 
     void run()
     {
-        var modeNames = new[] { "Test", "Tutorial", "BotDemo" };
-        var runMode = modeNames[1];
-        var competitions = IntroductionStript.loader.Levels.Keys.ToArray();
-        var levels = IntroductionStript.loader.Levels[competitions[0]].Keys.ToArray();
         LoadingData data = new LoadingData();
-        data.AssemblyName = competitions[competitionIndex];
+
+        var competitions = loader.Levels.Keys.ToArray();
+        data.AssemblyName = competitions[0];
+        var levels = loader.Levels[competitions[0]].Keys.ToArray();
         data.Level = levels[0];
-        var factory = IntroductionStript.loader.CreateControllerFactory(runMode);
-        SettingsProposal proposal = new SettingsProposal();
-//            proposal.Controllers = new System.Collections.Generic.List<ControllerSettings>
-//                {
-//                    new ControllerSettings {ControllerId = "Left", Type = ControllerType.Bot, Name = bots[leftBot]},
-//                    new ControllerSettings {ControllerId = "Right", Type = ControllerType.Bot, Name = bots[rightBot]}
-//                };
-        Dispatcher.WorldPrepared(() => IntroductionStript.loader.CreateSimpleMode(data, proposal, factory));
+        Dispatcher.RunAllTests(data);
+//        var modeNames = new[] { "Test", "Tutorial", "BotDemo" };
+//        var runMode = modeNames[1];
+//        var competitions = loader.Levels.Keys.ToArray();
+//        var levels = loader.Levels[competitions[0]].Keys.ToArray();
+//        LoadingData data = new LoadingData();
+//        data.AssemblyName = competitions[competitionIndex];
+//        data.Level = levels[0];
+//        var factory = loader.CreateControllerFactory(runMode);
+//        SettingsProposal proposal = new SettingsProposal();
+////            proposal.Controllers = new System.Collections.Generic.List<ControllerSettings>
+////                {
+////                    new ControllerSettings {ControllerId = "Left", Type = ControllerType.Bot, Name = bots[leftBot]},
+////                    new ControllerSettings {ControllerId = "Right", Type = ControllerType.Bot, Name = bots[rightBot]}
+////                };
+//        Dispatcher.WorldPrepared(() => IntroductionStript.loader.CreateSimpleMode(data, proposal, factory));
         
     }
 
