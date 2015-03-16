@@ -73,34 +73,29 @@ public class IntroductionStript : MonoBehaviour
             GUI.DrawTexture(new Rect(0.0f, 0.0f, Screen.width, Screen.height), background);
         }
         GUI.color = new Color(preColor.r, preColor.g, preColor.b, 10);
-        Rect menuRect = new Rect(
-            (Screen.width - kMenuWidth) * 0.5f,
-            (Screen.height - kMenuHeight) * 0.5f,
-            kMenuWidth,
-            kMenuHeight
-        );
+        Rect menuRect = new Rect((Screen.width - kMenuWidth) * 0.5f, (Screen.height - kMenuHeight) * 0.5f, kMenuWidth, kMenuHeight);
+
+        var tests = loader.Levels["Demo"]["Test"]().Logic.Tests.Keys;
+        LoadingData data = new LoadingData();
+        data.AssemblyName = "Demo";
+        data.Level = "Test";
         GUI.DrawTexture(menuRect, menuBackground);
 
-        var competitions = loader.Levels.Keys.ToArray();
-//        var competitionsGUI = competitions.Select(x => x.ToString()).ToArray();
-        var levels = loader.Levels[competitions[0]].Keys.ToArray();
-//        Debug.Log(levels[0]);
-//        var levelsGUI = levels.Select(x => x.ToString()).ToArray();
-        var comp = loader.Levels[competitions[0]][levels[0]]();
-        var modeNames = new[] { "Test", "Tutorial", "BotDemo" };
-//        var modesGUI = modeNames.Select(z => z).ToArray();
-        var bots = comp.Logic.Bots.Keys.ToArray();
-//        var botsGUI = bots.Select(x => x.ToString()).ToArray();
-
         GUILayout.BeginArea(menuRect);
-//        GUILayout.Space(kMenuHeaderHeight);
         GUILayout.FlexibleSpace();
-        foreach (string competition in modeNames)
+        if (MenuButton(button, "RunAllTests"))
         {
-            if (MenuButton(button, competition))
+            Debug.Log("runAllTests");
+            Dispatcher.RunAllTests(data);
+        }
+        GUILayout.FlexibleSpace();
+
+        foreach (string test in tests)
+        {
+            if (MenuButton(button, test))
             {
-                Debug.Log(competition);
-                run();
+                Debug.Log(test);
+                Dispatcher.RunTest(data, test);
                 //            StartCoroutine(DoRestart());
             }
             GUILayout.FlexibleSpace();
@@ -113,33 +108,6 @@ public class IntroductionStript : MonoBehaviour
 //        GUI.color = Color.yellow; GUILayout.Box("I'm yellow");
 //        GUI.color = new Color(1, 1, 1, 0.5f); GUILayout.Box("I'm translucent");
 //        GUI.color = Color.white; GUILayout.Box("I'm normal");
-
-    void run()
-    {
-        LoadingData data = new LoadingData();
-
-        var competitions = loader.Levels.Keys.ToArray();
-        data.AssemblyName = competitions[0];
-        var levels = loader.Levels[competitions[0]].Keys.ToArray();
-        data.Level = levels[0];
-        Dispatcher.RunAllTests(data);
-//        var modeNames = new[] { "Test", "Tutorial", "BotDemo" };
-//        var runMode = modeNames[1];
-//        var competitions = loader.Levels.Keys.ToArray();
-//        var levels = loader.Levels[competitions[0]].Keys.ToArray();
-//        LoadingData data = new LoadingData();
-//        data.AssemblyName = competitions[competitionIndex];
-//        data.Level = levels[0];
-//        var factory = loader.CreateControllerFactory(runMode);
-//        SettingsProposal proposal = new SettingsProposal();
-////            proposal.Controllers = new System.Collections.Generic.List<ControllerSettings>
-////                {
-////                    new ControllerSettings {ControllerId = "Left", Type = ControllerType.Bot, Name = bots[leftBot]},
-////                    new ControllerSettings {ControllerId = "Right", Type = ControllerType.Bot, Name = bots[rightBot]}
-////                };
-//        Dispatcher.WorldPrepared(() => IntroductionStript.loader.CreateSimpleMode(data, proposal, factory));
-        
-    }
 
     bool MenuButton(Texture icon, string text)
     {

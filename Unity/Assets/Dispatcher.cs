@@ -69,6 +69,13 @@ class Dispatcher
 		//убивать трэды как угодно
 	}
 
+    public static void RunTest(LoadingData data, string testName)
+    {
+        Dispatcher.WaitingNetworkServer.LoadingData = data;
+        var test = IntroductionStript.loader.GetTest(data, testName);
+        test.Run(WaitingNetworkServer, new UnityAsserter());
+    }
+
 	public static void RunAllTests(LoadingData data)
 	{
 		var competitions = loader.GetCompetitions(data);
