@@ -32,7 +32,9 @@ class Dispatcher
 	//Этот метод нужно вызвать ровно один раз навсегда! для этого завести флаг.
 	public static void Start()
 	{
-		Debugger.Logger = s => Debug.Log("CVARC:" + s);
+        //Debugger.DisableByDefault = true;
+        //Debugger.EnabledTypes.Add(DebuggerMessageType.Unity);
+		Debugger.Logger = s => Debug.Log(s);
 		//создание и заполнение loader-а сюда
 		loader = new Loader();
 		loader.AddLevel("Demo", "Test", () => new DemoCompetitions.Level1());
@@ -41,7 +43,7 @@ class Dispatcher
 		//создает PercistentServer и подписываемся на его событие
 		server = new PercistentTCPServer(14000);
 		server.ClientConnected += ClientConnected;
-		server.Printer = str => Debug.Log("FROM SERVER: " + str);
+		server.Printer = str => Debugger.Log(DebuggerMessageType.Unity,"FROM SERVER: " + str);
 		//new Thread(server.StartThread) { IsBackground = true }.Start();
 		RunThread(server.StartThread, "Server");
 	}
@@ -62,7 +64,7 @@ class Dispatcher
 		{
 			if (thread.IsAlive)
 			{
-				Debug.Log("THREAD WARN: thread " + thread.Name + " not closed yet. I'll kill it");
+				Debugger.Log(DebuggerMessageType.Unity, "THREAD WARN: thread " + thread.Name + " not closed yet. I'll kill it");
 				thread.Abort();
 			}
 		}
@@ -76,9 +78,10 @@ class Dispatcher
 		var asserter = new UnityAsserter();
 		Action runOneTest = () => 
 			{
+                Debugger.Log(DebuggerMessageType.Unity, "staring tests");
 				foreach(var testName in testsNames)
 				{
-					Debug.Log("Test is ready");
+					Debugger.Log(DebuggerMessageType.Unity,"Test is ready");
 					//Thread.Sleep(500);
 					Dispatcher.WaitingNetworkServer.LoadingData = data;
 					var test = IntroductionStript.loader.GetTest(data, testName);
@@ -143,7 +146,7 @@ class Dispatcher
 			//EditorApplication.isPlaying = false; // так мы "отжимаем" кнопку play. при этом скрипты продолжают выполняться, но юнити сцены закрываются и вызывается метод OnDisable
 		IsRoundScene = false;
 		Application.LoadLevel("Intro"); //может не надо этого?
-		Debug.Log("local exit");
+		Debugger.Log(DebuggerMessageType.Unity,"local exit");
 		//KillThreads(); // я не уверен, что это должно быть тут, но походу этого больше нигде нет.
 	}
 
@@ -171,7 +174,7 @@ class Dispatcher
 			server.RequestExit();
 			Thread.Sleep(100);
 			KillThreads();
-			Debug.Log("GLOBAL exit");
+			Debugger.Log(DebuggerMessageType.Unity,"GLOBAL exit");
 		}
 		else
 			ExpectedExit = false;

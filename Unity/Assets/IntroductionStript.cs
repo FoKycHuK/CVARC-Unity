@@ -98,7 +98,7 @@ public class IntroductionStript : MonoBehaviour
 //        {
 //            if (MenuButton(button, competition))
 //            {
-//                Debug.Log(competition);
+//                Debugger.Log(DebuggerMessageType.Unity,competition);
 //                run();
 //                //            StartCoroutine(DoRestart());
 //            }
@@ -224,7 +224,7 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
 
             if (runMode != Test)
             {
-                Debug.Log("Non test starting");
+                Debugger.Log(DebuggerMessageType.Unity,"Non test starting");
                 var factory = IntroductionStript.loader.CreateControllerFactory(runMode);
 
 
@@ -236,14 +236,14 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
                     new ControllerSettings {ControllerId = "Right", Type = ControllerType.Bot, Name = bots[rightBot]}
                 };
 
-                //            Debug.Log("Ok");
+                //            Debugger.Log(DebuggerMessageType.Unity,"Ok");
                 this.Close();
                 Dispatcher.WorldPrepared(() => IntroductionStript.loader.CreateSimpleMode(data, proposal, factory));
 
             }
             else // запуск одного теста
             {
-                Debug.Log("Tests starting");
+                Debugger.Log(DebuggerMessageType.Unity,"Tests starting");
                 //
                 Dispatcher.RunAllTests(data);
                 //Action runner = () => Dispatcher.RunAllTests(data);
@@ -263,7 +263,7 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
                     //action.BeginInvoke(null, null);
                     //Dispatcher.RunThread(action, "test thread");
                 }
-                Debug.Log("tests started");
+                Debugger.Log(DebuggerMessageType.Unity,"tests started");
             }
 
         }

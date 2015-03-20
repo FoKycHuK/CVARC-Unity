@@ -33,16 +33,16 @@ public partial class RoundScript : MonoBehaviour
         Behaviour = this;
         CameraCreator();
         ScoresFieldsCreator();
-        //Debug.Log("Started");
+        //Debugger.Log(DebuggerMessageType.Unity,"Started");
         try
         {
             world = Dispatcher.InitializeWorld();
-            Debug.Log("World loaded");
+            Debugger.Log(DebuggerMessageType.Unity,"World loaded");
         }
         catch(Exception e)
         {
-            Debug.Log("Fail");
-            Debug.Log(e.Message);
+            Debugger.Log(DebuggerMessageType.Unity,"Fail");
+            Debugger.Log(DebuggerMessageType.Unity,e.Message);
         }
         world.Scores.ScoresChanged += UpdateScores;
         CollisionInfo = new Tuple<string, string, int>(null, null, 0);
@@ -55,7 +55,7 @@ public partial class RoundScript : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(Time.timeScale);
+        //Debugger.Log(DebuggerMessageType.Unity,Time.timeScale);
         //timer++;
         //if (timer == 100)
         //{
@@ -73,7 +73,7 @@ public partial class RoundScript : MonoBehaviour
 		
         if (curWorldTime > 10)
         {
-			Debug.Log("Time is Up");
+			Debugger.Log(DebuggerMessageType.Unity,"Time is Up");
 			Dispatcher.SetExpectedExit();
 			world.OnExit();
             //((UEngine)world.Engine).Stop();
@@ -91,7 +91,7 @@ public partial class RoundScript : MonoBehaviour
 
     void FixedUpdate() //только физика и строгие расчеты. вызывается строго каждые 20 мс
     {
-		//Debug.Log(Time.fixedTime);
+		//Debugger.Log(DebuggerMessageType.Unity,Time.fixedTime);
 		curWorldTime = Time.fixedTime - timeOnStartSession;
         world.Clocks.Tick(curWorldTime);
         ((UEngine)world.Engine).UpdateSpeeds();

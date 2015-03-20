@@ -67,7 +67,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)bin\debug\*.dll" "$(SolutionDir)Unity\Assets\CVARC Assets\" /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(ProjectDir)bin\debug\CVARC.Core.dll" "$(SolutionDir)Unity\Assets\CVARC Assets\" /Y
+xcopy "$(ProjectDir)bin\debug\Demo.General.dll" "$(SolutionDir)Unity\Assets\CVARC Assets\" /Y
+xcopy "$(ProjectDir)bin\debug\TechnicalProject.dll" "$(SolutionDir)Unity\Assets\CVARC Assets\" /Y
+</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

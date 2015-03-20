@@ -11,7 +11,7 @@ namespace DemoCompetitions
     public class Level1 : Competitions
     {
         public Level1()
-            : base(new MovementLogicPart(), new UnityEnginePack(), new DemoManagerPart())
+            : base(new DemoLogicPartHelper(), new UnityEnginePack(), new DemoManagerPart())
         { }
     }
 }

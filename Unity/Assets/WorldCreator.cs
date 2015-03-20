@@ -13,7 +13,7 @@ public partial class RoundScript : MonoBehaviour
     {
         var loader = new Loader();
         loader.AddLevel("Demo", "Level1", () => new DemoCompetitions.Level1());
-        loader.AddLevel("RepairTheStarship", "Level1", () => new RepairTheStarship.Level1());
+        //loader.AddLevel("RepairTheStarship", "Level1", () => new RepairTheStarship.Level1());
 
         ////для Насти:
         //loader.Levels.Keys.ToArray(); // список всех соревнований
@@ -53,7 +53,7 @@ public partial class RoundScript : MonoBehaviour
         myCamera.AddComponent<Camera>();
         myCamera.AddComponent<GUILayer>();
         myCamera.AddComponent<AudioListener>();
-        myCamera.transform.position = new Vector3(0, 100, 0);
+        myCamera.transform.position = new Vector3(0, 50, 0);
         myCamera.transform.rotation = Quaternion.Euler(90, 0, 0);
     }
 

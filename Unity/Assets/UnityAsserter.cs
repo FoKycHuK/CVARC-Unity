@@ -12,16 +12,16 @@ class UnityAsserter : IAsserter
 	{
 		
 		if (expected != actual)
-			Debug.Log("Expected " + expected + ", but was " + actual);
+			Debugger.Log(DebuggerMessageType.Unity,"Expected " + expected + ", but was " + actual);
 		else
-			Debug.Log("OK");
+			Debugger.Log(DebuggerMessageType.Unity,"OK");
 	}
 
 	public void IsEqual(double expected, double actual, double delta)
 	{
 		var difference = Math.Abs(expected - actual);
 		if (difference > delta)
-			Debug.Log("Expected " + expected + "+- " + delta + ", but was " + actual);
+			Debugger.Log(DebuggerMessageType.Unity,"Expected " + expected + "+- " + delta + ", but was " + actual);
 
 	}
 }

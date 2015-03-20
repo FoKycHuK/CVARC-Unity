@@ -1,8 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\IntroductionStript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\RoundScript.cs">
     <Files>
-      <File FileName="Assets\IntroductionStript.cs" Line="39" Column="7" />
+      <File FileName="Assets\Demo\DemoActorManager.cs" Line="86" Column="2" />
+      <File FileName="Assets\IntroductionStript.cs" Line="1" Column="1" />
+      <File FileName="Assets\OnCollisionScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Demo\DemoCompetitions.cs" Line="1" Column="1" />
+      <File FileName="Assets\Demo\DemoWorldManager.cs" Line="15" Column="10" />
+      <File FileName="Assets\RoundScript.cs" Line="85" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

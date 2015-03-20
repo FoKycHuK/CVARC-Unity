@@ -50,7 +50,7 @@ namespace Assets
             var rot = obj.transform.rotation.eulerAngles;
             var y = -rot.y;
             if (y < -180) y += 360;
-            //Debug.Log(y);
+            //Debugger.Log(DebuggerMessageType.Unity,y);
             return new Frame3D(pos.x, pos.z, pos.y, Angle.FromGrad(rot.x), Angle.FromGrad(y), Angle.FromGrad(rot.z));
         }
 
@@ -66,7 +66,7 @@ namespace Assets
             image.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
             image.Apply();
             byte[] bytes = image.EncodeToPNG();
-            //Debug.Log(string.Format("Took screenshot to {0}", cameraName));
+            //Debugger.Log(DebuggerMessageType.Unity,string.Format("Took screenshot to {0}", cameraName));
             return bytes;
         }
 
@@ -95,7 +95,7 @@ namespace Assets
             cam.transform.parent = robot.transform;
             var camPos = settings.Location;
             var camRot = settings.ViewAngle;
-           // Debug.Log(camPos.Pitch.Grad + " " + camPos.Roll.Grad + " " + camPos.Yaw.Grad);
+           // Debugger.Log(DebuggerMessageType.Unity,camPos.Pitch.Grad + " " + camPos.Roll.Grad + " " + camPos.Yaw.Grad);
             cam.transform.localPosition = new Vector3((float)camPos.X, (float)camPos.Z / 20, (float)camPos.Y); // ???????
             cam.transform.localRotation = Quaternion.Euler(-(float)camPos.Pitch.Grad, 90 + (float)camPos.Yaw.Grad, (float)camPos.Roll.Grad);
             cam.fieldOfView = (float)camRot.Grad;
