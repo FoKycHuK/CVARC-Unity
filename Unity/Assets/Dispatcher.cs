@@ -32,8 +32,8 @@ class Dispatcher
 	//Этот метод нужно вызвать ровно один раз навсегда! для этого завести флаг.
 	public static void Start()
 	{
-        //Debugger.DisableByDefault = true;
-        //Debugger.EnabledTypes.Add(DebuggerMessageType.Unity);
+        Debugger.DisableByDefault = true;
+        Debugger.EnabledTypes.Add(DebuggerMessageType.UnityTest);
 		Debugger.Logger = s => Debug.Log(s);
 		//создание и заполнение loader-а сюда
 		loader = new Loader();
@@ -71,21 +71,38 @@ class Dispatcher
 		//убивать трэды как угодно
 	}
 
+    public static void RunOneTest(LoadingData data, string testName)
+    {
+        Debugger.Log( DebuggerMessageType.Unity, "Starting test "+testName);
+        var competitionsInstance = loader.GetCompetitions(data);
+        var test = loader.GetTest(data, testName);
+        var asserter = new UnityAsserter(testName);
+        Dispatcher.WaitingNetworkServer.LoadingData = data;
+        Action action = () =>
+        {
+            test.Run(Dispatcher.WaitingNetworkServer, asserter);
+            asserter.DebugOkMessage();
+        };
+        Dispatcher.RunThread(action, "test thread");
+    }
+
 	public static void RunAllTests(LoadingData data)
 	{
 		var competitions = loader.GetCompetitions(data);
 		var testsNames = competitions.Logic.Tests.Keys.ToArray();
-		var asserter = new UnityAsserter();
+		
 		Action runOneTest = () => 
 			{
                 Debugger.Log(DebuggerMessageType.Unity, "staring tests");
 				foreach(var testName in testsNames)
 				{
+                    var asserter = new UnityAsserter(testName);
 					Debugger.Log(DebuggerMessageType.Unity,"Test is ready");
 					//Thread.Sleep(500);
 					Dispatcher.WaitingNetworkServer.LoadingData = data;
 					var test = IntroductionStript.loader.GetTest(data, testName);
 					test.Run(WaitingNetworkServer, asserter);
+                    asserter.DebugOkMessage();
 					//while (IsRoundScene	)					Thread.Sleep(1);
 				}
 			};

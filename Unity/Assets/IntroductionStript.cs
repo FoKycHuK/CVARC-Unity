@@ -183,6 +183,7 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
     const string Tutorial = "Tutorial";
     const string BotDemo = "BotDemo";
     const string Test = "Test";
+    private const string AllTests = "AllTests";
 
 
     public void OnGUI()
@@ -197,7 +198,7 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
 
         var comp = IntroductionStript.loader.Levels[competitions[competitionIndex]][levels[levelIndex]]();
 
-        var modeNames = new[] { Test, Tutorial, BotDemo };
+        var modeNames = new[] { AllTests, Test, Tutorial, BotDemo };
         var modesGui = modeNames.Select(z => new GUIContent(z)).ToArray();
         controllerIndex = EditorGUILayout.Popup(new GUIContent("Choose mode:"), controllerIndex, modesGui);
         var runMode = modeNames[controllerIndex];
@@ -222,7 +223,7 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
             data.AssemblyName = competitions[competitionIndex];
             data.Level = levels[levelIndex];
 
-            if (runMode != Test)
+            if (runMode == Tutorial && runMode == BotDemo)
             {
                 Debugger.Log(DebuggerMessageType.Unity,"Non test starting");
                 var factory = IntroductionStript.loader.CreateControllerFactory(runMode);
@@ -241,29 +242,17 @@ internal class EditorGUILayoutEnumPopup : EditorWindow
                 Dispatcher.WorldPrepared(() => IntroductionStript.loader.CreateSimpleMode(data, proposal, factory));
 
             }
-            else // запуск одного теста
+            else if (runMode == AllTests) // запуск всех тестов
             {
-                Debugger.Log(DebuggerMessageType.Unity,"Tests starting");
+                Debugger.Log(DebuggerMessageType.Unity, "Tests starting");
                 //
                 Dispatcher.RunAllTests(data);
-                //Action runner = () => Dispatcher.RunAllTests(data);
-                //Dispatcher.RunThread(runner, "test runner");
-
-                if (false)
-                {
-                    //var competitionsInstance = IntroductionStript.loader.GetCompetitions(data);
-                    //var testName = "Forward";// competitionsInstance.Logic.Tests.First().Key; //Насте - нужен PopUp
-                    //var test = IntroductionStript.loader.GetTest(data, testName);
-                    //var asserter = new UnityAsserter();
-                    //Dispatcher.WaitingNetworkServer.LoadingData = data;
-
-                    //Action action = () => test.Run(Dispatcher.WaitingNetworkServer, asserter);
-                    //var testInfo = new BullShi();
-                    //Action action = () => testInfo.Run(Dispatcher.WaitingNetworkServer, asserter);
-                    //action.BeginInvoke(null, null);
-                    //Dispatcher.RunThread(action, "test thread");
-                }
-                Debugger.Log(DebuggerMessageType.Unity,"tests started");
+            }
+            else
+            {
+                var testName = "Movement_Round_Forward";
+                Dispatcher.RunOneTest(data,testName);
+                   
             }
 
         }
