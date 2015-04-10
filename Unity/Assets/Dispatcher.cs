@@ -9,7 +9,7 @@ using UnityEngine;
 
 class Dispatcher
 {
-	static Loader loader;
+	public static Loader loader { get; private set; }
 
 	//Данные уже установленного соединения
 	static NetworkServerData loadedNetworkServerData = null;
@@ -82,9 +82,15 @@ class Dispatcher
         {
             test.Run(Dispatcher.WaitingNetworkServer, asserter);
             asserter.DebugOkMessage();
+            lock (LastTestExecution)
+            {
+                LastTestExecution[testName] = !asserter.Failed;
+            }
         };
         Dispatcher.RunThread(action, "test thread");
     }
+
+    public static readonly Dictionary<string, bool> LastTestExecution = new Dictionary<string, bool>();
 
 	public static void RunAllTests(LoadingData data)
 	{
@@ -100,10 +106,14 @@ class Dispatcher
 					Debugger.Log(DebuggerMessageType.Unity,"Test is ready");
 					//Thread.Sleep(500);
 					Dispatcher.WaitingNetworkServer.LoadingData = data;
-					var test = IntroductionStript.loader.GetTest(data, testName);
+					var test = loader.GetTest(data, testName);
 					test.Run(WaitingNetworkServer, asserter);
                     asserter.DebugOkMessage();
-					//while (IsRoundScene	)					Thread.Sleep(1);
+				    lock (LastTestExecution)
+				    {
+                        LastTestExecution[testName] = !asserter.Failed;
+				    }
+				    //while (IsRoundScene	)					Thread.Sleep(1);
 				}
 			};
 		
