@@ -44,7 +44,7 @@ public partial class RoundScript : MonoBehaviour
             Debugger.Log(DebuggerMessageType.Unity,"Fail");
             Debugger.Log(DebuggerMessageType.Unity,e.Message);
         }
-        world.Scores.ScoresChanged += UpdateScores;
+        //world.Scores.ScoresChanged += UpdateScores;
         CollisionInfo = new Tuple<string, string, int>(null, null, 0);
 		Time.timeScale = 1; // вот почему так?
 

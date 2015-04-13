@@ -14,29 +14,40 @@ namespace Assets
 
         public override void CreateActorBody()
         {
-            GameObject robot = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-            if (Actor.ControllerId == "Left")
-            {
-                robot.transform.position = new Vector3(0, 5, 0);
-                robot.renderer.material.color = Color.green;
-            }
-            else
-            {
-                robot.transform.position = new Vector3(45, 5, 0);
-                //robot = GameObject.Instantiate(creater.Behaviour.cubePref, new Vector3(45, 5, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
-                robot.renderer.material.color = Color.red;
-            }
+            var state = (Actor.World as DemoWorld).WorldState;
+            var description = state.Robots.First(z => z.RobotName == Actor.ControllerId);
+            //var location = new Frame3D(description.X, description.Y, description.ZSize / 2, Angle.Zero, description.Yaw, Angle.Zero);
+            var robot = GameObject.CreatePrimitive(description.IsRound ? PrimitiveType.Cylinder : PrimitiveType.Cube);
+            //if (Actor.ControllerId == "Left")
+            //{
+            //    robot.transform.position = new Vector3(description.X, 5, description.Y);
+            //    robot.renderer.material.color = Color.green;
+            //}
+            //else
+            //{
+            //    robot.transform.position = new Vector3(45, 5, 0);
+            //    //robot = GameObject.Instantiate(creater.Behaviour.cubePref, new Vector3(45, 5, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
+            //    robot.renderer.material.color = Color.red;
+            //}
+            robot.transform.position = new Vector3(description.X, description.ZSize/2f, description.Y);
             robot.AddComponent<Rigidbody>();
-            robot.transform.rotation = Quaternion.Euler(0, 0, 0);
+            robot.renderer.material.color = Color.green;
+            robot.transform.localScale = new Vector3(description.XSize, description.ZSize, description.YSize);
+            robot.transform.rotation = Quaternion.Euler(0, (float)description.Yaw.Grad, 0);
+            //robot.transform.rotation = Quaternion.Euler(0, 0, 0);
             var plane = GameObject.CreatePrimitive(PrimitiveType.Cube);
             plane.transform.parent = robot.transform;
             plane.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             plane.renderer.material.color = Color.white;
             plane.transform.localPosition = new Vector3(0.3f, 0.90f, 0f);
-            robot.rigidbody.drag = 0; // трение
+            robot.rigidbody.drag = 0.001F; // трение
             robot.rigidbody.angularDrag = 0;
-            robot.rigidbody.useGravity = false;
+            robot.rigidbody.useGravity = true;
+            robot.rigidbody.mass = 1000;
+            robot.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX |
+                                          RigidbodyConstraints.FreezeRotationZ;
             robot.AddComponent("OnCollisionScript");
+            //Physics.minPenetrationForPenalty = 0.0001f;
             robot.name = Actor.ObjectId;
 
 
@@ -83,3 +94,43 @@ namespace Assets
         }
     }
 }
+
+/*
+	var state = (Actor.World as DemoWorld).WorldState;
+
+			var description = state.Robots.Where(z => z.RobotName == Actor.ControllerId).First();
+
+
+            string fileName = "red.png";
+			if (Actor.ControllerId == TwoPlayersId.Right) fileName = "blue.png";
+
+			var location = new Frame3D(description.X, description.Y, description.ZSize / 2, Angle.Zero,description.Yaw, Angle.Zero);
+
+			if (description.IsRound)
+				root.Add(new Cylinder
+					{
+						Height = description.ZSize,
+						RTop = description.XSize,
+						RBottom = description.XSize,
+						Location = location,
+						DefaultColor = MovementWorldManager.ToColor(description.Color),
+						IsMaterial = true,
+						Density = Density.Iron,
+						FrictionCoefficient = 0,
+						Top = new PlaneImageBrush { Image = Bitmap.FromStream(GetResourceStream(fileName)) },
+						NewId = Actor.ObjectId
+					});
+			else
+				root.Add(new Box
+				{
+					XSize = description.XSize,
+					YSize = description.YSize,
+					ZSize = description.ZSize,
+					DefaultColor = MovementWorldManager.ToColor(description.Color),
+					IsMaterial = true,
+					NewId = Actor.ObjectId,
+					Location = location,
+					Density = Density.Iron,
+					Top = new PlaneImageBrush { Image = Bitmap.FromStream(GetResourceStream(fileName)) },
+				});
+*/

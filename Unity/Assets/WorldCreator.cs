@@ -53,7 +53,7 @@ public partial class RoundScript : MonoBehaviour
         myCamera.AddComponent<Camera>();
         myCamera.AddComponent<GUILayer>();
         myCamera.AddComponent<AudioListener>();
-        myCamera.transform.position = new Vector3(0, 50, 0);
+        myCamera.transform.position = new Vector3(0, 300, 0);
         myCamera.transform.rotation = Quaternion.Euler(90, 0, 0);
     }
 
