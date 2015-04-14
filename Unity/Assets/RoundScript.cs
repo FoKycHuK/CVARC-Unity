@@ -21,6 +21,7 @@ public partial class RoundScript : MonoBehaviour
 	bool worldPrepearedToExit;
 	float curWorldTime;
 	float timeOnStartSession;
+    private long lastStart;
 
     // Use this for initialization
 
@@ -91,8 +92,11 @@ public partial class RoundScript : MonoBehaviour
 
     void FixedUpdate() //только физика и строгие расчеты. вызывается строго каждые 20 мс
     {
-		//Debugger.Log(DebuggerMessageType.Unity,Time.fixedTime);
-		curWorldTime = Time.fixedTime - timeOnStartSession;
+        //var delta = DateTime.Now.Second*(long)1000 + DateTime.Now.Millisecond - lastStart;
+        //if (delta > 10)
+        //    Debugger.Log(DebuggerMessageType.UnityTest, delta.ToString());
+        //lastStart = DateTime.Now.Second*(long) 1000 + DateTime.Now.Millisecond;
+        curWorldTime = Time.fixedTime - timeOnStartSession;
         world.Clocks.Tick(curWorldTime);
         ((UEngine)world.Engine).UpdateSpeeds();
     }

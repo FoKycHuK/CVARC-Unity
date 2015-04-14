@@ -14,7 +14,7 @@ namespace Assets
 
         public override void CreateActorBody()
         {
-            var state = (Actor.World as DemoWorld).WorldState;
+            var state = Actor.World.WorldState;
             var description = state.Robots.First(z => z.RobotName == Actor.ControllerId);
             //var location = new Frame3D(description.X, description.Y, description.ZSize / 2, Angle.Zero, description.Yaw, Angle.Zero);
             var robot = GameObject.CreatePrimitive(description.IsRound ? PrimitiveType.Cylinder : PrimitiveType.Cube);
@@ -29,7 +29,7 @@ namespace Assets
             //    //robot = GameObject.Instantiate(creater.Behaviour.cubePref, new Vector3(45, 5, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
             //    robot.renderer.material.color = Color.red;
             //}
-            robot.transform.position = new Vector3(description.X, description.ZSize/2f, description.Y);
+            robot.transform.position = new Vector3(description.X, description.IsRound ? description.ZSize :description.ZSize/2f, description.Y);
             robot.AddComponent<Rigidbody>();
             robot.renderer.material.color = Color.green;
             robot.transform.localScale = new Vector3(description.XSize, description.ZSize, description.YSize);
