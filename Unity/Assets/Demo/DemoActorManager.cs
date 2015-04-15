@@ -15,7 +15,11 @@ namespace Assets
         public override void CreateActorBody()
         {
             var state = Actor.World.WorldState;
-            var description = state.Robots.First(z => z.RobotName == Actor.ControllerId);
+            var description = state.Robots.FirstOrDefault(z => z.RobotName == Actor.ControllerId);
+            if (description == null) throw new Exception("Robot " + Actor.ControllerId + " is not defined in WorldState");
+            Debugger.Log(DebuggerMessageType.Always, Actor.ControllerId);
+         
+
             //var location = new Frame3D(description.X, description.Y, description.ZSize / 2, Angle.Zero, description.Yaw, Angle.Zero);
             var robot = GameObject.CreatePrimitive(description.IsRound ? PrimitiveType.Cylinder : PrimitiveType.Cube);
             //if (Actor.ControllerId == "Left")
@@ -89,7 +93,7 @@ namespace Assets
 
 
 
-            Actor.World.Engine.DefineCamera(Actor.ObjectId + ".Camera", Actor.ObjectId, new CVARC.V2.RobotCameraSettings());
+           // Actor.World.Engine.DefineCamera(Actor.ObjectId + ".Camera", Actor.ObjectId, new CVARC.V2.RobotCameraSettings());
         
         }
     }

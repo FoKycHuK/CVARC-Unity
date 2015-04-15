@@ -1,80 +1,578 @@
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 0
-All commands performed
-Movement_Round_Forward PASSED
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 0
-All commands performed
-Movement_Round_Backward PASSED
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 0
-All commands performed
-Movement_Rect_Forward PASSED
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 0
-All commands performed
-Movement_Rect_Backward PASSED
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 0
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 1
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 2
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 3
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 4
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 5
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 6
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 7
-All commands performed
-Movement_Rect_Square PASSED
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 0
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 1
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 2
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 3
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 4
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 5
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 6
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 7
-All commands performed
-Movement_Round_Square PASSED
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 0
-All commands performed
-Movement_Rect_Rotate PASSED
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 0
-All commands performed
-Movement_Round_Rotate PASSED
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 0
-All commands performed
-Movement_Limit_Linear PASSED
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 0
-All commands performed
-Movement_Limit_Round PASSED
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 0
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 1
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 2
-All commands performed
-Interaction_Rect_Alignment PASSED
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 0
-All commands performed
-Interaction_Rect_Collision PASSED
+FROM SERVER: Server started
+Starting test Movement_Round_Forward
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Time is Up
+local exit
+staring tests
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Test is ready
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Time is Up
+local exit
+Starting test Gripping_Round_GripAndMove
+FROM SERVER: Client accepted
+World initialization
+Starting basic fields
+Complete: basic fields. Starting engine
+Complete: engine. Starting world manager
+Complete: world manager. Starting controller factory
+Complete: controller factory. Creating world
+World created
+Actor Left initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Left
+Complete: body. Starting controller
+Actor Left is initialized
+Actor Right initialization
+Creating actor
+Complete: actor. Creating manager
+Comlete: manager creation. Initializing manager
+Comlete: manager initialization. Creating actor body
+Right
+Complete: body. Starting controller
+Actor Right is initialized
+Additional world initialization
+World loaded
+Time is Up
+local exit
+THREAD WARN: thread test runner not closed yet. I'll kill it
+THREAD WARN: thread test thread not closed yet. I'll kill it
+GLOBAL exit
