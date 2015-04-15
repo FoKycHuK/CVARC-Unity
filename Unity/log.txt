@@ -1,13 +1,5 @@
 Before performance
 Performed: CVARC.V2.MoveAndGripCommand 0
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 1
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 2
-All commands performed
-Interaction_Rect_Alignment PASSED
-Before performance
-Performed: CVARC.V2.MoveAndGripCommand 0
 All commands performed
 Movement_Round_Forward PASSED
 Before performance

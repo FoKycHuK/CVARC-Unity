@@ -64,13 +64,13 @@
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.4/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="CVARC.Core">
- <HintPath>C:/Users/Yura/Desktop/cvarc-unity/Unity/Assets/CVARC Assets/CVARC.Core.dll</HintPath>
+ <HintPath>C:/Users/Yura/Desktop/cvarc-unit1/Unity/Assets/CVARC Assets/CVARC.Core.dll</HintPath>
  </Reference>
  <Reference Include="Demo.General">
- <HintPath>C:/Users/Yura/Desktop/cvarc-unity/Unity/Assets/CVARC Assets/Demo.General.dll</HintPath>
+ <HintPath>C:/Users/Yura/Desktop/cvarc-unit1/Unity/Assets/CVARC Assets/Demo.General.dll</HintPath>
  </Reference>
  <Reference Include="TechnicalProject">
- <HintPath>C:/Users/Yura/Desktop/cvarc-unity/Unity/Assets/CVARC Assets/TechnicalProject.dll</HintPath>
+ <HintPath>C:/Users/Yura/Desktop/cvarc-unit1/Unity/Assets/CVARC Assets/TechnicalProject.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
