@@ -85,21 +85,16 @@ public class IntroductionStript : MonoBehaviour
             if (isPressedTests)
             {
                 GUILayout.FlexibleSpace();
+                MenuButton(button, "Hardcoded: " + HardcodedTest, GetTestColor(HardcodedTest), () => Dispatcher.RunOneTest(data, HardcodedTest));
                 MenuButton(button, "Run all tests", Color.black, () => Dispatcher.RunAllTests(data));
                 GUILayout.FlexibleSpace();
 
                 scrollViewVector = GUILayout.BeginScrollView(scrollViewVector, false, true);
                 foreach (string test in tests)
                 {
-                    Color color;
-                    if (!Dispatcher.LastTestExecution.ContainsKey(test))
-                        color = Color.grey;
-                    else if (Dispatcher.LastTestExecution[test])
-                        color = Color.green;
-                    else
-                        color = Color.red;
+                    
 
-                    MenuButton(button, test, color, () => Dispatcher.RunOneTest(data, test));
+                    MenuButton(button, test, GetTestColor(test), () => Dispatcher.RunOneTest(data, test));
                 }
                 GUILayout.EndScrollView(); 
             }
@@ -107,6 +102,20 @@ public class IntroductionStript : MonoBehaviour
             GUILayout.EndVertical();
         GUILayout.EndHorizontal();
         GUILayout.EndArea();
+    }
+
+    const string HardcodedTest = "Interaction_Rect_Alignment";
+    
+    Color GetTestColor(string test)
+    {
+        Color color;
+        if (!Dispatcher.LastTestExecution.ContainsKey(test))
+            color = Color.grey;
+        else if (Dispatcher.LastTestExecution[test])
+            color = Color.green;
+        else
+            color = Color.red;
+        return color;
     }
 
     void MenuButton(Texture icon, string text, Color color, Action pressAction)  // +Color color, Action pressAction

@@ -1,0 +1,88 @@
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 0
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 1
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 2
+All commands performed
+Interaction_Rect_Alignment PASSED
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 0
+All commands performed
+Movement_Round_Forward PASSED
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 0
+All commands performed
+Movement_Round_Backward PASSED
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 0
+All commands performed
+Movement_Rect_Forward PASSED
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 0
+All commands performed
+Movement_Rect_Backward PASSED
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 0
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 1
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 2
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 3
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 4
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 5
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 6
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 7
+All commands performed
+Movement_Rect_Square PASSED
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 0
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 1
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 2
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 3
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 4
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 5
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 6
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 7
+All commands performed
+Movement_Round_Square PASSED
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 0
+All commands performed
+Movement_Rect_Rotate PASSED
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 0
+All commands performed
+Movement_Round_Rotate PASSED
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 0
+All commands performed
+Movement_Limit_Linear PASSED
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 0
+All commands performed
+Movement_Limit_Round PASSED
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 0
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 1
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 2
+All commands performed
+Interaction_Rect_Alignment PASSED
+Before performance
+Performed: CVARC.V2.MoveAndGripCommand 0
+All commands performed
+Interaction_Rect_Collision PASSED
