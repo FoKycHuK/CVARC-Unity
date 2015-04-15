@@ -26,6 +26,12 @@ class UnityAsserter : IAsserter
 	    }
 	}
 
+    public void Fail(string str)
+    {
+        Debugger.Log(DebuggerMessageType.UnityTest, testName + " failed:" + str);
+        Failed = true;
+    }
+
 	public void IsEqual(double expected, double actual, double delta)
 	{
 		var difference = Math.Abs(expected - actual);

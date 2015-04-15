@@ -82,14 +82,26 @@ class Dispatcher
         Dispatcher.WaitingNetworkServer.LoadingData = data;
         Action action = () =>
         {
-            test.Run(Dispatcher.WaitingNetworkServer, asserter);
-            asserter.DebugOkMessage();
-            lock (LastTestExecution)
-            {
-                LastTestExecution[testName] = !asserter.Failed;
-            }
+            ExecuteTest(testName, test, asserter);
         };
         Dispatcher.RunThread(action, "test thread");
+    }
+
+    static void ExecuteTest(string testName, ICvarcTest test, UnityAsserter asserter)
+    {
+        try
+        {
+            test.Run(WaitingNetworkServer, asserter);
+        }
+        catch (Exception e)
+        {
+            asserter.Fail(e.GetType().Name + " " + e.Message);
+        }
+        asserter.DebugOkMessage();
+        lock (LastTestExecution)
+        {
+            LastTestExecution[testName] = !asserter.Failed;
+        }
     }
 
     public static readonly Dictionary<string, bool> LastTestExecution = new Dictionary<string, bool>();
@@ -106,16 +118,9 @@ class Dispatcher
 				{
                     var asserter = new UnityAsserter(testName);
 					Debugger.Log(DebuggerMessageType.Unity,"Test is ready");
-					//Thread.Sleep(500);
 					Dispatcher.WaitingNetworkServer.LoadingData = data;
 					var test = loader.GetTest(data, testName);
-					test.Run(WaitingNetworkServer, asserter);
-                    asserter.DebugOkMessage();
-				    lock (LastTestExecution)
-				    {
-                        LastTestExecution[testName] = !asserter.Failed;
-				    }
-				    //while (IsRoundScene	)					Thread.Sleep(1);
+                    ExecuteTest(testName, test, asserter);
 				}
 			};
 		
