@@ -77,7 +77,8 @@ public class IntroductionStript : MonoBehaviour
         GUILayout.BeginHorizontal();
             GUILayout.BeginVertical();
             MenuButton(button, "Tests", Color.black, () => { isPressedTests = !isPressedTests; });
-        
+            MenuButton(button, "Hardcoded: " + HardcodedTest, GetTestColor(HardcodedTest), () => Dispatcher.RunOneTest(data, HardcodedTest));
+               
             GUI.color = preColor;
             GUILayout.EndVertical();
 
@@ -85,7 +86,6 @@ public class IntroductionStript : MonoBehaviour
             if (isPressedTests)
             {
                 GUILayout.FlexibleSpace();
-                MenuButton(button, "Hardcoded: " + HardcodedTest, GetTestColor(HardcodedTest), () => Dispatcher.RunOneTest(data, HardcodedTest));
                 MenuButton(button, "Run all tests", Color.black, () => Dispatcher.RunAllTests(data));
                 GUILayout.FlexibleSpace();
 
@@ -104,7 +104,7 @@ public class IntroductionStript : MonoBehaviour
         GUILayout.EndArea();
     }
 
-    const string HardcodedTest = "Interaction_Rect_Alignment";
+    const string HardcodedTest = "Movement_Round_Square";
     
     Color GetTestColor(string test)
     {

@@ -33,8 +33,9 @@ class Dispatcher
 	public static void Start()
 	{
         Debugger.DisableByDefault = true;
+        Debugger.EnabledTypes.Add(DebuggerMessageType.Unity);
         Debugger.EnabledTypes.Add(DebuggerMessageType.UnityTest);
-	    Debugger.EnabledTypes.Add(DebuggerMessageType.Drawing);
+        // Debugger.EnabledTypes.Add(DebuggerMessageType.Initialization);
 		Debugger.Logger = s => Debug.Log(s);
 		//создание и заполнение loader-а сюда
 		loader = new Loader();

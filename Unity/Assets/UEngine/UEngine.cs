@@ -57,6 +57,7 @@ namespace Assets
 
         public byte[] GetImageFromCamera(string cameraName)
         {
+            return new byte[0];
             Camera[] allCameras = Resources.FindObjectsOfTypeAll(typeof(Camera)) as Camera[];
             var camera = allCameras
                 .Where(x => cameraName.Equals(x.name))
@@ -90,6 +91,7 @@ namespace Assets
 
         public void DefineCamera(string cameraName, string host, CVARC.V2.RobotCameraSettings settings)
         {
+            return;
             var cam = new GameObject(cameraName).AddComponent<Camera>();
             var robot = GameObject.Find(host);
             cam.transform.parent = robot.transform;
