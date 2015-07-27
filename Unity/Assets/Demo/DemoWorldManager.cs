@@ -12,6 +12,7 @@ namespace Assets
 {
     public class DemoWorldManager : WorldManager<DemoWorld>, IDemoWorldManager
     {
+        public IdGenerator Generator { get; private set; }
         public override void CreateWorld(IdGenerator generator)
         {
             var myPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
@@ -19,8 +20,7 @@ namespace Assets
             myPlane.transform.rotation = Quaternion.Euler(0, 0, 0);
             myPlane.transform.localScale = new Vector3(20, 1, 20);
             myPlane.renderer.material.color = Color.red;
-
-            //this.generator = generator;
+            this.Generator = generator;
             //Settings = World.SceneSettings;
 
             //var myPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
@@ -36,12 +36,6 @@ namespace Assets
 
         public void CreateObject(DemoObjectData data)
         {
-            //if (data == null)
-            //{
-            //    Debugger.Log(DebuggerMessageType.Drawing, "data is null!");
-            //    return;
-            //}
-            //Debugger.Log(DebuggerMessageType.Drawing, "Begin Drawing");
             var gameObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
             var width = data.XSize;
             var height = data.YSize;
@@ -58,6 +52,17 @@ namespace Assets
                 //gameObj.rigidbody.useGravity = true;
                 gameObj.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             }
+            else
+            {
+                gameObj.rigidbody.drag = 40F;
+                gameObj.rigidbody.angularDrag = 40F;
+                gameObj.rigidbody.mass = 100;
+                gameObj.rigidbody.isKinematic = data.IsStatic;
+                gameObj.rigidbody.constraints = RigidbodyConstraints.FreezeRotationX |
+                                                RigidbodyConstraints.FreezeRotationZ |
+                                                RigidbodyConstraints.FreezePositionY;
+            }
+            gameObj.name = Generator.CreateNewId(data);
             //Debugger.Log(DebuggerMessageType.Drawing, "End Drawing");
 
         }

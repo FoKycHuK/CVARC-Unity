@@ -36,7 +36,10 @@ namespace Assets
             robot.transform.position = new Vector3(description.X, description.IsRound ? description.ZSize :description.ZSize/2f, description.Y);
             robot.AddComponent<Rigidbody>();
             robot.renderer.material.color = Color.green;
-            robot.transform.localScale = new Vector3(description.XSize, description.ZSize, description.YSize);
+            if (description.IsRound)
+                robot.transform.localScale = new Vector3(description.XSize*2f, description.ZSize, description.YSize * 2);
+            else
+                robot.transform.localScale = new Vector3(description.XSize, description.ZSize, description.YSize);
             robot.transform.rotation = Quaternion.Euler(0, (float)description.Yaw.Grad, 0);
             //robot.transform.rotation = Quaternion.Euler(0, 0, 0);
             var plane = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -44,10 +47,10 @@ namespace Assets
             plane.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             plane.renderer.material.color = Color.white;
             plane.transform.localPosition = new Vector3(0.3f, 0.90f, 0f);
-            robot.rigidbody.drag = 0.001F; // трение
-            robot.rigidbody.angularDrag = 0;
+            robot.rigidbody.drag = 0F; // трение
+            robot.rigidbody.angularDrag = 0F;
             robot.rigidbody.useGravity = true;
-            robot.rigidbody.mass = 1000;
+            robot.rigidbody.mass = 2700;
             robot.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX |
                                           RigidbodyConstraints.FreezeRotationZ;
             robot.AddComponent("OnCollisionScript");

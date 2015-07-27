@@ -7,6 +7,7 @@ using AIRLab.Mathematics;
 using System.Threading;
 using AIRLab;
 using CVARC.Basic.Sensors;
+using CVARC.V2;
 
 namespace Assets
 {
@@ -129,7 +130,11 @@ namespace Assets
 
 		public void Attach(string objectToAttach, string host, Frame3D relativePosition)
 		{
-			
+		    var hostObj = GameObject.Find(host);
+            var attachment = GameObject.Find(objectToAttach);
+            attachment.transform.parent = hostObj.transform;
+		    GameObject.Destroy(attachment.rigidbody);
+		    attachment.transform.localPosition = new Vector3((float) relativePosition.X/10, (float) relativePosition.Z/10, (float) relativePosition.Y/10);
 		}
 
 		public void DeleteObject(string objectId)
@@ -139,12 +144,22 @@ namespace Assets
 
 		public void Detach(string objectToDetach, Frame3D absolutePosition)
 		{
-			
+            var attachment = GameObject.Find(objectToDetach);
+        	attachment.transform.parent = null;
+            attachment.transform.localPosition = new Vector3((float)absolutePosition.X / 10, (float)absolutePosition.Z / 10, (float)absolutePosition.Y / 10); ;
+            attachment.rigidbody.drag = 40F;
+            attachment.rigidbody.angularDrag = 40F;
+            attachment.rigidbody.mass = 100;
+            attachment.rigidbody.isKinematic = false;
+            attachment.rigidbody.constraints = RigidbodyConstraints.FreezeRotationX |
+                                            RigidbodyConstraints.FreezeRotationZ |
+                                            RigidbodyConstraints.FreezePositionY;
+
 		}
 
 		public string FindParent(string objectId)
 		{
-			return null;
+		    return GameObject.Find(objectId).transform.parent.name;
 		}
 	}
 }

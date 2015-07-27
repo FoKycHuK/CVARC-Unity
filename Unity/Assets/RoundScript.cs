@@ -72,7 +72,7 @@ public partial class RoundScript : MonoBehaviour
 
         if (!worldRunning) return;
 		
-        if (curWorldTime > 10)
+        if (curWorldTime > 30)
         {
 			Debugger.Log(DebuggerMessageType.Unity,"Time is Up");
 			Dispatcher.SetExpectedExit();
