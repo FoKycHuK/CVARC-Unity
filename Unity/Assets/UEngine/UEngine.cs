@@ -159,7 +159,11 @@ namespace Assets
 
 		public string FindParent(string objectId)
 		{
-		    return GameObject.Find(objectId).transform.parent.name;
+			var obj = GameObject.Find(objectId);
+			if (obj==null) return null;
+			if (obj.transform == null) return null;
+			if (obj.transform.parent == null) return null;
+			return obj.transform.parent.name;
 		}
 	}
 }
