@@ -40,6 +40,7 @@ class Dispatcher
 		//создание и заполнение loader-а сюда
 		loader = new Loader();
 		loader.AddLevel("Demo", "Test", () => new DemoCompetitions.Level1());
+        loader.AddLevel("RoboMovies", "Test", () => new RMCompetitions.Level1());
 
 		RenewWaitingNetworkServer();
 		//создает PercistentServer и подписываемся на его событие

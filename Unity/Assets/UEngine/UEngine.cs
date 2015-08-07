@@ -30,7 +30,6 @@ namespace Assets
 
         public void SetSpeed(string id, Frame3D speed)
         {
-		    var movingObject = GameObject.Find(id);
             requested[id] = new Frame2D(speed.X, speed.Y, -speed.Yaw);
         }
 

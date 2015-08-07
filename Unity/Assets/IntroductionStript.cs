@@ -68,9 +68,10 @@ public class IntroductionStript : MonoBehaviour
        
         GUI.DrawTexture(menuRect, menuBackground);
 
-        var tests = Dispatcher.loader.Levels["Demo"]["Test"]().Logic.Tests.Keys;
+        //var tests = Dispatcher.loader.Levels["Demo"]["Test"]().Logic.Tests.Keys;
+        var tests = Dispatcher.loader.Levels["RoboMovies"]["Test"]().Logic.Tests.Keys.OrderBy(x => x).ToArray();
         LoadingData data = new LoadingData();
-        data.AssemblyName = "Demo";
+        data.AssemblyName = "RoboMovies";
         data.Level = "Test";
 
         GUILayout.BeginArea(menuRect);
