@@ -38,7 +38,8 @@ namespace Assets
             foreach (var e in requested.Keys)
             {
                 var movingObject = GameObject.Find(e);
-                movingObject.rigidbody.velocity = new Vector3((float)requested[e].X, 0, (float)requested[e].Y);
+                var oldVelocity = movingObject.rigidbody.velocity;
+                movingObject.rigidbody.velocity = new Vector3((float)requested[e].X, oldVelocity.y, (float)requested[e].Y);
                 movingObject.rigidbody.angularVelocity = new Vector3(0, (float)requested[e].Angle.Radian, 0);
             }
         }
@@ -97,7 +98,7 @@ namespace Assets
             cam.transform.parent = robot.transform;
             var camPos = settings.Location;
             var camRot = settings.ViewAngle;
-           // Debugger.Log(DebuggerMessageType.Unity,camPos.Pitch.Grad + " " + camPos.Roll.Grad + " " + camPos.Yaw.Grad);
+            // Debugger.Log(DebuggerMessageType.Unity,camPos.Pitch.Grad + " " + camPos.Roll.Grad + " " + camPos.Yaw.Grad);
             cam.transform.localPosition = new Vector3((float)camPos.X, (float)camPos.Z / 20, (float)camPos.Y); // ???????
             cam.transform.localRotation = Quaternion.Euler(-(float)camPos.Pitch.Grad, 90 + (float)camPos.Yaw.Grad, (float)camPos.Roll.Grad);
             cam.fieldOfView = (float)camRot.Grad;

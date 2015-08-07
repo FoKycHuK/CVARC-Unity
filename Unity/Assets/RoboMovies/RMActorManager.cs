@@ -34,9 +34,12 @@ namespace Assets
 
             actorBody.rigidbody.drag = 0;
             actorBody.rigidbody.angularDrag = 0;
-            actorBody.rigidbody.useGravity = false;
-            actorBody.rigidbody.mass = 2700;
+            actorBody.rigidbody.useGravity = true;
+            actorBody.rigidbody.mass = 2.7f;
             actorBody.rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+            actorBody.AddComponent<MeshCollider>();
+            //actorBody.GetComponent<CapsuleCollider>().enabled = false;
+
             actorBody.AddComponent("OnCollisionScript");
             actorBody.name = Actor.ObjectId;
 

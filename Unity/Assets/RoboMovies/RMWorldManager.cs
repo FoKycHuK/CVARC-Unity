@@ -14,7 +14,6 @@ namespace Assets
 
         public void CloseClapperboard(string clapperboardId)
         {
-            Debug.Log("Entering RMWorldManager::CloseClapperboard.");
             var cap = GameObject.Find(clapperboardId);
             if (cap == null) return;
 
@@ -91,10 +90,9 @@ namespace Assets
 
             light.AddComponent<Rigidbody>();
             
-            light.rigidbody.drag = 0;
-            light.rigidbody.angularDrag = 0;
+            light.rigidbody.drag = light.rigidbody.angularDrag = 4;
             light.rigidbody.useGravity = true;
-            light.rigidbody.mass = 300;
+            light.rigidbody.mass = 0.2f;
             light.name = lightId;
         }
 
@@ -108,11 +106,11 @@ namespace Assets
             popcorn.renderer.material.color = Color.white;
 
             popcorn.AddComponent<Rigidbody>();
+            popcorn.AddComponent<MeshCollider>();
             
-            popcorn.rigidbody.drag = 0;
-            popcorn.rigidbody.angularDrag = 0;
+            popcorn.rigidbody.drag = popcorn.rigidbody.angularDrag = 4;
             popcorn.rigidbody.useGravity = true;
-            popcorn.rigidbody.mass = 1000;
+            popcorn.rigidbody.mass = 0.2f;
             popcorn.name = popcornId;
         }
 
@@ -171,11 +169,11 @@ namespace Assets
             stand.renderer.material.color = UnityColor[color];
 
             stand.AddComponent<Rigidbody>();
-            
-            stand.rigidbody.drag = 0;
-            stand.rigidbody.angularDrag = 0;
+            stand.AddComponent<MeshCollider>();
+
+            stand.rigidbody.drag = stand.rigidbody.angularDrag = 4;
             stand.rigidbody.useGravity = true;
-            stand.rigidbody.mass = 1000;
+            stand.rigidbody.mass = 0.3f;
             stand.name = standId;
         }
 
