@@ -14,11 +14,13 @@ namespace Assets
 
         public void CloseClapperboard(string clapperboardId)
         {
+            Debugger.Log(RMDebugMessage.Unity, "Closing clapperboard " + clapperboardId);
             var cap = GameObject.Find(clapperboardId);
             if (cap == null) return;
 
             cap.transform.rotation = Quaternion.identity;
             cap.transform.Translate(-openClapperCapOffset);
+            Debugger.Log(RMDebugMessage.Unity, "Clapperboard closed at " + cap.transform.position.ToString());
         }
 
         public void CreateClapperboard(string clapperboardId, AIRLab.Mathematics.Point2D location, SideColor color)
@@ -39,6 +41,7 @@ namespace Assets
 
         public void CreateEmptyTable()
         {
+            Debugger.Log(RMDebugMessage.WorldCreation, "RMWorld creation started");
             var floor = GameObject.CreatePrimitive(PrimitiveType.Plane);
             floor.transform.position = Vector3.zero;
             floor.transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -54,6 +57,8 @@ namespace Assets
             RemoveObject("Point light");
 
             CreateBorders();
+            
+            Debugger.Log(RMDebugMessage.WorldCreation, "RMWorld creation successed!");
         }
 
         private void CreateBorders()
@@ -111,6 +116,7 @@ namespace Assets
             popcorn.rigidbody.drag = popcorn.rigidbody.angularDrag = 4;
             popcorn.rigidbody.useGravity = true;
             popcorn.rigidbody.mass = 0.2f;
+            popcorn.rigidbody.centerOfMass = new Vector3(0, -3, 0);
             popcorn.name = popcornId;
         }
 
@@ -164,7 +170,7 @@ namespace Assets
             var stand = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
             
             stand.transform.position = new Vector3((float)location.X, 3.5f, (float)location.Y);
-            stand.transform.localScale = new Vector3(6, 3.5f, 6);
+            stand.transform.localScale = new Vector3(6, 3.45f, 6);
 
             stand.renderer.material.color = UnityColor[color];
 
@@ -179,7 +185,7 @@ namespace Assets
 
         public void CreateStartingArea(AIRLab.Mathematics.Point2D centerLocation, SideColor color)
         {
-            var offset = new Vector3((float)centerLocation.X, 1.1f, (float)centerLocation.Y);
+            var offset = new Vector3((float)centerLocation.X, 1.5f, (float)centerLocation.Y);
 
             var top = GameObject.CreatePrimitive(PrimitiveType.Cube);
             top.transform.position = new Vector3(0, 0, 40 / 2) + offset;
@@ -187,7 +193,7 @@ namespace Assets
             var bottom = GameObject.CreatePrimitive(PrimitiveType.Cube);
             bottom.transform.position = new Vector3(0, 0, -40 / 2) + offset;
             
-            top.transform.localScale = bottom.transform.localScale = new Vector3(40, 2.2f, 2.2f);
+            top.transform.localScale = bottom.transform.localScale = new Vector3(40, 3, 3);
             bottom.renderer.material.color = top.renderer.material.color = UnityColor[color];
         }
 
@@ -212,5 +218,12 @@ namespace Assets
             { SideColor.Yellow, Color.yellow },
             { SideColor.Any, Color.magenta } 
         };
+
+        public void ClimbUpStairs(string actorId, string stairsId)
+        {
+            var actor = GameObject.Find(actorId);
+            var stairs = GameObject.Find(stairsId);
+            actor.transform.position = stairs.transform.position + new Vector3(0, 3.5f, 0);
+        }
     }
 }
