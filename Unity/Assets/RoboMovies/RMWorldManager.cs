@@ -98,6 +98,7 @@ namespace Assets
             light.rigidbody.drag = light.rigidbody.angularDrag = 4;
             light.rigidbody.useGravity = true;
             light.rigidbody.mass = 0.2f;
+            light.rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
             light.name = lightId;
         }
 
@@ -180,6 +181,7 @@ namespace Assets
             stand.rigidbody.drag = stand.rigidbody.angularDrag = 4;
             stand.rigidbody.useGravity = true;
             stand.rigidbody.mass = 0.3f;
+            stand.rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
             stand.name = standId;
         }
 
