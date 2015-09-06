@@ -225,7 +225,8 @@ namespace Assets
         {
             var actor = GameObject.Find(actorId);
             var stairs = GameObject.Find(stairsId);
-            actor.transform.position = stairs.transform.position + new Vector3(0, 3.5f, 0);
+
+            actor.transform.position = stairs.transform.position + new Vector3(0, 19, 0);
         }
     }
 }
