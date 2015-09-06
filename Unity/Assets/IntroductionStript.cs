@@ -7,6 +7,9 @@ using System;
 
 public class IntroductionStript : MonoBehaviour
 {
+    const string ASSEMBLY_NAME = "RoboMovies";
+    //const string ASSEMBLY_NAME = "Demo";
+
     static bool serverIsRunned = false;
 
     void Start()
@@ -68,10 +71,9 @@ public class IntroductionStript : MonoBehaviour
        
         GUI.DrawTexture(menuRect, menuBackground);
 
-        //var tests = Dispatcher.loader.Levels["Demo"]["Test"]().Logic.Tests.Keys;
-        var tests = Dispatcher.loader.Levels["RoboMovies"]["Test"]().Logic.Tests.Keys.OrderBy(x => x).ToArray();
+        var tests = Dispatcher.loader.Levels[ASSEMBLY_NAME]["Test"]().Logic.Tests.Keys.OrderBy(x => x).ToArray();
         LoadingData data = new LoadingData();
-        data.AssemblyName = "RoboMovies";
+        data.AssemblyName = ASSEMBLY_NAME;
         data.Level = "Test";
 
         GUILayout.BeginArea(menuRect);
