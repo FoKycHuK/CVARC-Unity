@@ -33,8 +33,7 @@ namespace Assets
             //    //robot = GameObject.Instantiate(creater.Behaviour.cubePref, new Vector3(45, 5, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
             //    robot.renderer.material.color = Color.red;
             //}
-            robot.transform.position = new Vector3(description.X, 
-                (description.IsRound ? description.ZSize : description.ZSize/2f) + 0.2f, description.Y);
+            robot.transform.position = new Vector3(description.X, description.IsRound ? description.ZSize : description.ZSize/2f, description.Y);
             robot.AddComponent<Rigidbody>();
             robot.renderer.material.color = Color.green;
             if (description.IsRound)
@@ -58,6 +57,9 @@ namespace Assets
             //Physics.minPenetrationForPenalty = 0.0001f;
             robot.name = Actor.ObjectId;
 
+            var floor = GameObject.Find("floor");
+            foreach (var robotCollider in robot.GetComponents<Collider>())
+                Physics.IgnoreCollision(floor.GetComponent<MeshCollider>(), robotCollider);
 
 
             //GameObject robot = GameObject.CreatePrimitive(PrimitiveType.Cylinder);

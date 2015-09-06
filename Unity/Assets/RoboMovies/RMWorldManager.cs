@@ -47,6 +47,7 @@ namespace Assets
             floor.transform.rotation = Quaternion.Euler(0, 180, 0);
             floor.transform.localScale = new Vector3(30, 1, 20);
             floor.renderer.material.mainTexture = Resources.Load<Texture2D>("field");
+            floor.name = "floor";
 
             var light = new GameObject("sunshine");
             light.AddComponent<Light>();

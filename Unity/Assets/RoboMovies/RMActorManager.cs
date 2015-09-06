@@ -16,13 +16,13 @@ namespace Assets
 
         public override void CreateActorBody()
         {
-            var location = new Vector3(-150 + 35, robotHeight / 2 + 0.2f, 0);
+            var location = new Vector3(-150 + 35, robotHeight / 2, 0);
             var rotation = Quaternion.Euler(0, 0, 0);
             string topTexture = "yellow";
 
             if (Actor.ControllerId == TwoPlayersId.Right)
             {
-                location = new Vector3(150 - 35, robotHeight / 2 + 0.2f, 0);
+                location = new Vector3(150 - 35, robotHeight / 2, 0);
                 rotation = Quaternion.Euler(0, 180, 0);
                 topTexture = "green";
             }
@@ -53,6 +53,10 @@ namespace Assets
             actorHead.transform.localScale = new Vector3(robotRadius * 2, 0.1f, robotRadius * 2);
             actorHead.renderer.material.mainTexture = Resources.Load<Texture2D>(topTexture);
             actorHead.transform.parent = actorBody.transform;
+
+            var floor = GameObject.Find("floor");
+            foreach (var robotCollider in actorBody.GetComponents<Collider>())
+                Physics.IgnoreCollision(floor.GetComponent<MeshCollider>(), robotCollider);
         }
     }
 }
