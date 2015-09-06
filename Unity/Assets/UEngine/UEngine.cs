@@ -128,12 +128,13 @@ namespace Assets
             return new Frame3D(vel.x, vel.y, vel.z, Angle.FromRad(angVel.y), Angle.FromRad(angVel.z), Angle.FromRad(angVel.x)); //???
         }
 
+        Dictionary<GameObject, Tuple<float, float>> attachedParams = new Dictionary<GameObject, Tuple<float, float>>();
         public void Attach(string objectToAttach, string host, Frame3D relativePosition)
         {
             var parent = GameObject.Find(host);
             var attachment = GameObject.Find(objectToAttach);
             
-            // move attachment to (0, 0, 0) relative to parent position
+            // move attachment to (0, 0, 0) relative to parent
             attachment.transform.position = parent.transform.position;
             attachment.transform.rotation = parent.transform.rotation;
             
@@ -149,6 +150,8 @@ namespace Assets
             joint.enableCollision = false;
             joint.breakForce = Single.PositiveInfinity;
             
+            attachedParams.Add(attachment, new Tuple<float, float>(attachment.rigidbody.drag, attachment.rigidbody.angularDrag));
+            attachment.rigidbody.drag = attachment.rigidbody.angularDrag = 0;
 
             // Второй способ: приаттачивание с помощью родительского трансформа.
             // Не стоит использовать, т.к. юнька при аттаче localScale ребенка 
@@ -179,6 +182,11 @@ namespace Assets
             var joints = attachment.GetComponents<FixedJoint>();
             foreach(var joint in joints)
                 GameObject.Destroy(joint);
+
+            var attachmentParams = attachedParams[attachment];
+            attachment.rigidbody.drag = attachmentParams.Item1;
+            attachment.rigidbody.angularDrag = attachmentParams.Item2;
+            attachedParams.Remove(attachment);
 
         	//attachment.transform.parent = null;
 
