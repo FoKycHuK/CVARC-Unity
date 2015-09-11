@@ -183,12 +183,15 @@ namespace Assets
             foreach(var joint in joints)
                 GameObject.Destroy(joint);
 
-            var attachmentParams = attachedParams[attachment];
-            attachment.rigidbody.drag = attachmentParams.Item1;
-            attachment.rigidbody.angularDrag = attachmentParams.Item2;
-            attachedParams.Remove(attachment);
-
-        	//attachment.transform.parent = null;
+            if (attachedParams.ContainsKey(attachment))
+            {
+                var attachmentParams = attachedParams[attachment];
+                attachment.rigidbody.drag = attachmentParams.Item1;
+                attachment.rigidbody.angularDrag = attachmentParams.Item2;
+                attachedParams.Remove(attachment);
+            }
+        	
+            //attachment.transform.parent = null;
 
             //if (attachment.rigidbody != null)
             //    attachment.rigidbody.isKinematic = false;
