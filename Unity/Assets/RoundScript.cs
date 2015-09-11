@@ -88,6 +88,8 @@ public partial class RoundScript : MonoBehaviour
             ((UEngine)world.Engine).CollisionSender(CollisionInfo.Item1, CollisionInfo.Item2);
             CollisionInfo.Item3 = 0;
         }
+
+        UpdateScores();
     }
 
     void FixedUpdate() //только физика и строгие расчеты. вызывается строго каждые 20 мс

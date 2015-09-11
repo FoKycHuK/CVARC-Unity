@@ -20,6 +20,7 @@ namespace Assets
             myPlane.transform.rotation = Quaternion.Euler(0, 0, 0);
             myPlane.transform.localScale = new Vector3(20, 1, 20);
             myPlane.renderer.material.color = Color.red;
+            myPlane.name = "floor";
             this.Generator = generator;
             //Settings = World.SceneSettings;
 

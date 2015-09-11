@@ -64,13 +64,17 @@
       <Project>{f7b5021f-09e8-4388-97a2-4b44b9770d03}</Project>
       <Name>CVARC.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CVARC\CVARC.V2\RoboMovies\RoboMovies\RoboMovies.General.csproj">
+      <Project>{4c00a5ba-5f04-4173-910d-e7813b313001}</Project>
+      <Name>RoboMovies.General</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(ProjectDir)bin\debug\CVARC.Core.dll" "$(SolutionDir)Unity\Assets\CVARC Assets\" /Y
 xcopy "$(ProjectDir)bin\debug\Demo.General.dll" "$(SolutionDir)Unity\Assets\CVARC Assets\" /Y
 xcopy "$(ProjectDir)bin\debug\TechnicalProject.dll" "$(SolutionDir)Unity\Assets\CVARC Assets\" /Y
-</PostBuildEvent>
+xcopy "$(ProjectDir)bin\debug\RoboMovies.General.dll" "$(SolutionDir)Unity\Assets\CVARC Assets\" /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using UnityEditor;
 using UnityEngine;
+using RoboMovies;
 
 class Dispatcher
 {
@@ -35,11 +36,16 @@ class Dispatcher
         Debugger.DisableByDefault = true;
         Debugger.EnabledTypes.Add(DebuggerMessageType.Unity);
         Debugger.EnabledTypes.Add(DebuggerMessageType.UnityTest);
+        Debugger.EnabledTypes.Add(RMDebugMessage.WorldCreation);
+        Debugger.EnabledTypes.Add(RMDebugMessage.Logic);
+        Debugger.EnabledTypes.Add(RMDebugMessage.Workflow);
+        Debugger.EnabledTypes.Add(DebuggerMessageType.Workflow);
         // Debugger.EnabledTypes.Add(DebuggerMessageType.Initialization);
 		Debugger.Logger = s => Debug.Log(s);
 		//создание и заполнение loader-а сюда
 		loader = new Loader();
 		loader.AddLevel("Demo", "Test", () => new DemoCompetitions.Level1());
+        loader.AddLevel("RoboMovies", "Test", () => new RMCompetitions.Level1());
 
 		RenewWaitingNetworkServer();
 		//создает PercistentServer и подписываемся на его событие

@@ -30,7 +30,6 @@ namespace Assets
 
         public void SetSpeed(string id, Frame3D speed)
         {
-		    var movingObject = GameObject.Find(id);
             requested[id] = new Frame2D(speed.X, speed.Y, -speed.Yaw);
         }
 
@@ -39,7 +38,8 @@ namespace Assets
             foreach (var e in requested.Keys)
             {
                 var movingObject = GameObject.Find(e);
-                movingObject.rigidbody.velocity = new Vector3((float)requested[e].X, 0, (float)requested[e].Y);
+                var oldVelocity = movingObject.rigidbody.velocity;
+                movingObject.rigidbody.velocity = new Vector3((float)requested[e].X, oldVelocity.y, (float)requested[e].Y);
                 movingObject.rigidbody.angularVelocity = new Vector3(0, (float)requested[e].Angle.Radian, 0);
             }
         }
@@ -98,7 +98,7 @@ namespace Assets
             cam.transform.parent = robot.transform;
             var camPos = settings.Location;
             var camRot = settings.ViewAngle;
-           // Debugger.Log(DebuggerMessageType.Unity,camPos.Pitch.Grad + " " + camPos.Roll.Grad + " " + camPos.Yaw.Grad);
+            // Debugger.Log(DebuggerMessageType.Unity,camPos.Pitch.Grad + " " + camPos.Roll.Grad + " " + camPos.Yaw.Grad);
             cam.transform.localPosition = new Vector3((float)camPos.X, (float)camPos.Z / 20, (float)camPos.Y); // ???????
             cam.transform.localRotation = Quaternion.Euler(-(float)camPos.Pitch.Grad, 90 + (float)camPos.Yaw.Grad, (float)camPos.Roll.Grad);
             cam.fieldOfView = (float)camRot.Grad;
@@ -128,42 +128,109 @@ namespace Assets
             return new Frame3D(vel.x, vel.y, vel.z, Angle.FromRad(angVel.y), Angle.FromRad(angVel.z), Angle.FromRad(angVel.x)); //???
         }
 
-		public void Attach(string objectToAttach, string host, Frame3D relativePosition)
-		{
-		    var hostObj = GameObject.Find(host);
+        Dictionary<GameObject, Tuple<float, float>> attachedParams = new Dictionary<GameObject, Tuple<float, float>>();
+        public void Attach(string objectToAttach, string host, Frame3D relativePosition)
+        {
+            var parent = GameObject.Find(host);
             var attachment = GameObject.Find(objectToAttach);
-            attachment.transform.parent = hostObj.transform;
-		    GameObject.Destroy(attachment.rigidbody);
-		    attachment.transform.localPosition = new Vector3((float) relativePosition.X/10, (float) relativePosition.Z/10, (float) relativePosition.Y/10);
-		}
+            
+            // move attachment to (0, 0, 0) relative to parent
+            attachment.transform.position = parent.transform.position;
+            attachment.transform.rotation = parent.transform.rotation;
+            
+            // set attachments position and rotation relative to parent
+            var rp = relativePosition;
+            attachment.transform.position += Quaternion.Euler(parent.transform.eulerAngles) * 
+                new Vector3((float)rp.X, (float)rp.Z, (float)rp.Y);
+            attachment.transform.rotation *= Quaternion.Euler((float)rp.Roll.Grad, (float)rp.Yaw.Grad, (float)rp.Pitch.Grad);
+            
+            // create unbreakable joint between attachment and parent
+            var joint = attachment.AddComponent<FixedJoint>();
+            joint.connectedBody = parent.rigidbody;
+            joint.enableCollision = false;
+            joint.breakForce = Single.PositiveInfinity;
+            
+            attachedParams.Add(attachment, new Tuple<float, float>(attachment.rigidbody.drag, attachment.rigidbody.angularDrag));
+            attachment.rigidbody.drag = attachment.rigidbody.angularDrag = 0;
 
-		public void DeleteObject(string objectId)
-		{
-			
-		}
+            // Второй способ: приаттачивание с помощью родительского трансформа.
+            // Не стоит использовать, т.к. юнька при аттаче localScale ребенка 
+            // становится зависимым от localScale родителя.
+            //// physics no affects the attachments rigidbody
+            //if (attachment.rigidbody != null)
+            //    attachment.rigidbody.isKinematic = true;
+          
+            //// move attacment to (0, 0, 0) relative to parent transform position
+            //attachment.transform.position = parent.transform.position;
+            //attachment.transform.rotation = parent.transform.rotation;
 
-		public void Detach(string objectToDetach, Frame3D absolutePosition)
+            //// set parent
+            //attachment.transform.parent = parent.transform;
+         
+            //// set attachments position and rotation relative to parent
+            //var rp = relativePosition;
+            //attachment.transform.localPosition = new Vector3((float)rp.X / parent.transform.localScale.x, 
+            //                                                 (float)rp.Z / parent.transform.localScale.y, 
+            //                                                 (float)rp.Y / parent.transform.localScale.z);
+            //attachment.transform.localRotation = Quaternion.Euler((float)rp.Roll.Grad, (float)rp.Yaw.Grad, (float)rp.Pitch.Grad);
+        }
+
+        public void Detach(string objectToDetach, Frame3D absolutePosition)
 		{
             var attachment = GameObject.Find(objectToDetach);
-        	attachment.transform.parent = null;
-            attachment.transform.localPosition = new Vector3((float)absolutePosition.X / 10, (float)absolutePosition.Z / 10, (float)absolutePosition.Y / 10); ;
-            attachment.rigidbody.drag = 40F;
-            attachment.rigidbody.angularDrag = 40F;
-            attachment.rigidbody.mass = 100;
-            attachment.rigidbody.isKinematic = false;
-            attachment.rigidbody.constraints = RigidbodyConstraints.FreezeRotationX |
-                                            RigidbodyConstraints.FreezeRotationZ |
-                                            RigidbodyConstraints.FreezePositionY;
+            
+            var joints = attachment.GetComponents<FixedJoint>();
+            foreach(var joint in joints)
+                GameObject.Destroy(joint);
 
+            if (attachedParams.ContainsKey(attachment))
+            {
+                var attachmentParams = attachedParams[attachment];
+                attachment.rigidbody.drag = attachmentParams.Item1;
+                attachment.rigidbody.angularDrag = attachmentParams.Item2;
+                attachedParams.Remove(attachment);
+            }
+        	
+            //attachment.transform.parent = null;
+
+            //if (attachment.rigidbody != null)
+            //    attachment.rigidbody.isKinematic = false;
+            
+            //var ap = absolutePosition;
+            //attachment.transform.position = new Vector3((float)ap.X, (float)ap.Z, (float)ap.Y);
+            //attachment.transform.rotation = Quaternion.Euler((float)ap.Roll.Grad, (float)ap.Yaw.Grad, (float)ap.Pitch.Grad);
+		}
+		
+        public void DeleteObject(string objectId)
+		{
+            GameObject.Destroy(GameObject.Find(objectId));
 		}
 
 		public string FindParent(string objectId)
 		{
 			var obj = GameObject.Find(objectId);
-			if (obj==null) return null;
+            if (obj == null) return null;
+            
+            var parent = FindParentByJoints(obj);
+            if (parent == null) 
+                parent = FindParentByHierarchy(obj);
+            
+            return parent;
+		}
+
+        string FindParentByHierarchy(GameObject obj)
+        {
 			if (obj.transform == null) return null;
 			if (obj.transform.parent == null) return null;
 			return obj.transform.parent.name;
-		}
+        }
+
+        string FindParentByJoints(GameObject obj)
+        {
+            var joint = obj.GetComponents<FixedJoint>().FirstOrDefault();
+            if (joint == null) return null;
+            if (joint.connectedBody == null) return null;
+            return joint.connectedBody.name;
+        }
 	}
 }
