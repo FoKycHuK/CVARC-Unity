@@ -28,14 +28,14 @@ namespace Assets
             var clapperboard = GameObject.CreatePrimitive(PrimitiveType.Cube);
             clapperboard.transform.position = new Vector3((float)location.X, 7, (float)location.Y);
             clapperboard.transform.localScale = new Vector3(16, 10, 5);
-            clapperboard.renderer.material.color = Color.black;
+            clapperboard.GetComponent<Renderer>().material.color = Color.black;
 
             var cap = GameObject.CreatePrimitive(PrimitiveType.Cube);
             cap.transform.position = new Vector3((float)location.X, 14.5f, (float)location.Y);
             cap.transform.Translate(openClapperCapOffset);
             cap.transform.rotation = Quaternion.Euler(0, 0, 60);
             cap.transform.localScale = new Vector3(16, 5, 5);
-            cap.renderer.material.color = UnityColor[color];
+            cap.GetComponent<Renderer>().material.color = UnityColor[color];
             cap.name = clapperboardId;
         }
 
@@ -46,13 +46,13 @@ namespace Assets
             floor.transform.position = Vector3.zero;
             floor.transform.rotation = Quaternion.Euler(0, 180, 0);
             floor.transform.localScale = new Vector3(30, 1, 20);
-            floor.renderer.material.mainTexture = Resources.Load<Texture2D>("field");
+            floor.GetComponent<Renderer>().material.mainTexture = Resources.Load<Texture2D>("field");
             floor.name = "floor";
 
             var light = new GameObject("sunshine");
             light.AddComponent<Light>();
-            light.light.type = LightType.Point;
-            light.light.range = 1000;
+            light.GetComponent<Light>().type = LightType.Point;
+            light.GetComponent<Light>().range = 1000;
             light.transform.position = new Vector3(0, 200, 0);
 
             RemoveObject("Point light");
@@ -80,7 +80,7 @@ namespace Assets
                 var border = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 border.transform.position = new Vector3(side * posX / 2, 5, side * posZ / 2);
                 border.transform.localScale = new Vector3(sizeX, 10, sizeZ);
-                border.renderer.material.color = Color.red;
+                border.GetComponent<Renderer>().material.color = Color.red;
             }
         }
 
@@ -92,14 +92,14 @@ namespace Assets
             light.transform.position = new Vector3((float)location.X, radius, (float)location.Y);
             light.transform.localScale = new Vector3(radius * 2, radius * 2, radius * 2);
 
-            light.renderer.material.color = Color.yellow;
+            light.GetComponent<Renderer>().material.color = Color.yellow;
 
             light.AddComponent<Rigidbody>();
             
-            light.rigidbody.drag = light.rigidbody.angularDrag = 4;
-            light.rigidbody.useGravity = true;
-            light.rigidbody.mass = 0.2f;
-            light.rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+            light.GetComponent<Rigidbody>().drag = light.GetComponent<Rigidbody>().angularDrag = 4;
+            light.GetComponent<Rigidbody>().useGravity = true;
+            light.GetComponent<Rigidbody>().mass = 0.2f;
+            light.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
             light.name = lightId;
         }
 
@@ -110,15 +110,15 @@ namespace Assets
             popcorn.transform.position = new Vector3((float)location.X, 7, (float)location.Y);
             popcorn.transform.localScale = new Vector3(9.5f, 7, 9.5f);
 
-            popcorn.renderer.material.color = Color.white;
+            popcorn.GetComponent<Renderer>().material.color = Color.white;
 
             popcorn.AddComponent<Rigidbody>();
             popcorn.AddComponent<MeshCollider>();
             
-            popcorn.rigidbody.drag = popcorn.rigidbody.angularDrag = 4;
-            popcorn.rigidbody.useGravity = true;
-            popcorn.rigidbody.mass = 0.2f;
-            popcorn.rigidbody.centerOfMass = new Vector3(0, -3, 0);
+            popcorn.GetComponent<Rigidbody>().drag = popcorn.GetComponent<Rigidbody>().angularDrag = 4;
+            popcorn.GetComponent<Rigidbody>().useGravity = true;
+            popcorn.GetComponent<Rigidbody>().mass = 0.2f;
+            popcorn.GetComponent<Rigidbody>().centerOfMass = new Vector3(0, -3, 0);
             popcorn.name = popcornId;
         }
 
@@ -127,7 +127,7 @@ namespace Assets
             var dispenser = GameObject.CreatePrimitive(PrimitiveType.Cube);
             dispenser.transform.position = new Vector3((float)location.X, 14, (float)location.Y);
             dispenser.transform.localScale = new Vector3(6, 28, 6);
-            dispenser.renderer.material.color = Color.blue;
+            dispenser.GetComponent<Renderer>().material.color = Color.blue;
             dispenser.name = dispenserId;
         }
 
@@ -151,7 +151,7 @@ namespace Assets
                 stair.transform.position = new Vector3(0, 0, (bottomLength - length) / 2);
                 stair.transform.Translate(offset + Vector3.up * height / 2);
                 stair.transform.localScale = new Vector3(width, height, length);
-                stair.renderer.material.color = UnityColor[color];
+                stair.GetComponent<Renderer>().material.color = UnityColor[color];
                 stair.name = length == topLength ? stairsId : "wall";
             }
 
@@ -160,7 +160,7 @@ namespace Assets
                 var border = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 border.transform.localScale = new Vector3(3, ySize + 2.2f, bottomLength);
                 border.transform.position = new Vector3(x, (ySize + 2.2f) / 2, 0) + offset;
-                border.renderer.material.color = Color.blue;
+                border.GetComponent<Renderer>().material.color = Color.blue;
             };
 
             addBorder(width / 2);
@@ -174,15 +174,15 @@ namespace Assets
             stand.transform.position = new Vector3((float)location.X, 3.5f, (float)location.Y);
             stand.transform.localScale = new Vector3(6, 3.45f, 6);
 
-            stand.renderer.material.color = UnityColor[color];
+            stand.GetComponent<Renderer>().material.color = UnityColor[color];
 
             stand.AddComponent<Rigidbody>();
             stand.AddComponent<MeshCollider>();
 
-            stand.rigidbody.drag = stand.rigidbody.angularDrag = 4;
-            stand.rigidbody.useGravity = true;
-            stand.rigidbody.mass = 0.3f;
-            stand.rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+            stand.GetComponent<Rigidbody>().drag = stand.GetComponent<Rigidbody>().angularDrag = 4;
+            stand.GetComponent<Rigidbody>().useGravity = true;
+            stand.GetComponent<Rigidbody>().mass = 0.3f;
+            stand.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
             stand.name = standId;
         }
 
@@ -197,7 +197,7 @@ namespace Assets
             bottom.transform.position = new Vector3(0, 0, -40 / 2) + offset;
             
             top.transform.localScale = bottom.transform.localScale = new Vector3(40, 3, 3);
-            bottom.renderer.material.color = top.renderer.material.color = UnityColor[color];
+            bottom.GetComponent<Renderer>().material.color = top.GetComponent<Renderer>().material.color = UnityColor[color];
         }
 
         public void RemoveObject(string objectId)
