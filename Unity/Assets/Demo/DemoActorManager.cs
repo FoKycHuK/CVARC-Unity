@@ -35,7 +35,7 @@ namespace Assets
             //}
             robot.transform.position = new Vector3(description.X, description.IsRound ? description.ZSize : description.ZSize/2f, description.Y);
             robot.AddComponent<Rigidbody>();
-            robot.renderer.material.color = Color.green;
+            robot.GetComponent<Renderer>().material.color = Color.green;
             if (description.IsRound)
                 robot.transform.localScale = new Vector3(description.XSize*2f, description.ZSize, description.YSize * 2);
             else
@@ -45,15 +45,15 @@ namespace Assets
             var plane = GameObject.CreatePrimitive(PrimitiveType.Cube);
             plane.transform.parent = robot.transform;
             plane.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-            plane.renderer.material.color = Color.white;
+            plane.GetComponent<Renderer>().material.color = Color.white;
             plane.transform.localPosition = new Vector3(0.3f, 0.90f, 0f);
-            robot.rigidbody.drag = 0F; // трение
-            robot.rigidbody.angularDrag = 0F;
-            robot.rigidbody.useGravity = true;
-            robot.rigidbody.mass = 2700;
-            robot.rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX |
+            robot.GetComponent<Rigidbody>().drag = 0F; // трение
+            robot.GetComponent<Rigidbody>().angularDrag = 0F;
+            robot.GetComponent<Rigidbody>().useGravity = true;
+            robot.GetComponent<Rigidbody>().mass = 2700;
+            robot.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX |
                                           RigidbodyConstraints.FreezeRotationZ;
-            robot.AddComponent("OnCollisionScript");
+            robot.AddComponent<OnCollisionScript>();
             //Physics.minPenetrationForPenalty = 0.0001f;
             robot.name = Actor.ObjectId;
 

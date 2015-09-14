@@ -38,9 +38,9 @@ namespace Assets
             foreach (var e in requested.Keys)
             {
                 var movingObject = GameObject.Find(e);
-                var oldVelocity = movingObject.rigidbody.velocity;
-                movingObject.rigidbody.velocity = new Vector3((float)requested[e].X, oldVelocity.y, (float)requested[e].Y);
-                movingObject.rigidbody.angularVelocity = new Vector3(0, (float)requested[e].Angle.Radian, 0);
+                var oldVelocity = movingObject.GetComponent<Rigidbody>().velocity;
+                movingObject.GetComponent<Rigidbody>().velocity = new Vector3((float)requested[e].X, oldVelocity.y, (float)requested[e].Y);
+                movingObject.GetComponent<Rigidbody>().angularVelocity = new Vector3(0, (float)requested[e].Angle.Radian, 0);
             }
         }
 
@@ -102,7 +102,7 @@ namespace Assets
             cam.transform.localPosition = new Vector3((float)camPos.X, (float)camPos.Z / 20, (float)camPos.Y); // ???????
             cam.transform.localRotation = Quaternion.Euler(-(float)camPos.Pitch.Grad, 90 + (float)camPos.Yaw.Grad, (float)camPos.Roll.Grad);
             cam.fieldOfView = (float)camRot.Grad;
-            if (robot.renderer.material.color == Color.green)
+            if (robot.GetComponent<Renderer>().material.color == Color.green)
                 cam.rect = new Rect(0, 0.7f, 0.3f, 0.3f);
             else
                 cam.rect = new Rect(0.7f, 0.7f, 0.3f, 0.3f);
@@ -123,8 +123,8 @@ namespace Assets
         public Frame3D GetSpeed(string id)
         {
             var movingObject = GameObject.Find(id);
-            var vel = movingObject.rigidbody.velocity;
-            var angVel = movingObject.rigidbody.angularVelocity;
+            var vel = movingObject.GetComponent<Rigidbody>().velocity;
+            var angVel = movingObject.GetComponent<Rigidbody>().angularVelocity;
             return new Frame3D(vel.x, vel.y, vel.z, Angle.FromRad(angVel.y), Angle.FromRad(angVel.z), Angle.FromRad(angVel.x)); //???
         }
 
@@ -146,12 +146,12 @@ namespace Assets
             
             // create unbreakable joint between attachment and parent
             var joint = attachment.AddComponent<FixedJoint>();
-            joint.connectedBody = parent.rigidbody;
+            joint.connectedBody = parent.GetComponent<Rigidbody>();
             joint.enableCollision = false;
             joint.breakForce = Single.PositiveInfinity;
             
-            attachedParams.Add(attachment, new Tuple<float, float>(attachment.rigidbody.drag, attachment.rigidbody.angularDrag));
-            attachment.rigidbody.drag = attachment.rigidbody.angularDrag = 0;
+            attachedParams.Add(attachment, new Tuple<float, float>(attachment.GetComponent<Rigidbody>().drag, attachment.GetComponent<Rigidbody>().angularDrag));
+            attachment.GetComponent<Rigidbody>().drag = attachment.GetComponent<Rigidbody>().angularDrag = 0;
 
             // Второй способ: приаттачивание с помощью родительского трансформа.
             // Не стоит использовать, т.к. юнька при аттаче localScale ребенка 
@@ -186,8 +186,8 @@ namespace Assets
             if (attachedParams.ContainsKey(attachment))
             {
                 var attachmentParams = attachedParams[attachment];
-                attachment.rigidbody.drag = attachmentParams.Item1;
-                attachment.rigidbody.angularDrag = attachmentParams.Item2;
+                attachment.GetComponent<Rigidbody>().drag = attachmentParams.Item1;
+                attachment.GetComponent<Rigidbody>().angularDrag = attachmentParams.Item2;
                 attachedParams.Remove(attachment);
             }
         	

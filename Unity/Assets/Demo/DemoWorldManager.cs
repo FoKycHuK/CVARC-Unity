@@ -19,7 +19,7 @@ namespace Assets
             myPlane.transform.position = new Vector3(0, 0, 0);
             myPlane.transform.rotation = Quaternion.Euler(0, 0, 0);
             myPlane.transform.localScale = new Vector3(20, 1, 20);
-            myPlane.renderer.material.color = Color.red;
+            myPlane.GetComponent<Renderer>().material.color = Color.red;
             myPlane.name = "floor";
             this.Generator = generator;
             //Settings = World.SceneSettings;
@@ -47,19 +47,19 @@ namespace Assets
             gameObj.transform.localScale = new Vector3(width, weight, height);
             if (data.IsStatic)
             {
-                gameObj.rigidbody.drag = 0.001F;
-                gameObj.rigidbody.mass = 999;
-                gameObj.rigidbody.isKinematic = data.IsStatic;
+                gameObj.GetComponent<Rigidbody>().drag = 0.001F;
+                gameObj.GetComponent<Rigidbody>().mass = 999;
+                gameObj.GetComponent<Rigidbody>().isKinematic = data.IsStatic;
                 //gameObj.rigidbody.useGravity = true;
-                gameObj.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+                gameObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             }
             else
             {
-                gameObj.rigidbody.drag = 40F;
-                gameObj.rigidbody.angularDrag = 40F;
-                gameObj.rigidbody.mass = 100;
-                gameObj.rigidbody.isKinematic = data.IsStatic;
-                gameObj.rigidbody.constraints = RigidbodyConstraints.FreezeRotationX |
+                gameObj.GetComponent<Rigidbody>().drag = 40F;
+                gameObj.GetComponent<Rigidbody>().angularDrag = 40F;
+                gameObj.GetComponent<Rigidbody>().mass = 100;
+                gameObj.GetComponent<Rigidbody>().isKinematic = data.IsStatic;
+                gameObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX |
                                                 RigidbodyConstraints.FreezeRotationZ |
                                                 RigidbodyConstraints.FreezePositionY;
             }
