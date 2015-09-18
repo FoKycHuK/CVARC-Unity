@@ -6,7 +6,12 @@ Obj/
 UnityGenerated/
 Library/
 Assets/AssetStoreTools*
+
+# ===================== #
+# CVARC specified fiels #
+# ===================== #
 Assets/CVARC Assets/*
+/log.txt
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
