@@ -1,4 +1,0 @@
-[submodule "CVARC"]
-	path = CVARC
-	url = https://github.com/air-labs/CVARC
-	branch = Stable
