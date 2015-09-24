@@ -1,12 +1,7 @@
 ﻿using CVARC.V2;
 using Demo;
-using DemoCompetitions;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using UnityEngine;
+
 
 namespace Assets
 {
@@ -22,17 +17,6 @@ namespace Assets
             myPlane.GetComponent<Renderer>().material.color = Color.red;
             myPlane.name = "floor";
             this.Generator = generator;
-            //Settings = World.SceneSettings;
-
-            //var myPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            //myPlane.renderer.material.color = Color.yellow;
-            //var widthPlane = 30;
-            //var heightPlane = 20;
-            //var weightPlane = 5;
-            //myPlane.transform.position = new Vector3(0, 0, 0);
-            //myPlane.transform.rotation = Quaternion.Euler(0, 0, 0);
-            //myPlane.transform.localScale = new Vector3(widthPlane, weightPlane, heightPlane);
-
         }
 
         public void CreateObject(DemoObjectData data)
@@ -50,7 +34,6 @@ namespace Assets
                 gameObj.GetComponent<Rigidbody>().drag = 0.001F;
                 gameObj.GetComponent<Rigidbody>().mass = 999;
                 gameObj.GetComponent<Rigidbody>().isKinematic = data.IsStatic;
-                //gameObj.rigidbody.useGravity = true;
                 gameObj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             }
             else
@@ -64,8 +47,6 @@ namespace Assets
                                                 RigidbodyConstraints.FreezePositionY;
             }
             gameObj.name = Generator.CreateNewId(data);
-            //Debugger.Log(DebuggerMessageType.Drawing, "End Drawing");
-
         }
     }
 }

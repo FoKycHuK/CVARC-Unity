@@ -1,10 +1,7 @@
 ﻿using Assets;
 using CVARC.V2;
 using Demo;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 
 namespace DemoCompetitions
 {

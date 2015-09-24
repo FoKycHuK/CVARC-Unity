@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets
 {
     class OnCollisionScript : MonoBehaviour
     {
+        //так же может иметь место метод OnCollisionExit с такой же сигнатурой
         void OnCollisionEnter(Collision collision)
         {
             if (RoundScript.CollisionInfo.Item3 == 0)
@@ -21,11 +18,5 @@ namespace Assets
                 RoundScript.CollisionInfo.Item3 = 2;
             }
         }
-        //void OnCollisionExit(Collision collision)
-        //{
-        //    var conflictObject = collision.gameObject;
-        //    conflictObject.rigidbody.velocity = new Vector3(0, 0, 0);
-        //    conflictObject.rigidbody.angularVelocity = new Vector3(0, 0, 0);
-        //}
     }
 }

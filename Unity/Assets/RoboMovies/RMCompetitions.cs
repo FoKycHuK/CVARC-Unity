@@ -1,10 +1,7 @@
 ﻿using Assets;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using CVARC.V2;
 using RoboMovies;
+
 
 namespace RMCompetitions
 {
