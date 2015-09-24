@@ -43,14 +43,11 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PercistentTCP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -73,7 +70,6 @@
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(ProjectDir)bin\debug\CVARC.Core.dll" "$(SolutionDir)Unity\Assets\CVARC Assets\" /Y
 xcopy "$(ProjectDir)bin\debug\Demo.General.dll" "$(SolutionDir)Unity\Assets\CVARC Assets\" /Y
-xcopy "$(ProjectDir)bin\debug\TechnicalProject.dll" "$(SolutionDir)Unity\Assets\CVARC Assets\" /Y
 xcopy "$(ProjectDir)bin\debug\RoboMovies.General.dll" "$(SolutionDir)Unity\Assets\CVARC Assets\" /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
