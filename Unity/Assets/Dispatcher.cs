@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Assets;
 using UnityEngine;
 using RoboMovies;
 
@@ -10,23 +11,18 @@ using RoboMovies;
 class Dispatcher
 {
     public static Loader loader { get; private set; }
-
     //Данные уже установленного соединения
     static NetworkServerData loadedNetworkServerData = null;
-
     //Данные соединения, которое еще не установлено. 
     public static NetworkServerData WaitingNetworkServer { get; private set; }
-
     //Делегат, который запустит мир, определенный очередным клиентом.
     static Func<IWorld> WorldInitializer;
-
     static bool ExpectedExit;
-
     static public bool TestMode = false;
-
     static readonly List<Thread> Threads = new List<Thread>();
-
     static PercistentTCPServer server;
+    public static readonly Dictionary<string, bool> LastTestExecution = new Dictionary<string, bool>();
+
     //Этот метод нужно вызвать ровно один раз навсегда! для этого завести флаг.
     public static void Start()
     {
@@ -37,7 +33,6 @@ class Dispatcher
         Debugger.EnabledTypes.Add(RMDebugMessage.Logic);
         Debugger.EnabledTypes.Add(RMDebugMessage.Workflow);
         Debugger.EnabledTypes.Add(DebuggerMessageType.Workflow);
-        // Debugger.EnabledTypes.Add(DebuggerMessageType.Initialization);
         Debugger.Logger = s => Debug.Log(s);
         loader = new Loader();
         loader.AddLevel("Demo", "Test", () => new DemoCompetitions.Level1());
@@ -100,8 +95,6 @@ class Dispatcher
             LastTestExecution[testName] = !asserter.Failed;
         }
     }
-
-    public static readonly Dictionary<string, bool> LastTestExecution = new Dictionary<string, bool>();
 
     public static void RunAllTests(LoadingData data)
     {

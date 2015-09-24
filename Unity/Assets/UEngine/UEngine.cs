@@ -8,8 +8,6 @@ using AIRLab;
 
 namespace Assets
 {
-
-
     public class UEngine : CVARC.V2.IEngine
     {
         Dictionary<string, Frame2D> requested = new Dictionary<string, Frame2D>();
