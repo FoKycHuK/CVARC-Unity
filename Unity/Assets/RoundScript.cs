@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 using Assets;
-using System.Threading;
 using System;
 using CVARC.V2;
 using AIRLab;
-using UnityEditor;
 
 
 public partial class RoundScript : MonoBehaviour
@@ -18,23 +15,19 @@ public partial class RoundScript : MonoBehaviour
     GameObject myCamera;
     public GameObject cubePref; // Эти поля -- прототипы, к ним самим обращаться не получится.
     bool worldRunning = true;
-	bool worldPrepearedToExit;
-	float curWorldTime;
-	float timeOnStartSession;
+    bool worldPrepearedToExit;
+    float curWorldTime;
+    float timeOnStartSession;
     private long lastStart;
 
-    // Use this for initialization
 
-
-    
     void Start()
     {
-		timeOnStartSession = Time.fixedTime;
-		curWorldTime = 0;
+        timeOnStartSession = Time.fixedTime;
+        curWorldTime = 0;
         Behaviour = this;
         CameraCreator();
         ScoresFieldsCreator();
-        //Debugger.Log(DebuggerMessageType.Unity,"Started");
         try
         {
             world = Dispatcher.InitializeWorld();
@@ -45,43 +38,23 @@ public partial class RoundScript : MonoBehaviour
             Debugger.Log(DebuggerMessageType.Unity,"Fail");
             Debugger.Log(DebuggerMessageType.Unity,e.Message);
         }
-        //world.Scores.ScoresChanged += UpdateScores;
         CollisionInfo = new Tuple<string, string, int>(null, null, 0);
-		Time.timeScale = 1; // вот почему так?
-
-		//в момент повторного запуска время уже не нулевое
-		
-
+        Time.timeScale = 1; // вот почему так?
+        //в момент повторного запуска время уже не нулевое
     }
 
     void Update()
     {
-        //Debugger.Log(DebuggerMessageType.Unity,Time.timeScale);
-        //timer++;
-        //if (timer == 100)
-        //{
-        //    Time.timeScale = 10;
-        //}
-        //if (timer == 200)
-        //{
-        //    Time.timeScale = 0.5f;
-        //}
-        //ТОЛЬКО В АПДЕЙТЕ (НЕ В ФИКСЕД_АПДЕЙТЕ)
-        //напомнить, > чтобы я глянул, что передается в таймер
-
-
         if (!worldRunning) return;
-		
+        
         if (curWorldTime > 30)
         {
-			Debugger.Log(DebuggerMessageType.Unity,"Time is Up");
-			Dispatcher.SetExpectedExit();
-			world.OnExit();
-            //((UEngine)world.Engine).Stop();
-            //((UEngine)world.Engine).UpdateSpeeds();
+            Debugger.Log(DebuggerMessageType.Unity,"Time is Up");
+            Dispatcher.SetExpectedExit();
+            world.OnExit();
             return;
         }
-		Dispatcher.CheckNetworkClient();
+        Dispatcher.CheckNetworkClient();
 
         if (CollisionInfo.Item3 == 2)
         {
@@ -94,17 +67,13 @@ public partial class RoundScript : MonoBehaviour
 
     void FixedUpdate() //только физика и строгие расчеты. вызывается строго каждые 20 мс
     {
-        //var delta = DateTime.Now.Second*(long)1000 + DateTime.Now.Millisecond - lastStart;
-        //if (delta > 10)
-        //    Debugger.Log(DebuggerMessageType.UnityTest, delta.ToString());
-        //lastStart = DateTime.Now.Second*(long) 1000 + DateTime.Now.Millisecond;
         curWorldTime = Time.fixedTime - timeOnStartSession;
         world.Clocks.Tick(curWorldTime);
         ((UEngine)world.Engine).UpdateSpeeds();
     }
 
-	void OnDisable()
-	{
-		Dispatcher.OnDispose();
-	}
+    void OnDisable()
+    {
+        Dispatcher.OnDispose();
+    }
 }

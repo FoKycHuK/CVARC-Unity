@@ -1,14 +1,11 @@
 ﻿using System.Linq;
-using UnityEditor;
 using UnityEngine;
-using System.Collections;
 using CVARC.V2;
 using System;
 
 public class IntroductionStript : MonoBehaviour
 {
     const string ASSEMBLY_NAME = "RoboMovies";
-    //const string ASSEMBLY_NAME = "Demo";
 
     static bool serverIsRunned = false;
 
@@ -24,7 +21,7 @@ public class IntroductionStript : MonoBehaviour
 
     void Update()
     {
-        Dispatcher.CheckNetworkClient(); // нарм?
+        Dispatcher.CheckNetworkClient();
     }
 
     void Server()
@@ -35,7 +32,6 @@ public class IntroductionStript : MonoBehaviour
     void OnDisable()
     {
         Dispatcher.OnDispose();
-        //Dispatcher.KillThreads();
     }
 
     const float
@@ -137,7 +133,7 @@ public class IntroductionStript : MonoBehaviour
                 }
                 break;
             case EventType.Repaint:
-//                GUI.DrawTexture(rect, icon);
+                //GUI.DrawTexture(rect, icon);
                 var col = GUI.color;
                 GUI.color = color;
                 GUI.TextField(rect, text);
